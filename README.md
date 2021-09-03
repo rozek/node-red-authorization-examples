@@ -82,6 +82,8 @@ Additional object properties or form variables will be ignored by the authentica
 
 Successful login, token validation and token refresh always add the related cookie to the `cookies` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
 
+Any login or token validation failure automatically deletes the cookies, comparable to a logout.
+
 ## Header-based Authorization ##
 
 ![](header-auth.png)
