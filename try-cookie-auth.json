@@ -1,0 +1,194 @@
+[
+    {
+        "id": "e7e4d431ae21b31c",
+        "type": "comment",
+        "z": "56af3abb553264d3",
+        "name": "try yourself",
+        "info": "",
+        "x": 740,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "bcce3b9c21368743",
+        "type": "http in",
+        "z": "56af3abb553264d3",
+        "name": "",
+        "url": "cookie-auth",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 760,
+        "y": 620,
+        "wires": [
+            [
+                "dce768562a2ca476"
+            ]
+        ]
+    },
+    {
+        "id": "dce768562a2ca476",
+        "type": "component",
+        "z": "56af3abb553264d3",
+        "name": "",
+        "targetComponent": {
+            "id": "64e44cfd3f8cdc25",
+            "name": "Cookie Auth",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 2,
+        "outLabels": [
+            "authorized",
+            "unauthorized"
+        ],
+        "x": 960,
+        "y": 620,
+        "wires": [
+            [
+                "b146b96c1e6e4802"
+            ],
+            [
+                "79102e3ebd685bba"
+            ]
+        ]
+    },
+    {
+        "id": "79102e3ebd685bba",
+        "type": "http response",
+        "z": "56af3abb553264d3",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1190,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "b146b96c1e6e4802",
+        "type": "change",
+        "z": "56af3abb553264d3",
+        "name": "inform about success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "successfully authorized",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 680,
+        "wires": [
+            [
+                "79102e3ebd685bba"
+            ]
+        ]
+    },
+    {
+        "id": "bca7975301895f4d",
+        "type": "http in",
+        "z": "56af3abb553264d3",
+        "name": "",
+        "url": "cookie-auth",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 770,
+        "y": 740,
+        "wires": [
+            [
+                "71e4555a54e65012"
+            ]
+        ]
+    },
+    {
+        "id": "71e4555a54e65012",
+        "type": "component",
+        "z": "56af3abb553264d3",
+        "name": "",
+        "targetComponent": {
+            "id": "419bf3f9ef406282",
+            "name": "Cookie Login",
+            "api": [
+                {
+                    "name": "requiredRoles",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        "paramSources": {
+            "requiredRoles": {
+                "name": "requiredRoles",
+                "type": "string",
+                "required": false,
+                "source": "",
+                "sourceType": "str"
+            }
+        },
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 2,
+        "outLabels": [
+            "success",
+            "failure"
+        ],
+        "x": 980,
+        "y": 740,
+        "wires": [
+            [
+                "5aa149195cb2bafd"
+            ],
+            [
+                "9603dfde62c5f08b"
+            ]
+        ]
+    },
+    {
+        "id": "5aa149195cb2bafd",
+        "type": "change",
+        "z": "56af3abb553264d3",
+        "name": "inform about success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "successfully authorized",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 800,
+        "wires": [
+            [
+                "9603dfde62c5f08b"
+            ]
+        ]
+    },
+    {
+        "id": "9603dfde62c5f08b",
+        "type": "http response",
+        "z": "56af3abb553264d3",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1190,
+        "y": 800,
+        "wires": []
+    }
+]
