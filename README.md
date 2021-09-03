@@ -32,6 +32,8 @@ For testing and debugging purposes, the [following flow](show-user-registry.json
 
 ### Try yourself ###
 
+The following example illustrates how to integrate basic authentication into Node-RED flows. Just [import it](try-basic-auth.json) and navigate your browser to the shown endpoint.
+
 ![](try-basic-auth.png)
 
 ## Cookie-based Authorization ##
