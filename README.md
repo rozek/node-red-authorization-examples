@@ -8,7 +8,7 @@ Every example requires the following Node-RED extension
 
 * [node-red-contrib-components](https://github.com/ollixx/node-red-contrib-components)<br>"Components" allow multiply needed flows to be defined once and then invoked from multiple places
 
-Additionally, all examples expect the global flow context to contain an object called `UserRegistry` which has the same format as described in  "node-red-within-express":
+Additionally, all examples expect the global flow context to contain an object called `UserRegistry` which has the same format as described in "node-red-within-express":
 
 * the object's property names are the ids of registered users<br>user ids have no specific format, they may be user names, email addresses or any other data you are free to choose
 * the object's property values are JavaScript objects with the following properties, at least (additional properties may be added at will):
@@ -20,11 +20,13 @@ When used outside "node-red-within-express", the following flows allow such a re
 
 ![](outside-node-red-within-express.png)
 
-Just import [these flows](outside-node-red-within-express.json), place them on your Node-RED workspace and - if need be - check the "Inject once" setting of the node labelled "at Startup".
+Just import [these flows](outside-node-red-within-express.json), place them on your Node-RED workspace and - if need be - check the "Inject once" setting of the node labelled "at Startup". By default, the created UserRegistry contains a single user `node-red` with the password `t0pS3cr3t!` and a single role `node-red` (this is exactly the same user who is also included in "node-red-within-express" and has the permission to access the embedded Node-RED editor)
 
 For testing and debugging purposes, the [following flow](show-user-registry.json) may also be imported, which dumps the current contents of the user registry onto Node-RED's debug console when clicked:
 
 ![](show-user-registry.png)
+
+Some of the experiments described below can be executed more easily if you have [Postman](https://www.postman.com/) installed on your machine. You may then import the [Postman collection](PostmanCollection.json) that comes with this repository and use predefined requests for testing.
 
 ## Basic HTTP Authentication ##
 
@@ -69,6 +71,8 @@ The following example illustrates how to integrate Cookie-based authentication i
 * send a POST request to the shown entry point in order to log-in and then
 * send a GET request to the same entry point to validate that log-in and access the protected resource
 
+(The included [Postman collection](PostmanCollection.json) facilitates these steps.)
+
 Sending GET requests without prior login (or after token expiration) should fail with status code 401 (Unauthorized)
 
 The login request should either contain
@@ -104,6 +108,8 @@ The following example illustrates how to integrate Header-based authentication i
 
 * send a POST request to the shown entry point in order to log-in and then
 * send a GET request to the same entry point to validate that log-in
+
+(The included [Postman collection](PostmanCollection.json) facilitates these steps as it also automatically copies the authorization header of any successful authentication into the GET request.)
 
 Sending GET requests without prior login (or after token expiration) should fail with status code 401 (Unauthorized)
 
