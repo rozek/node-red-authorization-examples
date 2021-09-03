@@ -1,0 +1,340 @@
+[
+    {
+        "id": "5f40353168982c37",
+        "type": "comment",
+        "z": "56af3abb553264d3",
+        "name": "Header-based authorization (w/ expiration)",
+        "info": "",
+        "x": 1500,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "8f9ec350798a22ab",
+        "type": "component_in",
+        "z": "56af3abb553264d3",
+        "name": "Header Auth",
+        "api": [],
+        "x": 1410,
+        "y": 300,
+        "wires": [
+            [
+                "8d77be6450ce0f2a"
+            ]
+        ]
+    },
+    {
+        "id": "8d77be6450ce0f2a",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "validate authorization",
+        "func": "  let TokenHeader = msg.req.headers['authorization'] || ''\n  if (TokenHeader.startsWith('Bearer')) {\n    let Token = TokenHeader.replace(/^Bearer\\s+/,'').trim()\n    if (Token !== '') {\n      let [UserId,Expiration,Digest] = Token.split(':')\n      if (\n        (UserId !== '') && /^\\d+$/.test(Expiration) && /^[0-9a-fA-F]+$/.test(Digest)\n      ) {\n        let TokenKey = global.get('TokenKey')\n          const HMAC = crypto.createHmac('sha256',TokenKey)\n          HMAC.update(UserId + ':' + Expiration)\n        let expectedDigest = HMAC.digest('hex')\n\n        if (\n          (Digest === expectedDigest) &&\n          (parseInt(Expiration,10) >= Date.now())\n        ) {\n          msg.UserId  = UserId\n          msg.headers = msg.headers || {}\n          msg.headers['authorization'] = 'Bearer ' + Token\n          return [msg,null]                                        // authorized\n        }\n      }\n    }\n  }\n\n  msg.payload    = 'Unauthorized'\n  msg.statusCode = 401\n  return [null,msg]                                            // not authorized\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 1480,
+        "y": 360,
+        "wires": [
+            [
+                "79785206c30e98c3"
+            ],
+            [
+                "01c89bdd2ba3fdb0"
+            ]
+        ]
+    },
+    {
+        "id": "46757419b5fc4f41",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "authorized",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1830,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "01c89bdd2ba3fdb0",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "unauthorized",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1830,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d4ec5cf7db1ed2b4",
+        "type": "component_in",
+        "z": "56af3abb553264d3",
+        "name": "Header Login",
+        "api": [
+            {
+                "name": "requiredRoles",
+                "type": "string",
+                "required": false
+            }
+        ],
+        "x": 1410,
+        "y": 420,
+        "wires": [
+            [
+                "b21258d4f3b19a31"
+            ]
+        ]
+    },
+    {
+        "id": "b21258d4f3b19a31",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "validate credentials",
+        "func": "  let UserId   = msg.payload.UserId   || ''\n  let Password = msg.payload.Password || ''\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withoutAuthorization()\n        }\n      }\n    )\n  }\n\n  function withAuthorizationOf (UserName, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.UserId = UserId\n      return [msg,null]\n    } else {\n      return withoutAuthorization()\n    }\n  }\n\n  function withoutAuthorization () {\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n    return [null,msg]\n  }\n\n  return withoutAuthorization()\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 1470,
+        "y": 480,
+        "wires": [
+            [
+                "6e31b911deebaca2"
+            ],
+            [
+                "236616e5c01b7f8b"
+            ]
+        ]
+    },
+    {
+        "id": "f14437d9aaf5d79e",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "success",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1840,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "236616e5c01b7f8b",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "failure",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1850,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "3ae11bc056bb4ea5",
+        "type": "inject",
+        "z": "56af3abb553264d3",
+        "name": "at Startup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 1430,
+        "y": 220,
+        "wires": [
+            [
+                "02f5a2c430d381b9"
+            ]
+        ]
+    },
+    {
+        "id": "02f5a2c430d381b9",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "generate Token Key",
+        "func": "  let TokenKey = global.get('TokenKey')\n  if (TokenKey == null) {     // do not change TokenKey upon Node-RED deployment\n    global.set('TokenKey',crypto.randomBytes(16).toString('hex'))\n  }\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 1640,
+        "y": 220,
+        "wires": [
+            [
+                "08c6f38667b1f597"
+            ]
+        ]
+    },
+    {
+        "id": "08c6f38667b1f597",
+        "type": "debug",
+        "z": "56af3abb553264d3",
+        "name": "Status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "'token key generated'",
+        "statusType": "jsonata",
+        "x": 1850,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3165fc5071ea3432",
+        "type": "inject",
+        "z": "56af3abb553264d3",
+        "name": "at Startup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 1430,
+        "y": 160,
+        "wires": [
+            [
+                "4c8bc88e9138d602"
+            ]
+        ]
+    },
+    {
+        "id": "4c8bc88e9138d602",
+        "type": "change",
+        "z": "56af3abb553264d3",
+        "name": "set token lifetime",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TokenLifetime",
+                "pt": "global",
+                "to": "2*60*1000",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TokenLifetime",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1630,
+        "y": 160,
+        "wires": [
+            [
+                "59d1b07f62cd0149"
+            ]
+        ]
+    },
+    {
+        "id": "59d1b07f62cd0149",
+        "type": "debug",
+        "z": "56af3abb553264d3",
+        "name": "Status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 1850,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "79785206c30e98c3",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "refresh token",
+        "func": "  let Expiration   = Date.now() + global.get('TokenLifetime')\n  let TokenContent = msg.UserId + ':' + Expiration\n\n  let TokenKey = global.get('TokenKey')\n    const HMAC = crypto.createHmac('sha256',TokenKey)\n    HMAC.update(TokenContent)\n  let Digest = HMAC.digest('hex')\n\n  msg.headers = msg.headers || {}\n  msg.headers['authorization'] = 'Bearer ' + TokenContent + ':' + Digest\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 1650,
+        "y": 300,
+        "wires": [
+            [
+                "46757419b5fc4f41"
+            ]
+        ]
+    },
+    {
+        "id": "6e31b911deebaca2",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "create token",
+        "func": "  let Expiration   = Date.now() + global.get('TokenLifetime')\n  let TokenContent = msg.UserId + ':' + Expiration\n\n  let TokenKey = global.get('TokenKey')\n    const HMAC = crypto.createHmac('sha256',TokenKey)\n    HMAC.update(TokenContent)\n  let Digest = HMAC.digest('hex')\n\n  msg.headers = msg.headers || {}\n  msg.headers['authorization'] = 'Bearer ' + TokenContent + ':' + Digest\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 1670,
+        "y": 420,
+        "wires": [
+            [
+                "f14437d9aaf5d79e"
+            ]
+        ]
+    }
+]
