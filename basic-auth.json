@@ -1,0 +1,81 @@
+[
+    {
+        "id": "b226928597254811",
+        "type": "comment",
+        "z": "56af3abb553264d3",
+        "name": "basic HTTP authentication (w/o expiration)",
+        "info": "",
+        "x": 180,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "044b8567a46bcbc1",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "validate authorization",
+        "func": "  let Credentials = msg.req.headers['authorization'] || ''\n  if (! Credentials.startsWith('Basic')) {\n    return withAuthorizationRequest()\n  }\n\n  Credentials = Credentials.replace(/^Basic\\s+/,'')      // still Base64-encoded\n  try {\n    Credentials = (new Buffer(Credentials,'base64')).toString('utf8')\n  } catch (Signal) { return withAuthorizationRequest() }\n\n  let UserId   = Credentials.replace(/:.*$/,'').trim()\n  let Password = Credentials.replace(/^[^:]+:/,'').trim()\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withAuthorizationRequest()\n        }\n      }\n    )\n  }\n\n  function withAuthorizationOf (UserId, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.UserId = UserId\n      return [msg,null]\n    } else {\n      return withAuthorizationRequest()\n    }\n  }\n\n  function withAuthorizationRequest () {\n    msg.headers = msg.headers || {}\n    msg.headers['WWW-Authenticate'] = 'Basic'\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n\n    return [null,msg]\n  }\n\n  return withAuthorizationRequest()\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 280,
+        "y": 160,
+        "wires": [
+            [
+                "6eb977dad5c20f4d"
+            ],
+            [
+                "49dde1b1cc7852b8"
+            ]
+        ]
+    },
+    {
+        "id": "3ecce50b4322b35f",
+        "type": "component_in",
+        "z": "56af3abb553264d3",
+        "name": "basic Auth",
+        "api": [
+            {
+                "name": "requiredRole",
+                "type": "string",
+                "required": false
+            }
+        ],
+        "x": 80,
+        "y": 160,
+        "wires": [
+            [
+                "044b8567a46bcbc1"
+            ]
+        ]
+    },
+    {
+        "id": "6eb977dad5c20f4d",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "authorized",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 490,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "49dde1b1cc7852b8",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "unauthorized",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 490,
+        "y": 180,
+        "wires": []
+    }
+]
