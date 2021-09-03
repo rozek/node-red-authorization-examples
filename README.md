@@ -28,6 +28,8 @@ For testing and debugging purposes, the [following flow](show-user-registry.json
 
 ## Basic HTTP Authentication ##
 
+The simplest approach to user authentication is to use the "basic HTTP authentication" built into every browser:
+
 ![](basic-auth.png)
 
 One of the biggest disadvantages of basic authentication is the lack of (implicit) expiration and explicit logout. Once correct credentials have been given, the browser always automatically sends them with every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
