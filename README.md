@@ -20,7 +20,7 @@ When used outside "node-red-within-express", the following flows allow such a re
 
 ![](outside-node-red-within-express.png)
 
-Just import [these flows](outside-node-red-within-express.json) and place them on your Node-RED workspace.
+Just import [these flows](outside-node-red-within-express.json), place them on your Node-RED workspace and - if need be - check the "Inject once" setting of the node labelled "at Startup".
 
 ![](show-user-registry.png)
 
