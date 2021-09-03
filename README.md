@@ -48,13 +48,13 @@ However, basic authentication lacks (implicit) expiration and explicit logout, m
 
 ## Cookie-based Authorization ##
 
-Another popular approach is to let users log-in and to generate access tokens which are then set as communication "cookies". Such cookies are also automatically attached to every request, but the contained tokens may be designed to "expire" or to be deleted upon a "logout".
+Another popular approach is to let users log-in and generate access tokens which are then used as "cookies" for the communication between browser and server. Such cookies are also automatically attached to every request, but the contained tokens may be designed to "expire" or to be deleted upon a "logout".
 
 The token in this example consists of a user id and an expiration time. While it is stored in plain text (and, thus, may be inspected by the client), its value is secured with a "message digest" - as a consequence, any attempt to change the token will inevitably be recognized and lead to authorization loss. On the other hand, any successful token validation automatically refreshes that token - tokens therefore effectively expire after a certain time of *inactivity* only.
 
-The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active sessions.
+The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active tokens.
 
-Token lifetime may be configured, by default, it is set to 10 minutes.
+Token lifetime may be configured - by default, it is set to 10 minutes.
 
 > Nota bene: current law often requires users to be informed about cookie usage. The cookie used here counts as a "technically required cookie" which cannot be forbidden if the visited site is expected to work as foreseen.
 
@@ -65,6 +65,42 @@ If desired, "Component use" nodes for "Cookie Login" may be configured to requir
 ### Try yourself ###
 
 The following example illustrates how to integrate Cookie-based authentication into Node-RED flows. Just [import it](try-cookie-auth.json) and:
+
+* send a POST request to the shown entry point in order to log-in and then
+* send a GET request to the same entry point to validate that log-in and access the protected resource
+
+Sending GET requests without prior login (or after token expiration) should fail with status code 401 (Unauthorized)
+
+The login request should either contain
+
+* a body of type "application/json" with the JSON serialization of an object containing the properties `UserId` and `Password`, at least, or
+* a body of type "multipart/form-data" or "application/x-www-form-urlencoded" with the form variables `UserId` and `Password`, at least
+
+Additional object properties or form variables will be ignored by the authentication itself, but passed on to any following nodes.
+
+![](try-cookie-auth.png)
+
+Successful login, token validation and token refresh always adds the related cookie to the `cookies` property of the `msg` object which, thus, automatically becomes part of the flow's response.
+
+Any login or token validation failure automatically deletes the token cookie, comparable to a logout.
+
+## Header-based Authorization ##
+
+The third example also generates access tokens but stores them in an HTTP header instead of a cookie. This avoids having to follow any cookie-related laws but requires some JavaScript on the client side which always adds a proper authorization header to any outgoing request.
+
+Again, access tokens consist of a user id and an expiration time. While they are stored in plain text (and, thus, may be inspected by the client), their value is secured with a "message digest" - as a consequence, any attempt to change a token will inevitably be recognized and lead to authorization loss. On the other hand, any successful token validation automatically refreshes that token - tokens therefore effectively expire after a certain time of inactivity only.
+
+The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active sessions.
+
+Token lifetime may be configured, by default, it is set to 10 minutes.
+
+![](header-auth.png)
+
+If desired, "Component use" nodes for "Header Login" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures. Similarly, the upper output of "Component use" nodes for "Header Auth" fires upon successful token validation, the lower one in case of a validation failure.
+
+### Try yourself ###
+
+The following example illustrates how to integrate Header-based authentication into Node-RED flows. Just [import it](try-header-auth.json) and:
 
 * send a POST request to the shown entry point in order to log-in and then
 * send a GET request to the same entry point to validate that log-in
@@ -78,19 +114,11 @@ The login request should either contain
 
 Additional object properties or form variables will be ignored by the authentication itself, but passed on to any following nodes.
 
-![](try-cookie-auth.png)
+![](try-header-auth.png)
 
-Successful login, token validation and token refresh always adds the related cookie to the `cookies` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
+Successful login, token validation and token refresh always adds the quired header to the `headers` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
 
 Any login or token validation failure automatically deletes the token cookie, comparable to a logout.
-
-## Header-based Authorization ##
-
-![](header-auth.png)
-
-### Try yourself ###
-
-![](try-header-auth.png)
 
 ## License ##
 
