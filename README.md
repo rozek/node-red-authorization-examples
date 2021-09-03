@@ -80,7 +80,7 @@ Additional object properties or form variables will be ignored by the authentica
 
 ![](try-cookie-auth.png)
 
-Successful login, token validation and token refresh always add the related cookie to the `cookies` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
+Successful login, token validation and token refresh always adds the related cookie to the `cookies` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
 
 Any login or token validation failure automatically deletes the token cookie, comparable to a logout.
 
