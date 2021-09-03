@@ -1,1 +1,76 @@
-[{"id":"fe9d58b1f84fce63","type":"inject","z":"56af3abb553264d3","name":"show UserRegistry","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payloadType":"date","x":790,"y":1020,"wires":[["663a2575d83ff39f"]]},{"id":"80fab4a14a0c61a7","type":"comment","z":"56af3abb553264d3","name":"for testing purposes","info":"","x":770,"y":960,"wires":[]},{"id":"663a2575d83ff39f","type":"function","z":"56af3abb553264d3","name":"create output","func":"let UserRegistry = global.get('UserRegistry')\n  msg.payload = 'UserRegistry:\\n'\n  for (let UserName in UserRegistry) {\n    let Roles = UserRegistry[UserName].Roles\n    msg.payload += (\n      ' - \"' + UserName + '\": ' + (\n        Array.isArray(Roles)\n        ? '[' + Roles.join(',') + ']'\n        : '[]'\n      )\n    ) + '\\n'\n  }\nreturn msg\n","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1000,"y":1020,"wires":[["62b2658722dbd9e7"]]},{"id":"62b2658722dbd9e7","type":"debug","z":"56af3abb553264d3","name":"show","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1170,"y":1020,"wires":[]}]
+[
+    {
+        "id": "fe9d58b1f84fce63",
+        "type": "inject",
+        "z": "56af3abb553264d3",
+        "name": "show UserRegistry",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 790,
+        "y": 1020,
+        "wires": [
+            [
+                "663a2575d83ff39f"
+            ]
+        ]
+    },
+    {
+        "id": "80fab4a14a0c61a7",
+        "type": "comment",
+        "z": "56af3abb553264d3",
+        "name": "for testing purposes",
+        "info": "",
+        "x": 770,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "663a2575d83ff39f",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "create output",
+        "func": "let UserRegistry = global.get('UserRegistry')\n  msg.payload = 'UserRegistry:\\n'\n  for (let UserName in UserRegistry) {\n    let Roles = UserRegistry[UserName].Roles\n    msg.payload += (\n      ' - \"' + UserName + '\": ' + (\n        Array.isArray(Roles)\n        ? '[' + Roles.join(',') + ']'\n        : '[]'\n      )\n    ) + '\\n'\n  }\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1020,
+        "wires": [
+            [
+                "62b2658722dbd9e7"
+            ]
+        ]
+    },
+    {
+        "id": "62b2658722dbd9e7",
+        "type": "debug",
+        "z": "56af3abb553264d3",
+        "name": "show",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 1020,
+        "wires": []
+    }
+]
