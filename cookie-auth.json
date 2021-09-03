@@ -1,0 +1,320 @@
+[
+    {
+        "id": "dca7a383b191c54a",
+        "type": "comment",
+        "z": "56af3abb553264d3",
+        "name": "Cookie-based authorization (w/ expiration)",
+        "info": "",
+        "x": 840,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "64e44cfd3f8cdc25",
+        "type": "component_in",
+        "z": "56af3abb553264d3",
+        "name": "Cookie Auth",
+        "api": [],
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "773dd978b43cdf2d"
+            ]
+        ]
+    },
+    {
+        "id": "773dd978b43cdf2d",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "validate authorization",
+        "func": "  let Cookie = ((msg.req.cookies || {}).authorization || '').trim()\n  if (Cookie !== '') {\n    let [UserId,Expiration,Digest] = Cookie.split(':')\n    if (\n      (UserId !== '') && /^\\d+$/.test(Expiration) && /^[0-9a-fA-F]+$/.test(Digest)\n    ) {\n      let TokenKey = global.get('TokenKey')\n        const HMAC = crypto.createHmac('sha256',TokenKey)\n        HMAC.update(UserId + ':' + Expiration)\n      let expectedDigest = HMAC.digest('hex')\n\n      if (\n        (Digest === expectedDigest) &&\n        (parseInt(Expiration,10) >= Date.now())\n      ) {\n        msg.cookies = msg.cookies || {}\n        msg.cookies.authorization = Cookie\n\n        msg.UserId = UserId\n        return [msg,null]                                          // authorized\n      }\n    }\n  }\n\n  msg.cookies = msg.cookies || {}\n  msg.cookies.authorization = null\n\n  msg.payload    = 'Unauthorized'\n  msg.statusCode = 401\n  return [null,msg]                                            // not authorized\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 360,
+        "wires": [
+            [
+                "831ab758fc9713ba"
+            ],
+            [
+                "70071c140431ccd8"
+            ]
+        ]
+    },
+    {
+        "id": "6af7a94e4fadf088",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "authorized",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1170,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "70071c140431ccd8",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "unauthorized",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1170,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "419bf3f9ef406282",
+        "type": "component_in",
+        "z": "56af3abb553264d3",
+        "name": "Cookie Login",
+        "api": [
+            {
+                "name": "requiredRoles",
+                "type": "string",
+                "required": false
+            }
+        ],
+        "x": 750,
+        "y": 420,
+        "wires": [
+            [
+                "070ba65b879a3b29"
+            ]
+        ]
+    },
+    {
+        "id": "070ba65b879a3b29",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "validate credentials",
+        "func": "  let Body = msg.req.body || {}\n\n  let UserId   = msg.UserId   || Body.UserId   || ''\n  let Password = msg.Password || Body.Password || ''\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withoutAuthorization()\n        }\n      }\n    )\n  }\n\n  function withAuthorizationOf (UserName, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.UserId = UserId\n      return [msg,null]\n    } else {\n      return withoutAuthorization()\n    }\n  }\n\n  function withoutAuthorization () {\n    msg.cookies = msg.cookies || {}\n    msg.cookies.authorization = null\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n    return [null,msg]\n  }\n\n  return withoutAuthorization()\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 480,
+        "wires": [
+            [
+                "c17982509dce61d0"
+            ],
+            [
+                "752f73cb0059d6e7"
+            ]
+        ]
+    },
+    {
+        "id": "d776081c50cd8a2a",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "success",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1180,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "752f73cb0059d6e7",
+        "type": "component_out",
+        "z": "56af3abb553264d3",
+        "name": "failure",
+        "mode": "separate",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1190,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "1c33d24237575599",
+        "type": "inject",
+        "z": "56af3abb553264d3",
+        "name": "at Startup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 770,
+        "y": 220,
+        "wires": [
+            [
+                "2d74506d45fc0194"
+            ]
+        ]
+    },
+    {
+        "id": "2d74506d45fc0194",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "generate Token Key",
+        "func": "  let TokenKey = global.get('TokenKey')\n  if (TokenKey == null) {     // do not change TokenKey upon Node-RED deployment\n    global.set('TokenKey',crypto.randomBytes(16).toString('hex'))\n  }\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 980,
+        "y": 220,
+        "wires": [
+            [
+                "22e06c36beb8dbf1"
+            ]
+        ]
+    },
+    {
+        "id": "22e06c36beb8dbf1",
+        "type": "debug",
+        "z": "56af3abb553264d3",
+        "name": "Status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "'token key generated'",
+        "statusType": "jsonata",
+        "x": 1190,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c17982509dce61d0",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "create token",
+        "func": "  let Expiration   = Date.now() + global.get('TokenLifetime')\n  let TokenContent = msg.UserId + ':' + Expiration\n\n  let TokenKey = global.get('TokenKey')\n    const HMAC = crypto.createHmac('sha256',TokenKey)\n    HMAC.update(TokenContent)\n  let Digest = HMAC.digest('hex')\n\n  msg.cookies = msg.cookies || {}\n  msg.cookies.authorization = TokenContent + ':' + Digest\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 420,
+        "wires": [
+            [
+                "d776081c50cd8a2a"
+            ]
+        ]
+    },
+    {
+        "id": "831ab758fc9713ba",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "refresh token",
+        "func": "  let Expiration   = Date.now() + global.get('TokenLifetime')\n  let TokenContent = msg.UserId + ':' + Expiration\n\n  let TokenKey = global.get('TokenKey')\n    const HMAC = crypto.createHmac('sha256',TokenKey)\n    HMAC.update(TokenContent)\n  let Digest = HMAC.digest('hex')\n\n  msg.cookies = msg.cookies || {}\n  msg.cookies.authorization = TokenContent + ':' + Digest\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 300,
+        "wires": [
+            [
+                "6af7a94e4fadf088"
+            ]
+        ]
+    },
+    {
+        "id": "0f30846df8e8edf9",
+        "type": "inject",
+        "z": "56af3abb553264d3",
+        "name": "at Startup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 770,
+        "y": 160,
+        "wires": [
+            [
+                "157475d53bdb440d"
+            ]
+        ]
+    },
+    {
+        "id": "157475d53bdb440d",
+        "type": "change",
+        "z": "56af3abb553264d3",
+        "name": "set token lifetime",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TokenLifetime",
+                "pt": "global",
+                "to": "10*60*1000",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TokenLifetime",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 160,
+        "wires": [
+            [
+                "4894ab45a53168ed"
+            ]
+        ]
+    },
+    {
+        "id": "4894ab45a53168ed",
+        "type": "debug",
+        "z": "56af3abb553264d3",
+        "name": "Status",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 1190,
+        "y": 160,
+        "wires": []
+    }
+]
