@@ -1,0 +1,395 @@
+{
+	"info": {
+		"_postman_id": "a6566a03-64d6-4dc5-9baa-54938a3586a2",
+		"name": "node-red-authentication-examples",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "basic HTTP Authentication",
+			"item": [
+				{
+					"name": "basic-auth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/basic-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"basic-auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cookie-based Authorization",
+			"item": [
+				{
+					"name": "cookie-auth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/cookie-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"cookie-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserId",
+									"value": "invalid-userid",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "invalid-password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseURL}}/cookie-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"cookie-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid login (x-www-form-urlencoded)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserId",
+									"value": "{{UserId}}",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "{{Password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseURL}}/cookie-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"cookie-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid login (JSON)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserId\":\"{{UserId}}\",\n  \"Password\":\"{{Password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/cookie-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"cookie-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/cookie-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"cookie-auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Header-based Authorization",
+			"item": [
+				{
+					"name": "header-auth",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Header-Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/header-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"header-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserId",
+									"value": "invalid-userid",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "invalid-password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseURL}}/header-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"header-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid login (x-www-form-urlencoded)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"  let AuthorizationHeader = pm.response.headers.get('authorization')",
+									"  pm.collectionVariables.set('Header-Token', AuthorizationHeader)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserId",
+									"value": "{{UserId}}",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "{{Password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseURL}}/header-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"header-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid login (JSON)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"  let AuthorizationHeader = pm.response.headers.get('authorization')",
+									"  pm.collectionVariables.set('Header-Token', AuthorizationHeader)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserId\":\"{{UserId}}\",\n  \"Password\":\"{{Password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/header-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"header-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 401) {",
+									"  pm.collectionVariables.set('Header-Token', '')",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/header-auth",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"header-auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "https://127.0.0.1:1880"
+		},
+		{
+			"key": "UserId",
+			"value": ""
+		},
+		{
+			"key": "Password",
+			"value": ""
+		},
+		{
+			"key": "Header-Token",
+			"value": ""
+		}
+	]
+}
