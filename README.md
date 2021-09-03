@@ -28,19 +28,61 @@ For testing and debugging purposes, the [following flow](show-user-registry.json
 
 ## Basic HTTP Authentication ##
 
+The simplest approach to user authentication is to utilize the "basic HTTP authentication" built into every browser: if a requested resource requires a client to authenticate, the browser itself opens a small dialog window where users may enter their name and password (or cancel the request). These credentials are then sent back to the server for validation - if the server still denies access, the dialog is presented again, allowing users to enter different credentials - otherwise the browser stores the successful entries internally and, from now on, automatically sends them along with every request.
+
+> Nota bene: user credentials (especially passwords) are sent in plain text form - for that reason, it is important to use secured connections (i.e., HTTPS) only
+
 ![](basic-auth.png)
 
+If desired, "Component use" nodes for "basic Auth" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures.
+
 ### Try yourself ###
+
+The following example illustrates how to integrate basic authentication into Node-RED flows. Just [import it](try-basic-auth.json) and navigate your browser to the shown entry point.
 
 ![](try-basic-auth.png)
 
+The "basic HTTP authentication" procedure frees developers from having to design and implement their own login forms as the user interface is already built into the browser.
+
+However, basic authentication lacks (implicit) expiration and explicit logout, making it very difficult to terminate an authenticated "session" or to change users: once correct credentials have been given, the browser always automatically attaches them to every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
+
 ## Cookie-based Authorization ##
+
+Another popular approach is to let users log-in and to generate access tokens which are then set as communication "cookies". Such cookies are also automatically attached to every request, but the contained tokens may be designed to "expire" or to be deleted upon a "logout".
+
+The token in this example consists of a user id and an expiration time. While it is stored in plain text (and, thus, may be inspected by the client), its value is secured with a "message digest" - as a consequence, any attempt to change the token will inevitably be recognized and lead to authorization loss. On the other hand, any successful token validation automatically refreshes that token - tokens therefore effectively expire after a certain time of *inactivity* only.
+
+The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active sessions.
+
+Token lifetime may be configured, by default, it is set to 10 minutes.
+
+> Nota bene: current law often requires users to be informed about cookie usage. The cookie used here counts as a "technically required cookie" which cannot be forbidden if the visited site is expected to work as foreseen.
 
 ![](cookie-auth.png)
 
+If desired, "Component use" nodes for "Cookie Login" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures. Similarly, the upper output of "Component use" nodes for "Cookie Auth" fires upon successful token validation, the lower one in case of a validation failure.
+
 ### Try yourself ###
 
+The following example illustrates how to integrate Cookie-based authentication into Node-RED flows. Just [import it](try-cookie-auth.json) and:
+
+* send a POST request to the shown entry point in order to log-in and then
+* send a GET request to the same entry point to validate that log-in
+
+Sending GET requests without prior login (or after token expiration) should fail with status code 401 (Unauthorized)
+
+The login request should either contain
+
+* a body of type "application/json" with the JSON serialization of an object containing the properties `UserId` and `Password`, at least, or
+* a body of type "multipart/form-data" or "application/x-www-form-urlencoded" with the form variables `UserId` and `Password`, at least
+
+Additional object properties or form variables will be ignored by the authentication itself, but passed on to any following nodes.
+
 ![](try-cookie-auth.png)
+
+Successful login, token validation and token refresh always add the related cookie to the `cookies` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
+
+Any login or token validation failure automatically deletes the cookies, comparable to a logout.
 
 ## Header-based Authorization ##
 
