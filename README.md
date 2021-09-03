@@ -48,7 +48,19 @@ However, basic authentication lacks (implicit) expiration and explicit logout, m
 
 ## Cookie-based Authorization ##
 
+Another popular approach is to let users log-in and generate access tokens which are then set as request "cookies". Such cookies are also automatically attached by browsers to every request, but the contained tokens may be designed to "expire" or to be deleted upon a "logout".
+
+The token in this example consists of a user id and an expiration time. While it is stored in plain text (and, thus, may be inspected by the client), its value is secured with a "message digest" - any attempt to change the token will inevitably be recognized and lead to authorization loss. On the other hand, any successful token validation automatically refreshes that token - tokens therefore effectively expire after a certain time of *inactivity* only.
+
+The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active sessions.
+
+Token lifetime may be configured, by default, it is set to 10 minutes.
+
+> Nota bene: current law often requires users to be informed about cookie usage. The cookie used here counts as a "technically required cookie" which cannot be forbidden if the visited site is expected to work as foreseen.
+
 ![](cookie-auth.png)
+
+If desired, "Component use" nodes for "Cookie Auth" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures.
 
 ### Try yourself ###
 
