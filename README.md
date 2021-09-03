@@ -74,7 +74,7 @@ Sending GET requests without prior login (or after token expiration) should fail
 The login request should either contain
 
 * a body of type "application/json" with the JSON serialization of an object containing the properties `UserId` and `Password`, at least, or
-* a body of type "multipart/form-data" or "application/x-www-form-urlencoded" with the form variables `UserId` and `Password`, at least
+* a body of type "application/x-www-form-urlencoded" with the form variables `UserId` and `Password`, at least
 
 Additional object properties or form variables will be ignored by the authentication itself, but passed on to any following nodes.
 
@@ -110,7 +110,7 @@ Sending GET requests without prior login (or after token expiration) should fail
 The login request should either contain
 
 * a body of type "application/json" with the JSON serialization of an object containing the properties `UserId` and `Password`, at least, or
-* a body of type "multipart/form-data" or "application/x-www-form-urlencoded" with the form variables `UserId` and `Password`, at least
+* a body of type "application/x-www-form-urlencoded" with the form variables `UserId` and `Password`, at least
 
 Additional object properties or form variables will be ignored by the authentication itself, but passed on to any following nodes.
 
