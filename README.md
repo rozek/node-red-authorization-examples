@@ -66,9 +66,21 @@ If desired, "Component use" nodes for "Cookie Login" may be configured to requir
 
 The following example illustrates how to integrate Cookie-based authentication into Node-RED flows. Just [import it](try-cookie-auth.json) and:
 
-* send a POST request to the shown entry point...
+* send a POST request to the shown entry point in order to log-in and then
+* send a GET request to the same entry point to validate that log-in
+
+Sending GET requests without prior login (or after token expiration) should fail with status code 401 (Unauthorized)
+
+The login request should either contain
+
+* a body of type "application/json" with the JSON serialization of an object containing the properties `UserId` and `Password`, at least, or
+* a body of type "multipart/form-data" or "application/x-www-form-urlencoded" with the form variables `UserId` and `Password`, at least
+
+Additional object properties or form variables will be ignored by the authentication itself, but passed on to any following nodes.
 
 ![](try-cookie-auth.png)
+
+Successful login, token validation and token refresh always add the related cookie to the `cookies` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
 
 ## Header-based Authorization ##
 
