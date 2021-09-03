@@ -34,17 +34,17 @@ The simplest approach to user authentication is to utilize the "basic HTTP authe
 
 ![](basic-auth.png)
 
-If desired, "Component use" nodes for "basic Auth" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper outputis used for successful authentications, the lower one for failures.
+If desired, "Component use" nodes for "basic Auth" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures.
 
 ### Try yourself ###
 
-The following example illustrates how to integrate basic authentication into Node-RED flows. Just [import it](try-basic-auth.json) and navigate your browser to the shown endpoint.
+The following example illustrates how to integrate basic authentication into Node-RED flows. Just [import it](try-basic-auth.json) and navigate your browser to the shown entry point.
 
 ![](try-basic-auth.png)
 
-This procedure frees the developer from having to design and implement own login forms as the user interface is already built into the browser.
+The "basic HTTP authentication" procedure frees developers from having to design and implement their own login forms as the user interface is already built into the browser.
 
-One of the biggest disadvantages of basic authentication is the lack of (implicit) expiration and explicit logout. Once correct credentials have been given, the browser always automatically sends them with every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
+However, basic authentication lacks (implicit) expiration and explicit logout, making it very difficult to terminate an authenticated "session" or to change users: once correct credentials have been given, the browser always automatically sends them with every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
 
 ## Cookie-based Authorization ##
 
