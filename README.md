@@ -116,9 +116,9 @@ Additional object properties or form variables will be ignored by the authentica
 
 ![](try-header-auth.png)
 
-Successful login, token validation and token refresh always adds the quired header to the `headers` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
+Successful login, token validation and token refresh always adds the required header to the `headers` property of the `msg` object which, thus, automatically becomes part of the response to the incoming request.
 
-Any login or token validation failure automatically deletes the token cookie, comparable to a logout.
+Any login or token validation failure automatically deletes the authorization header, comparable to a logout.
 
 ## License ##
 
