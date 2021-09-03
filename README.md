@@ -44,7 +44,7 @@ The following example illustrates how to integrate basic authentication into Nod
 
 The "basic HTTP authentication" procedure frees developers from having to design and implement their own login forms as the user interface is already built into the browser.
 
-However, basic authentication lacks (implicit) expiration and explicit logout, making it very difficult to terminate an authenticated "session" or to change users: once correct credentials have been given, the browser always automatically sends them with every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
+However, basic authentication lacks (implicit) expiration and explicit logout, making it very difficult to terminate an authenticated "session" or to change users: once correct credentials have been given, the browser always automatically attaches them to every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
 
 ## Cookie-based Authorization ##
 
