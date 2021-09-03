@@ -16,7 +16,7 @@ Additionally, all examples expect the global flow context to contain an object c
   * **Salt**<br>contains a random "salt" value which is used during PBKDF2 password hash calculation
   * **Hash**<br>contains the actual PBKDF2 hash of the user's password
 
-When used outside "node-red-within-express", the following flows allow such a registry to be loaded from an external JSON file (called `registeredUsers.json`) or to be created if no such file exists or an existing file can not be loaded:
+When used outside "node-red-within-express", the following flows allow such a registry to be loaded from an external JSON file called `registeredUsers.json` (or to be created if no such file exists or an existing file can not be loaded) and written back after changes:
 
 ![](outside-node-red-within-express.png)
 
