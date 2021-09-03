@@ -20,11 +20,13 @@ When used outside "node-red-within-express", the following flows allow such a re
 
 ![](outside-node-red-within-express.png)
 
-Just import [these flows](outside-node-red-within-express.json), place them on your Node-RED workspace and - if need be - check the "Inject once" setting of the node labelled "at Startup". By default, the created UserRegistry contains a single user `node-red` with the password `t0pS3cr3t!` and a single role `node-red` (this is exactly the same user who is also included in "node-red-within-express" and has the permission to access the embedded Node-RED editor)
+Just import [these flows](outside-node-red-within-express.json), place them on your Node-RED workspace and - if need be - check the "Inject once" setting of the node labelled "at Startup". By default, the created user registry contains a single user `node-red` with the password `t0pS3cr3t!` and a single role `node-red` (this is exactly the same user who is also included in "node-red-within-express" by default)
 
 For testing and debugging purposes, the [following flow](show-user-registry.json) may also be imported, which dumps the current contents of the user registry onto Node-RED's debug console when clicked:
 
 ![](show-user-registry.png)
+
+### Postman Collection ###
 
 Some of the experiments described below can be executed more easily if you have [Postman](https://www.postman.com/) installed on your machine. You may then import the [Postman collection](PostmanCollection.json) that comes with this repository and use predefined requests for testing.
 
