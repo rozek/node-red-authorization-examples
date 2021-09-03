@@ -28,13 +28,13 @@ For testing and debugging purposes, the [following flow](show-user-registry.json
 
 ## Basic HTTP Authentication ##
 
-The simplest approach to user authentication is to utilize the "basic HTTP authentication" built into every browser: if a requested resource requires a client to authenticate, the browser itself opens a small dialog window where users may enter their name and password (or cancel the request, of course). These credentials are then sent back to the server for validation - if the server still denies access, the dialog is presented again, allowing users to enter different credentials - otherwise the browser stores successful inputs internally and automatically sends them along with every request.
+The simplest approach to user authentication is to utilize the "basic HTTP authentication" built into every browser: if a requested resource requires a client to authenticate, the browser itself opens a small dialog window where users may enter their name and password (or cancel the request). These credentials are then sent back to the server for validation - if the server still denies access, the dialog is presented again, allowing users to enter different credentials - otherwise the browser stores the successful entries internally and, from now on, automatically sends them along with every request.
 
 > Nota bene: user credentials (especially passwords) are sent in plain text form - for that reason, it is important to use secured connections (i.e., HTTPS) only
 
 ![](basic-auth.png)
 
-This procedure frees the developer from having to design and implement login forms as the user interface is already built into the browser.
+This procedure frees the developer from having to design and implement own login forms as the user interface is already built into the browser.
 
 One of the biggest disadvantages of basic authentication is the lack of (implicit) expiration and explicit logout. Once correct credentials have been given, the browser always automatically sends them with every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
 
@@ -43,6 +43,8 @@ One of the biggest disadvantages of basic authentication is the lack of (implici
 The following example illustrates how to integrate basic authentication into Node-RED flows. Just [import it](try-basic-auth.json) and navigate your browser to the shown endpoint.
 
 ![](try-basic-auth.png)
+
+If desired, the "Component use" node may be configured to require the authenticating user to have a specific role - otherwise, roles are ignored. The upper output of the "Component use" node is used for successful authentications, the lower one for failures.
 
 ## Cookie-based Authorization ##
 
