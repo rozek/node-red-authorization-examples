@@ -33,7 +33,12 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "libs": [],
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
         "x": 820,
         "y": 360,
         "wires": [
@@ -92,12 +97,17 @@
         "type": "function",
         "z": "56af3abb553264d3",
         "name": "validate credentials",
-        "func": "  let Body = msg.req.body || {}\n\n  let UserId   = msg.UserId   || Body.UserId   || ''\n  let Password = msg.Password || Body.Password || ''\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withoutAuthorization()\n        }\n      }\n    )\n  }\n\n  function withAuthorizationOf (UserName, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.UserId = UserId\n      return [msg,null]\n    } else {\n      return withoutAuthorization()\n    }\n  }\n\n  function withoutAuthorization () {\n    msg.cookies = msg.cookies || {}\n    msg.cookies.authorization = null\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n    return [null,msg]\n  }\n\n  return withoutAuthorization()\n",
+        "func": "  let UserId   = msg.payload.UserId   || ''\n  let Password = msg.payload.Password || ''\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withoutAuthorization()\n        }\n      }\n    )\n  }\n\n  function withAuthorizationOf (UserName, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.UserId = UserId\n      return [msg,null]\n    } else {\n      return withoutAuthorization()\n    }\n  }\n\n  function withoutAuthorization () {\n    msg.cookies = msg.cookies || {}\n    msg.cookies.authorization = null\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n    return [null,msg]\n  }\n\n  return withoutAuthorization()\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "libs": [],
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
         "x": 810,
         "y": 480,
         "wires": [
@@ -210,7 +220,12 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "libs": [],
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
         "x": 1010,
         "y": 420,
         "wires": [
@@ -229,7 +244,12 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "libs": [],
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
         "x": 990,
         "y": 300,
         "wires": [
@@ -276,7 +296,7 @@
                 "t": "set",
                 "p": "TokenLifetime",
                 "pt": "global",
-                "to": "10*60*1000",
+                "to": "2*60*1000",
                 "tot": "jsonata"
             },
             {
