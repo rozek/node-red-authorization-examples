@@ -1,16 +1,16 @@
 [
     {
-        "id": "89ab9c3cd6fd1964",
+        "id": "c77fc63b7b5d8602",
         "type": "comment",
         "z": "56af3abb553264d3",
         "name": "if used without \"node-red-within-express\"",
         "info": "",
         "x": 180,
-        "y": 500,
+        "y": 520,
         "wires": []
     },
     {
-        "id": "2141765bfa6c678a",
+        "id": "8141b7dfdc18bc8a",
         "type": "inject",
         "z": "56af3abb553264d3",
         "name": "at Startup",
@@ -30,20 +30,20 @@
         "topic": "",
         "payloadType": "date",
         "x": 100,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
-                "41ea030e6d3c0598"
+                "de554403c2566545"
             ]
         ]
     },
     {
-        "id": "41ea030e6d3c0598",
+        "id": "de554403c2566545",
         "type": "component",
         "z": "56af3abb553264d3",
         "name": "load or create UserRegistry",
         "targetComponent": {
-            "id": "d4cdf24f4f1bd687",
+            "id": "925fc7269cbe4703",
             "name": "load or create UserRegistry",
             "api": []
         },
@@ -55,15 +55,15 @@
             "default"
         ],
         "x": 320,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
-                "0e67c007b2cd1045"
+                "c56fc609fda78995"
             ]
         ]
     },
     {
-        "id": "33408d51c530423a",
+        "id": "3854f9bb20843d13",
         "type": "file in",
         "z": "56af3abb553264d3",
         "name": "",
@@ -73,77 +73,34 @@
         "sendError": false,
         "encoding": "utf8",
         "allProps": false,
-        "x": 380,
-        "y": 620,
+        "x": 160,
+        "y": 700,
         "wires": [
             [
-                "b65c2917d164e643"
+                "0198d0d32e82591e"
             ]
         ]
     },
     {
-        "id": "b65c2917d164e643",
-        "type": "json",
-        "z": "56af3abb553264d3",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 110,
-        "y": 680,
-        "wires": [
-            [
-                "7824fa7d69958fc2"
-            ]
-        ]
-    },
-    {
-        "id": "7824fa7d69958fc2",
-        "type": "change",
-        "z": "56af3abb553264d3",
-        "name": "save in global context",
-        "rules": [
-            {
-                "t": "set",
-                "p": "UserRegistry",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 300,
-        "y": 680,
-        "wires": [
-            [
-                "169e776be841d0e4"
-            ]
-        ]
-    },
-    {
-        "id": "3c30eb0909e7a462",
+        "id": "690568c6a20becea",
         "type": "catch",
         "z": "56af3abb553264d3",
         "name": "",
         "scope": [
-            "33408d51c530423a",
-            "b65c2917d164e643"
+            "3854f9bb20843d13",
+            "9c9169d8064c88fc"
         ],
         "uncaught": false,
         "x": 110,
-        "y": 740,
+        "y": 760,
         "wires": [
             [
-                "3e24b34462c75275"
+                "85e93b749a23c07d"
             ]
         ]
     },
     {
-        "id": "01261e50e4c44c29",
+        "id": "7db18657b376e6aa",
         "type": "debug",
         "z": "56af3abb553264d3",
         "name": "",
@@ -156,35 +113,36 @@
         "statusVal": "'could not load user registry'",
         "statusType": "jsonata",
         "x": 510,
-        "y": 740,
+        "y": 760,
         "wires": []
     },
     {
-        "id": "d4cdf24f4f1bd687",
+        "id": "925fc7269cbe4703",
         "type": "component_in",
         "z": "56af3abb553264d3",
         "name": "load or create UserRegistry",
         "api": [],
         "x": 140,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
-                "33408d51c530423a"
+                "3854f9bb20843d13",
+                "66b67483a83c20ce"
             ]
         ]
     },
     {
-        "id": "169e776be841d0e4",
+        "id": "0e0afe10981693e1",
         "type": "component_out",
         "z": "56af3abb553264d3",
         "name": "return",
         "mode": "default",
-        "x": 490,
-        "y": 680,
+        "x": 530,
+        "y": 640,
         "wires": []
     },
     {
-        "id": "0e67c007b2cd1045",
+        "id": "c56fc609fda78995",
         "type": "debug",
         "z": "56af3abb553264d3",
         "name": "Status",
@@ -197,30 +155,31 @@
         "statusVal": "'user registry loaded'",
         "statusType": "jsonata",
         "x": 530,
-        "y": 560,
+        "y": 580,
         "wires": []
     },
     {
-        "id": "3e24b34462c75275",
+        "id": "85e93b749a23c07d",
         "type": "function",
         "z": "56af3abb553264d3",
         "name": "create in global context",
-        "func": "global.set('UserRegistry',{\n  'node-red': {\n    Roles: ['node-red'],\n    Salt: '4486e8d35b8275020b1301226cc77963',\n    Hash: 'ab2b740ea9148aa4f320af3f3ba60ee2e33bb8039c57eea2b29579ff3f3b16bec2401f19e3c6ed8ad36de432b80b6f973a12c41af5d50738e4bb902d0117df53'\n  }\n})\nreturn msg\n",
+        "func": "  let UserRegistry = Object.create(null)\n    UserRegistry['node-red'] =  {\n      Roles: ['node-red'],\n      Salt: '4486e8d35b8275020b1301226cc77963',\n      Hash: 'ab2b740ea9148aa4f320af3f3ba60ee2e33bb8039c57eea2b29579ff3f3b16bec2401f19e3c6ed8ad36de432b80b6f973a12c41af5d50738e4bb902d0117df53'\n    }\n  global.set('UserRegistry',UserRegistry)\n\n  return msg\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 740,
+        "y": 760,
         "wires": [
             [
-                "01261e50e4c44c29"
+                "7db18657b376e6aa",
+                "0e0afe10981693e1"
             ]
         ]
     },
     {
-        "id": "996489424ed9b3b1",
+        "id": "762b9eeb2b5aa715",
         "type": "file",
         "z": "56af3abb553264d3",
         "name": "",
@@ -229,51 +188,35 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "utf8",
-        "x": 300,
-        "y": 860,
+        "x": 420,
+        "y": 880,
         "wires": [
             [
-                "5c9becba3c2ad1aa"
+                "b07ec65be23263d3"
             ]
         ]
     },
     {
-        "id": "b1bccbe658cf378e",
-        "type": "json",
-        "z": "56af3abb553264d3",
-        "name": "",
-        "property": "payload",
-        "action": "str",
-        "pretty": false,
-        "x": 110,
-        "y": 860,
-        "wires": [
-            [
-                "996489424ed9b3b1"
-            ]
-        ]
-    },
-    {
-        "id": "c5460f0e4cf425fb",
+        "id": "15a24ea49049d876",
         "type": "catch",
         "z": "56af3abb553264d3",
         "name": "",
         "scope": [
-            "996489424ed9b3b1",
-            "b1bccbe658cf378e"
+            "762b9eeb2b5aa715",
+            "33c2e31969bad3a8"
         ],
         "uncaught": false,
         "x": 110,
-        "y": 980,
+        "y": 1000,
         "wires": [
             [
-                "7afc6a7dfdc2f9b4",
-                "172620a272f1cf7b"
+                "03755ee9c3a590a8",
+                "2d8d4fd4deb6b657"
             ]
         ]
     },
     {
-        "id": "7afc6a7dfdc2f9b4",
+        "id": "03755ee9c3a590a8",
         "type": "debug",
         "z": "56af3abb553264d3",
         "name": "",
@@ -290,65 +233,32 @@
         "wires": []
     },
     {
-        "id": "15fdaffc165dcddc",
+        "id": "dc6447092581f7d6",
         "type": "component_in",
         "z": "56af3abb553264d3",
         "name": "write UserRegistry",
         "api": [],
         "x": 110,
-        "y": 800,
+        "y": 820,
         "wires": [
             [
-                "53524a8fd09f5328"
+                "05699a47cb63a34e",
+                "6373109762be3238"
             ]
         ]
     },
     {
-        "id": "53524a8fd09f5328",
-        "type": "change",
-        "z": "56af3abb553264d3",
-        "name": "load from global context",
-        "rules": [
-            {
-                "t": "set",
-                "p": "_payload",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "UserRegistry",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 350,
-        "y": 800,
-        "wires": [
-            [
-                "b1bccbe658cf378e"
-            ]
-        ]
-    },
-    {
-        "id": "1243c1c121dee66e",
+        "id": "a8f15dd328dfcefd",
         "type": "component_out",
         "z": "56af3abb553264d3",
         "name": "return",
         "mode": "default",
         "x": 530,
-        "y": 920,
+        "y": 940,
         "wires": []
     },
     {
-        "id": "5c9becba3c2ad1aa",
+        "id": "b07ec65be23263d3",
         "type": "change",
         "z": "56af3abb553264d3",
         "name": "restore payload",
@@ -372,15 +282,15 @@
         "to": "",
         "reg": false,
         "x": 180,
-        "y": 920,
+        "y": 940,
         "wires": [
             [
-                "1243c1c121dee66e"
+                "a8f15dd328dfcefd"
             ]
         ]
     },
     {
-        "id": "172620a272f1cf7b",
+        "id": "2d8d4fd4deb6b657",
         "type": "change",
         "z": "56af3abb553264d3",
         "name": "report in payload",
@@ -411,10 +321,86 @@
         "to": "",
         "reg": false,
         "x": 290,
-        "y": 980,
+        "y": 1000,
         "wires": [
             [
-                "1243c1c121dee66e"
+                "a8f15dd328dfcefd"
+            ]
+        ]
+    },
+    {
+        "id": "0198d0d32e82591e",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "write to global context",
+        "func": "  let UserSet = JSON.parse(msg.payload)                             // may fail!\n\n  let UserRegistry = Object.create(null)\n  for (let UserId in UserSet) {\n    if (UserSet.hasOwnProperty(UserId)) {\n      UserRegistry[UserId.toLowerCase()] = UserSet[UserId]\n    }\n  }\n  global.set('UserRegistry',UserRegistry)\n\n  msg.payload = ''\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 700,
+        "wires": [
+            [
+                "0e0afe10981693e1"
+            ]
+        ]
+    },
+    {
+        "id": "66b67483a83c20ce",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "-> catch",
+        "func": "// do not pass any msg from here!",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 640,
+        "wires": [
+            [
+                "85e93b749a23c07d"
+            ]
+        ]
+    },
+    {
+        "id": "05699a47cb63a34e",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "-> catch",
+        "func": "// do not pass any msg from here!",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 820,
+        "wires": [
+            [
+                "2d8d4fd4deb6b657"
+            ]
+        ]
+    },
+    {
+        "id": "6373109762be3238",
+        "type": "function",
+        "z": "56af3abb553264d3",
+        "name": "read from global context",
+        "func": "  let UserRegistry = global.get('UserRegistry')\n\n  let UserSet = {}\n  for (let UserId in UserRegistry) {\n    let UserEntry = Object.assign({},UserRegistry[UserId])\n      delete UserEntry.Password          // never write passwords in plain text!\n    UserSet[UserId] = UserEntry\n  }\n\n  msg.payload = JSON.stringify(UserSet)\n  return msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 880,
+        "wires": [
+            [
+                "762b9eeb2b5aa715"
             ]
         ]
     }
