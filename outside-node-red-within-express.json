@@ -152,7 +152,7 @@
         "tostatus": true,
         "complete": "true",
         "targetType": "full",
-        "statusVal": "'user registry loaded'",
+        "statusVal": "'user registry available'",
         "statusType": "jsonata",
         "x": 530,
         "y": 580,
