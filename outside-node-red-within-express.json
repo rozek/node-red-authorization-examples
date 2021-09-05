@@ -88,7 +88,7 @@
         "name": "",
         "scope": [
             "3854f9bb20843d13",
-            "9c9169d8064c88fc"
+            "0198d0d32e82591e"
         ],
         "uncaught": false,
         "x": 110,
@@ -202,8 +202,7 @@
         "z": "56af3abb553264d3",
         "name": "",
         "scope": [
-            "762b9eeb2b5aa715",
-            "33c2e31969bad3a8"
+            "762b9eeb2b5aa715"
         ],
         "uncaught": false,
         "x": 110,
@@ -333,7 +332,7 @@
         "type": "function",
         "z": "56af3abb553264d3",
         "name": "write to global context",
-        "func": "  let UserSet = JSON.parse(msg.payload)                             // may fail!\n\n  let UserRegistry = Object.create(null)\n  for (let UserId in UserSet) {\n    if (UserSet.hasOwnProperty(UserId)) {\n      UserRegistry[UserId.toLowerCase()] = UserSet[UserId]\n    }\n  }\n  global.set('UserRegistry',UserRegistry)\n\n  msg.payload = ''\n  return msg\n",
+        "func": "  let UserSet = JSON.parse(msg.payload)                             // may fail!\n\n  let UserRegistry = Object.create(null)\n  for (let UserId in UserSet) {\n    if (UserSet.hasOwnProperty(UserId)) {\n      if ((UserId.indexOf('/') >= 0) || (UserId.indexOf(':') >= 0)) {\n        throw 'Invalid character in UserId found'\n      }\n      \n      UserRegistry[UserId.toLowerCase()] = UserSet[UserId]\n    }\n  }\n  global.set('UserRegistry',UserRegistry)\n\n  msg.payload = ''\n  return msg\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -351,7 +350,7 @@
         "id": "66b67483a83c20ce",
         "type": "function",
         "z": "56af3abb553264d3",
-        "name": "-> catch",
+        "name": "→ catch",
         "func": "// do not pass any msg from here!",
         "outputs": 1,
         "noerr": 0,
@@ -370,7 +369,7 @@
         "id": "05699a47cb63a34e",
         "type": "function",
         "z": "56af3abb553264d3",
-        "name": "-> catch",
+        "name": "→ catch",
         "func": "// do not pass any msg from here!",
         "outputs": 1,
         "noerr": 0,
