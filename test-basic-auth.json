@@ -346,7 +346,7 @@
         "y": 600,
         "wires": [
             [
-                "20163b8a2ef5234e"
+                "05ebc29c69196a84"
             ]
         ]
     },
@@ -445,7 +445,7 @@
         "y": 740,
         "wires": [
             [
-                "cdb5fa26cbceb538"
+                "487a95eb02215fe2"
             ]
         ]
     },
@@ -501,7 +501,7 @@
         "tls": "ec064d975c3f74fe",
         "persist": false,
         "proxy": "",
-        "authType": "basic",
+        "authType": "",
         "x": 330,
         "y": 740,
         "wires": [
@@ -544,7 +544,7 @@
         "y": 880,
         "wires": [
             [
-                "b2fefbea7b1a9274"
+                "4566e76383eed2f4"
             ]
         ]
     },
@@ -600,7 +600,7 @@
         "tls": "ec064d975c3f74fe",
         "persist": false,
         "proxy": "",
-        "authType": "basic",
+        "authType": "",
         "x": 330,
         "y": 880,
         "wires": [
@@ -750,7 +750,7 @@
         "y": 1020,
         "wires": [
             [
-                "a5dcc9e9f7ad18d8"
+                "cf5f0b0891149cb3"
             ]
         ]
     },
@@ -806,7 +806,7 @@
         "tls": "ec064d975c3f74fe",
         "persist": false,
         "proxy": "",
-        "authType": "basic",
+        "authType": "",
         "x": 330,
         "y": 1020,
         "wires": [
@@ -950,7 +950,7 @@
         "id": "c16254dad01ade88",
         "type": "change",
         "z": "b8b754302f25342a",
-        "name": "configure URL",
+        "name": "configure",
         "rules": [
             {
                 "t": "set",
@@ -965,7 +965,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 460,
+        "x": 440,
         "y": 100,
         "wires": [
             [
@@ -974,24 +974,16 @@
         ]
     },
     {
-        "id": "20163b8a2ef5234e",
-        "type": "change",
+        "id": "05ebc29c69196a84",
+        "type": "function",
         "z": "b8b754302f25342a",
         "name": "arrange",
-        "rules": [
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "BasicAuthURL",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
+        "func": "msg.url = flow.get('BasicAuthURL')\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 200,
         "y": 600,
         "wires": [
@@ -1001,24 +993,16 @@
         ]
     },
     {
-        "id": "cdb5fa26cbceb538",
-        "type": "change",
+        "id": "487a95eb02215fe2",
+        "type": "function",
         "z": "b8b754302f25342a",
         "name": "arrange",
-        "rules": [
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "BasicAuthURL",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
+        "func": "msg.url = flow.get('BasicAuthURL')\nmsg.headers = {\n  'Authorization':'Basic ' + new Buffer('wrong-user:wrong-password').toString('base64')\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 200,
         "y": 740,
         "wires": [
@@ -1028,24 +1012,16 @@
         ]
     },
     {
-        "id": "b2fefbea7b1a9274",
-        "type": "change",
+        "id": "4566e76383eed2f4",
+        "type": "function",
         "z": "b8b754302f25342a",
         "name": "arrange",
-        "rules": [
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "BasicAuthURL",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
+        "func": "msg.url = flow.get('BasicAuthURL')\nmsg.headers = {\n  'Authorization':'Basic ' + new Buffer('node-red:wrong-password').toString('base64')\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 200,
         "y": 880,
         "wires": [
@@ -1055,24 +1031,16 @@
         ]
     },
     {
-        "id": "a5dcc9e9f7ad18d8",
-        "type": "change",
+        "id": "cf5f0b0891149cb3",
+        "type": "function",
         "z": "b8b754302f25342a",
         "name": "arrange",
-        "rules": [
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "BasicAuthURL",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
+        "func": "msg.url = flow.get('BasicAuthURL')\nmsg.headers = {\n  'Authorization':'Basic ' + new Buffer('node-red:t0pS3cr3t!').toString('base64')\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 200,
         "y": 1020,
         "wires": [
