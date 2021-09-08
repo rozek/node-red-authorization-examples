@@ -54,15 +54,15 @@ However, basic authentication lacks (implicit) expiration and explicit logout, m
 
 ### Automated Tests ###
 
-There are [a few tests](test-basic-auth.json) (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) that test this implementation. These tests require
+There are a few tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
 
 * the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
 
 to be installed.
 
-The server to be tested may be configured in a node called "configure URL".
+To run them, just import [the test flows](test-basic-auth.json) into your workspace and enter the server to be tested in the node called "configure URL".
 
-¡[](test-basic-auth.png)
+![](test-basic-auth.png)
 
 ## Cookie-based Authorization ##
 
