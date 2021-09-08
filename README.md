@@ -40,6 +40,8 @@ The simplest approach to user authentication is to utilize the "basic HTTP authe
 
 If desired, "Component use" nodes for "basic Auth" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures.
 
+Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
+
 ### Try yourself ###
 
 The following example illustrates how to integrate basic authentication into Node-RED flows. Just [import it](try-basic-auth.json) and navigate your browser to the shown entry point.
@@ -65,6 +67,8 @@ Token lifetime may be configured - by default, it is set to 10 minutes.
 ![](cookie-auth.png)
 
 If desired, "Component use" nodes for "Cookie Login" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures. Similarly, the upper output of "Component use" nodes for "Cookie Auth" fires upon successful token validation, the lower one in case of a validation failure.
+
+Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
 ### Try yourself ###
 
@@ -103,6 +107,8 @@ Token lifetime may be configured, by default, it is set to 10 minutes.
 ![](header-auth.png)
 
 If desired, "Component use" nodes for "Header Login" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures. Similarly, the upper output of "Component use" nodes for "Header Auth" fires upon successful token validation, the lower one in case of a validation failure.
+
+Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
 ### Try yourself ###
 
