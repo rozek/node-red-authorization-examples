@@ -60,7 +60,7 @@ There are a few automated tests (built with the author's [node-red-test-support]
 
 to be installed.
 
-To run them, just import [the test flows](test-basic-auth.json) into your workspace and enter the server to be tested in the node called "configure URL".
+To run them, just import [the test flows](test-basic-auth.json) into your workspace and enter the server to be tested in the node called "configure".
 
 ![](test-basic-auth.png)
 
