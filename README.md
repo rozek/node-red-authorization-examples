@@ -52,6 +52,18 @@ The "basic HTTP authentication" procedure frees developers from having to design
 
 However, basic authentication lacks (implicit) expiration and explicit logout, making it very difficult to terminate an authenticated "session" or to change users: once correct credentials have been given, the browser always automatically attaches them to every request - unless a "private" window (or tab) is opened: in that case, the browser withdraws any given credentials as soon as the window (or tab) is closed.
 
+### Automated Tests ###
+
+There are a few tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
+
+* the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
+
+to be installed.
+
+To run them, just import [the test flows](test-basic-auth.json) into your workspace and enter the server to be tested in the node called "configure URL".
+
+![](test-basic-auth.png)
+
 ## Cookie-based Authorization ##
 
 Another popular approach is to let users log-in and generate access tokens which are then used as "cookies" for the communication between browser and server. Such cookies are also automatically attached to every request, but the contained tokens may be designed to "expire" or to be deleted upon a "logout".
