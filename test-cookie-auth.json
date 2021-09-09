@@ -15,7 +15,7 @@
         "z": "b8b754302f25342a",
         "name": "login with missing form",
         "info": "",
-        "x": 1400,
+        "x": 1440,
         "y": 160,
         "wires": []
     },
@@ -25,7 +25,7 @@
         "z": "b8b754302f25342a",
         "name": "login with incomplete form",
         "info": "",
-        "x": 1410,
+        "x": 1450,
         "y": 300,
         "wires": []
     },
@@ -35,7 +35,7 @@
         "z": "b8b754302f25342a",
         "name": "login with wrong password",
         "info": "",
-        "x": 1410,
+        "x": 1450,
         "y": 580,
         "wires": []
     },
@@ -45,7 +45,7 @@
         "z": "b8b754302f25342a",
         "name": "login with wrong userid",
         "info": "",
-        "x": 1400,
+        "x": 1440,
         "y": 440,
         "wires": []
     },
@@ -55,7 +55,7 @@
         "z": "b8b754302f25342a",
         "name": "login with correct credentials",
         "info": "",
-        "x": 1420,
+        "x": 1460,
         "y": 720,
         "wires": []
     },
@@ -65,7 +65,7 @@
         "z": "b8b754302f25342a",
         "name": "get without cookie",
         "info": "",
-        "x": 2050,
+        "x": 2090,
         "y": 160,
         "wires": []
     },
@@ -75,7 +75,7 @@
         "z": "b8b754302f25342a",
         "name": "get with broken cookie",
         "info": "",
-        "x": 2060,
+        "x": 2100,
         "y": 300,
         "wires": []
     },
@@ -85,7 +85,7 @@
         "z": "b8b754302f25342a",
         "name": "get with modified userid",
         "info": "",
-        "x": 2060,
+        "x": 2100,
         "y": 440,
         "wires": []
     },
@@ -95,7 +95,7 @@
         "z": "b8b754302f25342a",
         "name": "get with modified expiration",
         "info": "",
-        "x": 2080,
+        "x": 2120,
         "y": 580,
         "wires": []
     },
@@ -105,7 +105,7 @@
         "z": "b8b754302f25342a",
         "name": "get with modified digest",
         "info": "",
-        "x": 2060,
+        "x": 2100,
         "y": 720,
         "wires": []
     },
@@ -115,7 +115,7 @@
         "z": "b8b754302f25342a",
         "name": "get with correct cookie",
         "info": "",
-        "x": 2060,
+        "x": 2100,
         "y": 860,
         "wires": []
     },
@@ -172,7 +172,7 @@
         "type": "function",
         "z": "b8b754302f25342a",
         "name": "Status",
-        "func": "switch (true) {\n  case (msg.topic === '-'):\n    node.status({})\n    break\n  case (flow.get('Totals') === 0):\n    node.status({fill:'green',shape:'dot',text:'ok'})\n    break\n  default:\n    node.status({fill:'red',shape:'dot',text:'failed'})\n}\n",
+        "func": "switch (true) {\n  case (msg.TestMode === '-'):\n    node.status({})\n    break\n  case (flow.get('Totals') === 0):\n    node.status({fill:'green',shape:'dot',text:'ok'})\n    break\n  default:\n    node.status({fill:'red',shape:'dot',text:'failed'})\n}\n",
         "outputs": 0,
         "noerr": 0,
         "initialize": "",
@@ -378,7 +378,7 @@
         "z": "b8b754302f25342a",
         "name": "#1",
         "api": [],
-        "x": 1350,
+        "x": 1390,
         "y": 200,
         "wires": [
             [
@@ -392,7 +392,7 @@
         "z": "b8b754302f25342a",
         "name": "#2",
         "api": [],
-        "x": 1350,
+        "x": 1390,
         "y": 340,
         "wires": [
             [
@@ -406,7 +406,7 @@
         "z": "b8b754302f25342a",
         "name": "#3",
         "api": [],
-        "x": 1350,
+        "x": 1390,
         "y": 480,
         "wires": [
             [
@@ -420,7 +420,7 @@
         "z": "b8b754302f25342a",
         "name": "#4",
         "api": [],
-        "x": 1350,
+        "x": 1390,
         "y": 620,
         "wires": [
             [
@@ -434,7 +434,7 @@
         "z": "b8b754302f25342a",
         "name": "#5",
         "api": [],
-        "x": 1350,
+        "x": 1390,
         "y": 760,
         "wires": [
             [
@@ -957,7 +957,7 @@
         "z": "b8b754302f25342a",
         "name": "#6",
         "api": [],
-        "x": 2010,
+        "x": 2050,
         "y": 200,
         "wires": [
             [
@@ -971,7 +971,7 @@
         "z": "b8b754302f25342a",
         "name": "#7",
         "api": [],
-        "x": 2010,
+        "x": 2050,
         "y": 340,
         "wires": [
             [
@@ -985,7 +985,7 @@
         "z": "b8b754302f25342a",
         "name": "#8",
         "api": [],
-        "x": 2010,
+        "x": 2050,
         "y": 480,
         "wires": [
             [
@@ -999,7 +999,7 @@
         "z": "b8b754302f25342a",
         "name": "#9",
         "api": [],
-        "x": 2010,
+        "x": 2050,
         "y": 620,
         "wires": [
             [
@@ -1013,7 +1013,7 @@
         "z": "b8b754302f25342a",
         "name": "#10",
         "api": [],
-        "x": 2010,
+        "x": 2050,
         "y": 760,
         "wires": [
             [
@@ -1027,7 +1027,7 @@
         "z": "b8b754302f25342a",
         "name": "#11",
         "api": [],
-        "x": 2010,
+        "x": 2050,
         "y": 900,
         "wires": [
             [
@@ -1684,7 +1684,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1810,
+        "x": 1850,
         "y": 240,
         "wires": []
     },
@@ -1699,7 +1699,7 @@
             "708188e6f1577bfd"
         ],
         "uncaught": false,
-        "x": 1470,
+        "x": 1510,
         "y": 240,
         "wires": [
             [
@@ -1720,7 +1720,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1610,
+        "x": 1650,
         "y": 200,
         "wires": [
             [
@@ -1744,7 +1744,7 @@
                 "module": "chai"
             }
         ],
-        "x": 1730,
+        "x": 1770,
         "y": 200,
         "wires": [
             [
@@ -1763,7 +1763,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1480,
+        "x": 1520,
         "y": 200,
         "wires": [
             [
@@ -1778,7 +1778,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1810,
+        "x": 1850,
         "y": 380,
         "wires": []
     },
@@ -1793,7 +1793,7 @@
             "7e366ce5b00e33c4"
         ],
         "uncaught": false,
-        "x": 1470,
+        "x": 1510,
         "y": 380,
         "wires": [
             [
@@ -1814,7 +1814,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1610,
+        "x": 1650,
         "y": 340,
         "wires": [
             [
@@ -1838,7 +1838,7 @@
                 "module": "chai"
             }
         ],
-        "x": 1730,
+        "x": 1770,
         "y": 340,
         "wires": [
             [
@@ -1857,7 +1857,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1480,
+        "x": 1520,
         "y": 340,
         "wires": [
             [
@@ -1872,7 +1872,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1810,
+        "x": 1850,
         "y": 520,
         "wires": []
     },
@@ -1887,7 +1887,7 @@
             "bd65d1320dd3f321"
         ],
         "uncaught": false,
-        "x": 1470,
+        "x": 1510,
         "y": 520,
         "wires": [
             [
@@ -1908,7 +1908,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1610,
+        "x": 1650,
         "y": 480,
         "wires": [
             [
@@ -1932,7 +1932,7 @@
                 "module": "chai"
             }
         ],
-        "x": 1730,
+        "x": 1770,
         "y": 480,
         "wires": [
             [
@@ -1951,7 +1951,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1480,
+        "x": 1520,
         "y": 480,
         "wires": [
             [
@@ -1966,7 +1966,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1810,
+        "x": 1850,
         "y": 660,
         "wires": []
     },
@@ -1981,7 +1981,7 @@
             "4e2eaf92a6da3d0a"
         ],
         "uncaught": false,
-        "x": 1470,
+        "x": 1510,
         "y": 660,
         "wires": [
             [
@@ -2002,7 +2002,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1610,
+        "x": 1650,
         "y": 620,
         "wires": [
             [
@@ -2026,7 +2026,7 @@
                 "module": "chai"
             }
         ],
-        "x": 1730,
+        "x": 1770,
         "y": 620,
         "wires": [
             [
@@ -2045,7 +2045,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1480,
+        "x": 1520,
         "y": 620,
         "wires": [
             [
@@ -2060,7 +2060,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1810,
+        "x": 1850,
         "y": 800,
         "wires": []
     },
@@ -2075,7 +2075,7 @@
             "29c05ab8ca566391"
         ],
         "uncaught": false,
-        "x": 1470,
+        "x": 1510,
         "y": 800,
         "wires": [
             [
@@ -2096,7 +2096,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1610,
+        "x": 1650,
         "y": 760,
         "wires": [
             [
@@ -2120,7 +2120,7 @@
                 "module": "chai"
             }
         ],
-        "x": 1730,
+        "x": 1770,
         "y": 760,
         "wires": [
             [
@@ -2139,7 +2139,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1480,
+        "x": 1520,
         "y": 760,
         "wires": [
             [
@@ -2250,7 +2250,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 2470,
+        "x": 2510,
         "y": 240,
         "wires": []
     },
@@ -2265,7 +2265,7 @@
             "b03907e2f039afe6"
         ],
         "uncaught": false,
-        "x": 2130,
+        "x": 2170,
         "y": 240,
         "wires": [
             [
@@ -2286,7 +2286,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2270,
+        "x": 2310,
         "y": 200,
         "wires": [
             [
@@ -2310,7 +2310,7 @@
                 "module": "chai"
             }
         ],
-        "x": 2390,
+        "x": 2430,
         "y": 200,
         "wires": [
             [
@@ -2329,7 +2329,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2140,
+        "x": 2180,
         "y": 200,
         "wires": [
             [
@@ -2344,7 +2344,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 2470,
+        "x": 2510,
         "y": 380,
         "wires": []
     },
@@ -2359,7 +2359,7 @@
             "841d4fa1609a9e79"
         ],
         "uncaught": false,
-        "x": 2130,
+        "x": 2170,
         "y": 380,
         "wires": [
             [
@@ -2380,7 +2380,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2270,
+        "x": 2310,
         "y": 340,
         "wires": [
             [
@@ -2404,7 +2404,7 @@
                 "module": "chai"
             }
         ],
-        "x": 2390,
+        "x": 2430,
         "y": 340,
         "wires": [
             [
@@ -2423,7 +2423,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2140,
+        "x": 2180,
         "y": 340,
         "wires": [
             [
@@ -2438,7 +2438,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 2470,
+        "x": 2510,
         "y": 520,
         "wires": []
     },
@@ -2453,7 +2453,7 @@
             "7c5984f6386f10f8"
         ],
         "uncaught": false,
-        "x": 2130,
+        "x": 2170,
         "y": 520,
         "wires": [
             [
@@ -2474,7 +2474,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2270,
+        "x": 2310,
         "y": 480,
         "wires": [
             [
@@ -2498,7 +2498,7 @@
                 "module": "chai"
             }
         ],
-        "x": 2390,
+        "x": 2430,
         "y": 480,
         "wires": [
             [
@@ -2517,7 +2517,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2140,
+        "x": 2180,
         "y": 480,
         "wires": [
             [
@@ -2558,7 +2558,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 2470,
+        "x": 2510,
         "y": 660,
         "wires": []
     },
@@ -2573,7 +2573,7 @@
             "248b5b77dafb6ef9"
         ],
         "uncaught": false,
-        "x": 2130,
+        "x": 2170,
         "y": 660,
         "wires": [
             [
@@ -2594,7 +2594,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2270,
+        "x": 2310,
         "y": 620,
         "wires": [
             [
@@ -2618,7 +2618,7 @@
                 "module": "chai"
             }
         ],
-        "x": 2390,
+        "x": 2430,
         "y": 620,
         "wires": [
             [
@@ -2637,7 +2637,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2140,
+        "x": 2180,
         "y": 620,
         "wires": [
             [
@@ -2652,7 +2652,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 2470,
+        "x": 2510,
         "y": 800,
         "wires": []
     },
@@ -2667,7 +2667,7 @@
             "ce2449b4ddd54556"
         ],
         "uncaught": false,
-        "x": 2130,
+        "x": 2170,
         "y": 800,
         "wires": [
             [
@@ -2688,7 +2688,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2270,
+        "x": 2310,
         "y": 760,
         "wires": [
             [
@@ -2712,7 +2712,7 @@
                 "module": "chai"
             }
         ],
-        "x": 2390,
+        "x": 2430,
         "y": 760,
         "wires": [
             [
@@ -2731,7 +2731,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2140,
+        "x": 2180,
         "y": 760,
         "wires": [
             [
@@ -2746,7 +2746,7 @@
         "name": "return",
         "mode": "default",
         "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 2470,
+        "x": 2510,
         "y": 940,
         "wires": []
     },
@@ -2761,7 +2761,7 @@
             "f977f8188c7ef983"
         ],
         "uncaught": false,
-        "x": 2130,
+        "x": 2170,
         "y": 940,
         "wires": [
             [
@@ -2782,7 +2782,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2270,
+        "x": 2310,
         "y": 900,
         "wires": [
             [
@@ -2806,7 +2806,7 @@
                 "module": "chai"
             }
         ],
-        "x": 2390,
+        "x": 2430,
         "y": 900,
         "wires": [
             [
@@ -2825,7 +2825,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2140,
+        "x": 2180,
         "y": 900,
         "wires": [
             [
