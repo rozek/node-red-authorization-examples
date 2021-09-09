@@ -54,7 +54,7 @@ However, basic authentication lacks (implicit) expiration and explicit logout, m
 
 ### Automated Tests ###
 
-There are a few automated tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
+There are a few automated (client-side) tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
 
 * the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
 
@@ -110,7 +110,7 @@ Any login or token validation failure automatically deletes the token cookie, co
 
 ### Automated Tests ###
 
-There are a few automated tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
+There are a few automated (client-side) tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
 
 * the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
 
