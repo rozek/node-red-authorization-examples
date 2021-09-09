@@ -54,7 +54,7 @@ However, basic authentication lacks (implicit) expiration and explicit logout, m
 
 ### Automated Tests ###
 
-There are a few automated tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
+There are a few automated (client-side) tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
 
 * the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
 
@@ -73,6 +73,8 @@ The token in this example consists of a user id and an expiration time. While it
 The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active tokens.
 
 Token lifetime may be configured - by default, it is set to 10 minutes.
+
+In order to "login", POST a form containing the variables `UserId` and `Password` to the proper endpoint (`/cookie-auth` in this example).
 
 > Nota bene: current law often requires users to be informed about cookie usage. The cookie used here counts as a "technically required cookie" which cannot be forbidden if the visited site is expected to work as foreseen.
 
@@ -106,6 +108,20 @@ Successful login, token validation and token refresh always adds the related coo
 
 Any login or token validation failure automatically deletes the token cookie, comparable to a logout.
 
+### Automated Tests ###
+
+There are a few automated (client-side) tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
+
+* the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
+
+to be installed.
+
+To run them, just import [the test flows](test-cookie-auth.json) into your workspace and enter the server to be tested in the node called "configure".
+
+![](test-cookie-auth-I.png)
+![](test-cookie-auth-II.png)
+![](test-cookie-auth-III.png)
+
 ## Header-based Authorization ##
 
 The third example also generates access tokens but stores them in an HTTP header instead of a cookie. This avoids having to follow any cookie-related laws but requires some JavaScript on the client side which always adds a proper authorization header to any outgoing request.
@@ -115,6 +131,8 @@ Again, access tokens consist of a user id and an expiration time. While they are
 The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active sessions.
 
 Token lifetime may be configured, by default, it is set to 10 minutes.
+
+In order to "login", POST a form containing the variables `UserId` and `Password` to the proper endpoint (`/header-auth` in this example).
 
 ![](header-auth.png)
 
