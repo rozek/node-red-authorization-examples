@@ -106,6 +106,20 @@ Successful login, token validation and token refresh always adds the related coo
 
 Any login or token validation failure automatically deletes the token cookie, comparable to a logout.
 
+### Automated Tests ###
+
+There are a few automated tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
+
+* the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
+
+to be installed.
+
+To run them, just import [the test flows](test-cookie-auth.json) into your workspace and enter the server to be tested in the node called "configure".
+
+![](test-cookie-auth-I.png)
+![](test-cookie-auth-II.png)
+![](test-cookie-auth-III.png)
+
 ## Header-based Authorization ##
 
 The third example also generates access tokens but stores them in an HTTP header instead of a cookie. This avoids having to follow any cookie-related laws but requires some JavaScript on the client side which always adds a proper authorization header to any outgoing request.
