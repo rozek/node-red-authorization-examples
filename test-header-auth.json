@@ -1,0 +1,2850 @@
+[
+    {
+        "id": "e7ca2042f9faa8ac",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "Header-based authorization (w/ expiration)",
+        "info": "",
+        "x": 180,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "54e6ef6113e5a772",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "login with missing form",
+        "info": "",
+        "x": 780,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "720a51b364bd2300",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "login with incomplete form",
+        "info": "",
+        "x": 790,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "c2254101b1c4ef82",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "login with wrong password",
+        "info": "",
+        "x": 790,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "c8090a7564ac7ebd",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "login with wrong userid",
+        "info": "",
+        "x": 780,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "2a9278d81e5d463d",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "login with correct credentials",
+        "info": "",
+        "x": 800,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "a5a25d2def487420",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "get without authorization header",
+        "info": "",
+        "x": 1470,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "511264e54d3d3b3b",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "get with broken authorization header",
+        "info": "",
+        "x": 1480,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "7728bda793124a6b",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "get with modified userid",
+        "info": "",
+        "x": 1440,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "6f731bd1d67deadd",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "get with modified expiration",
+        "info": "",
+        "x": 1460,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "ae08da21a92778ac",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "get with modified digest",
+        "info": "",
+        "x": 1440,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "9e14fc8455bc66e7",
+        "type": "comment",
+        "z": "b8b754302f25342a",
+        "name": "get with correct authorization header",
+        "info": "",
+        "x": 1480,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "fb920739e3d35a79",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "run Tests",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 1360,
+        "wires": [
+            [
+                "d3e9149f4ab32119"
+            ]
+        ]
+    },
+    {
+        "id": "27ed2fd7e8a1f9a9",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "reset totals",
+        "func": "flow.set('Totals',0)\n\nmsg.TestMode = '-'\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1360,
+        "wires": [
+            [
+                "76e7264932a23aa2",
+                "afcfb43854f6d21d"
+            ]
+        ]
+    },
+    {
+        "id": "76e7264932a23aa2",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "Status",
+        "func": "switch (true) {\n  case (msg.TestMode === '-'):\n    node.status({})\n    break\n  case (flow.get('Totals') === 0):\n    node.status({fill:'green',shape:'dot',text:'ok'})\n    break\n  default:\n    node.status({fill:'red',shape:'dot',text:'failed'})\n}\n",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "afcfb43854f6d21d",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "dispatch",
+        "func": "if (context.get('pendingList') == null) { // first invocation\n  msg.TestMode = 'multiple-tests'\n\n  let MsgList = [null], pendingList = []\n  for (let i = 1, l = node.outputCount; i < l; i++) {\n    MsgList.push(null)\n    pendingList.push(i)\n  }\n  context.set('MsgList',MsgList)\n  context.set('pendingList',pendingList)\n}\n\nlet pendingList = context.get('pendingList')\nif (pendingList.length === 0) { // all tests completed\n  context.set('pendingList',null)\n  return [msg]\n} else { // ongoing tests\n  let msg = {} // create new, empty \"msg\" object\n\n  let chosenIndex  = Math.floor(Math.random()*pendingList.length)\n  let chosenOutput = pendingList.splice(chosenIndex,1)[0]\n\n  context.set('pendingList',pendingList)\n\n  let MsgList = context.get('MsgList').slice()\n    MsgList[chosenOutput] = msg\n  return MsgList\n}\n",
+        "outputs": 6,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 1440,
+        "wires": [
+            [
+                "591db95236304ad5"
+            ],
+            [
+                "b34fdc9b76252193"
+            ],
+            [
+                "d71405cfbdbccb61"
+            ],
+            [
+                "46f50404c55fdde6"
+            ],
+            [
+                "7e6900a48f3795a5"
+            ],
+            [
+                "df3379bb0f46e740"
+            ]
+        ]
+    },
+    {
+        "id": "25d9428a99d0e592",
+        "type": "link in",
+        "z": "b8b754302f25342a",
+        "name": "Header-based Authorization I",
+        "links": [
+            "1058abcffd64a90e",
+            "6a040403c7cd2fbd",
+            "7f16c89bcbf5f4e8",
+            "9f2375ca97834dfb",
+            "afddb7bc396168d3",
+            "d32ccfe6267c8cb0"
+        ],
+        "x": 35,
+        "y": 1440,
+        "wires": [
+            [
+                "afcfb43854f6d21d"
+            ]
+        ]
+    },
+    {
+        "id": "d3e9149f4ab32119",
+        "type": "change",
+        "z": "b8b754302f25342a",
+        "name": "configure",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HeaderAuthURL",
+                "pt": "flow",
+                "to": "https://127.0.0.1:9443/header-auth",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 1360,
+        "wires": [
+            [
+                "27ed2fd7e8a1f9a9"
+            ]
+        ]
+    },
+    {
+        "id": "b34fdc9b76252193",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "ebcd39ce42e6cd1c",
+            "name": "#1",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 1520,
+        "wires": [
+            [
+                "36469b260600964c"
+            ]
+        ]
+    },
+    {
+        "id": "36469b260600964c",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1520,
+        "wires": [
+            [
+                "d32ccfe6267c8cb0"
+            ]
+        ]
+    },
+    {
+        "id": "9409e9df754f89fa",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 1520,
+        "wires": [
+            [
+                "b34fdc9b76252193"
+            ]
+        ]
+    },
+    {
+        "id": "d32ccfe6267c8cb0",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "25d9428a99d0e592",
+            "a2d05779d9af1600"
+        ],
+        "x": 555,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "b3005d1f9ab7eb34",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 1540,
+        "wires": [
+            [
+                "36469b260600964c"
+            ]
+        ]
+    },
+    {
+        "id": "ebcd39ce42e6cd1c",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#1",
+        "api": [],
+        "x": 730,
+        "y": 1400,
+        "wires": [
+            [
+                "ec54e4230ac72d02"
+            ]
+        ]
+    },
+    {
+        "id": "a6de14ac48f7d143",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#2",
+        "api": [],
+        "x": 730,
+        "y": 1540,
+        "wires": [
+            [
+                "b4fd0dcf59dbb80b"
+            ]
+        ]
+    },
+    {
+        "id": "f61ef073a49d56e1",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#3",
+        "api": [],
+        "x": 730,
+        "y": 1680,
+        "wires": [
+            [
+                "51d1c92343b41787"
+            ]
+        ]
+    },
+    {
+        "id": "bc37617dff98eb2c",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#4",
+        "api": [],
+        "x": 730,
+        "y": 1820,
+        "wires": [
+            [
+                "631b0a99cb9e3fac"
+            ]
+        ]
+    },
+    {
+        "id": "dc373543c98c41c0",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#5",
+        "api": [],
+        "x": 730,
+        "y": 1960,
+        "wires": [
+            [
+                "416c119924d4cf42"
+            ]
+        ]
+    },
+    {
+        "id": "d71405cfbdbccb61",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "a6de14ac48f7d143",
+            "name": "#2",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 1580,
+        "wires": [
+            [
+                "76324e006880eadb"
+            ]
+        ]
+    },
+    {
+        "id": "76324e006880eadb",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1580,
+        "wires": [
+            [
+                "9f2375ca97834dfb"
+            ]
+        ]
+    },
+    {
+        "id": "ae73dd0ca19ad7be",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 1580,
+        "wires": [
+            [
+                "d71405cfbdbccb61"
+            ]
+        ]
+    },
+    {
+        "id": "9f2375ca97834dfb",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "25d9428a99d0e592",
+            "a2d05779d9af1600"
+        ],
+        "x": 555,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "d1b9a31a3d5a7dee",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 1600,
+        "wires": [
+            [
+                "76324e006880eadb"
+            ]
+        ]
+    },
+    {
+        "id": "46f50404c55fdde6",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "f61ef073a49d56e1",
+            "name": "#3",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 1640,
+        "wires": [
+            [
+                "db0ee16e92a23453"
+            ]
+        ]
+    },
+    {
+        "id": "db0ee16e92a23453",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1640,
+        "wires": [
+            [
+                "6a040403c7cd2fbd"
+            ]
+        ]
+    },
+    {
+        "id": "ebe1760549187b01",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 1640,
+        "wires": [
+            [
+                "46f50404c55fdde6"
+            ]
+        ]
+    },
+    {
+        "id": "6a040403c7cd2fbd",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "25d9428a99d0e592",
+            "a2d05779d9af1600"
+        ],
+        "x": 555,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "59a77a033e22ac00",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 1660,
+        "wires": [
+            [
+                "db0ee16e92a23453"
+            ]
+        ]
+    },
+    {
+        "id": "7e6900a48f3795a5",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "bc37617dff98eb2c",
+            "name": "#4",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 1700,
+        "wires": [
+            [
+                "346a256d9420743c"
+            ]
+        ]
+    },
+    {
+        "id": "346a256d9420743c",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1700,
+        "wires": [
+            [
+                "afddb7bc396168d3"
+            ]
+        ]
+    },
+    {
+        "id": "e9e01917c96e7339",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 1700,
+        "wires": [
+            [
+                "7e6900a48f3795a5"
+            ]
+        ]
+    },
+    {
+        "id": "afddb7bc396168d3",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "25d9428a99d0e592",
+            "a2d05779d9af1600"
+        ],
+        "x": 555,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "4b2de801a37c6022",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 1720,
+        "wires": [
+            [
+                "346a256d9420743c"
+            ]
+        ]
+    },
+    {
+        "id": "df3379bb0f46e740",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "dc373543c98c41c0",
+            "name": "#5",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 1760,
+        "wires": [
+            [
+                "da7e28a2e1bf248c"
+            ]
+        ]
+    },
+    {
+        "id": "da7e28a2e1bf248c",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1760,
+        "wires": [
+            [
+                "7f16c89bcbf5f4e8"
+            ]
+        ]
+    },
+    {
+        "id": "df70401fa1643045",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 1760,
+        "wires": [
+            [
+                "df3379bb0f46e740"
+            ]
+        ]
+    },
+    {
+        "id": "7f16c89bcbf5f4e8",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "25d9428a99d0e592",
+            "a2d05779d9af1600"
+        ],
+        "x": 555,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "f05a29f179bc1200",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 1780,
+        "wires": [
+            [
+                "da7e28a2e1bf248c"
+            ]
+        ]
+    },
+    {
+        "id": "79ef54a2de035fb8",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "dispatch",
+        "func": "if (context.get('pendingList') == null) { // first invocation\n  msg.TestMode = 'multiple-tests'\n\n  let MsgList = [null], pendingList = []\n  for (let i = 1, l = node.outputCount; i < l; i++) {\n    MsgList.push(null)\n    pendingList.push(i)\n  }\n  context.set('MsgList',MsgList)\n  context.set('pendingList',pendingList)\n}\n\nlet pendingList = context.get('pendingList')\nif (pendingList.length === 0) { // all tests completed\n  context.set('pendingList',null)\n  return [msg]\n} else { // ongoing tests\n  let msg = {} // create new, empty \"msg\" object\n\n  let chosenIndex  = Math.floor(Math.random()*pendingList.length)\n  let chosenOutput = pendingList.splice(chosenIndex,1)[0]\n\n  context.set('pendingList',pendingList)\n\n  let MsgList = context.get('MsgList').slice()\n    MsgList[chosenOutput] = msg\n  return MsgList\n}\n",
+        "outputs": 7,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 1960,
+        "wires": [
+            [
+                "76e7264932a23aa2"
+            ],
+            [
+                "845b67e4ebf5fcc1"
+            ],
+            [
+                "bb471e9f4b14c97e"
+            ],
+            [
+                "90a711d9335b3b16"
+            ],
+            [
+                "33f3bb7c8f458616"
+            ],
+            [
+                "0a53b8de0f83fa8f"
+            ],
+            [
+                "0baa4bf04c4ac709"
+            ]
+        ]
+    },
+    {
+        "id": "591db95236304ad5",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "login properly",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 1880,
+        "wires": [
+            [
+                "815dfe09e0c658ec"
+            ]
+        ]
+    },
+    {
+        "id": "2be81a6b63c738e2",
+        "type": "link in",
+        "z": "b8b754302f25342a",
+        "name": "Header-based Authorization II",
+        "links": [
+            "615b6c59f130c92e",
+            "700a127127152f4f",
+            "86cd6930d9e7ad6b",
+            "882d5ff704ca8792",
+            "886127876bd7ef32",
+            "acac9fca332bd0c3"
+        ],
+        "x": 35,
+        "y": 1960,
+        "wires": [
+            [
+                "79ef54a2de035fb8"
+            ]
+        ]
+    },
+    {
+        "id": "eb1585c5fb6e51e5",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#6",
+        "api": [],
+        "x": 1390,
+        "y": 1400,
+        "wires": [
+            [
+                "c84777f6f8f840d5"
+            ]
+        ]
+    },
+    {
+        "id": "255ea5f4987dae74",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#7",
+        "api": [],
+        "x": 1390,
+        "y": 1540,
+        "wires": [
+            [
+                "7820daee17f39762"
+            ]
+        ]
+    },
+    {
+        "id": "199d58038a990ca5",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#8",
+        "api": [],
+        "x": 1390,
+        "y": 1680,
+        "wires": [
+            [
+                "eb85b0942e5a5bc7"
+            ]
+        ]
+    },
+    {
+        "id": "10af7c883b428f3f",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#9",
+        "api": [],
+        "x": 1390,
+        "y": 1820,
+        "wires": [
+            [
+                "8a783c6058848429"
+            ]
+        ]
+    },
+    {
+        "id": "c4c9c112cf53a7a4",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#10",
+        "api": [],
+        "x": 1390,
+        "y": 1960,
+        "wires": [
+            [
+                "e2d7a60da0961826"
+            ]
+        ]
+    },
+    {
+        "id": "c8790ea6f277914c",
+        "type": "component_in",
+        "z": "b8b754302f25342a",
+        "name": "#11",
+        "api": [],
+        "x": 1390,
+        "y": 2100,
+        "wires": [
+            [
+                "89a77382ed379724"
+            ]
+        ]
+    },
+    {
+        "id": "845b67e4ebf5fcc1",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "eb1585c5fb6e51e5",
+            "name": "#6",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 2040,
+        "wires": [
+            [
+                "bbeaecaf0db4fde1"
+            ]
+        ]
+    },
+    {
+        "id": "bbeaecaf0db4fde1",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 2040,
+        "wires": [
+            [
+                "615b6c59f130c92e"
+            ]
+        ]
+    },
+    {
+        "id": "de6f23762beb5132",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 2040,
+        "wires": [
+            [
+                "845b67e4ebf5fcc1"
+            ]
+        ]
+    },
+    {
+        "id": "615b6c59f130c92e",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "2be81a6b63c738e2"
+        ],
+        "x": 555,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "f5fd7797bda262fb",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 2060,
+        "wires": [
+            [
+                "bbeaecaf0db4fde1"
+            ]
+        ]
+    },
+    {
+        "id": "bb471e9f4b14c97e",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "255ea5f4987dae74",
+            "name": "#7",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 2100,
+        "wires": [
+            [
+                "9b76988a052eb7e9"
+            ]
+        ]
+    },
+    {
+        "id": "9b76988a052eb7e9",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 2100,
+        "wires": [
+            [
+                "882d5ff704ca8792"
+            ]
+        ]
+    },
+    {
+        "id": "2d3fdf576aa48dc2",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 2100,
+        "wires": [
+            [
+                "bb471e9f4b14c97e"
+            ]
+        ]
+    },
+    {
+        "id": "882d5ff704ca8792",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "2be81a6b63c738e2"
+        ],
+        "x": 555,
+        "y": 2100,
+        "wires": []
+    },
+    {
+        "id": "321ea26811d1f655",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 2120,
+        "wires": [
+            [
+                "9b76988a052eb7e9"
+            ]
+        ]
+    },
+    {
+        "id": "90a711d9335b3b16",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "199d58038a990ca5",
+            "name": "#8",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 2160,
+        "wires": [
+            [
+                "303cdc01cb554def"
+            ]
+        ]
+    },
+    {
+        "id": "303cdc01cb554def",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 2160,
+        "wires": [
+            [
+                "700a127127152f4f"
+            ]
+        ]
+    },
+    {
+        "id": "392ba6a09bd3025b",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 2160,
+        "wires": [
+            [
+                "90a711d9335b3b16"
+            ]
+        ]
+    },
+    {
+        "id": "700a127127152f4f",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "2be81a6b63c738e2"
+        ],
+        "x": 555,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "94e74744f6573553",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 2180,
+        "wires": [
+            [
+                "303cdc01cb554def"
+            ]
+        ]
+    },
+    {
+        "id": "33f3bb7c8f458616",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "10af7c883b428f3f",
+            "name": "#9",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 2220,
+        "wires": [
+            [
+                "74f5c6df8789199e"
+            ]
+        ]
+    },
+    {
+        "id": "74f5c6df8789199e",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 2220,
+        "wires": [
+            [
+                "886127876bd7ef32"
+            ]
+        ]
+    },
+    {
+        "id": "cf525fc5945717a9",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 2220,
+        "wires": [
+            [
+                "33f3bb7c8f458616"
+            ]
+        ]
+    },
+    {
+        "id": "886127876bd7ef32",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "2be81a6b63c738e2"
+        ],
+        "x": 555,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "b84db194d9e190ab",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 2240,
+        "wires": [
+            [
+                "74f5c6df8789199e"
+            ]
+        ]
+    },
+    {
+        "id": "0a53b8de0f83fa8f",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "c4c9c112cf53a7a4",
+            "name": "#10",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 2280,
+        "wires": [
+            [
+                "061da3d4ca50e0d8"
+            ]
+        ]
+    },
+    {
+        "id": "061da3d4ca50e0d8",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 2280,
+        "wires": [
+            [
+                "acac9fca332bd0c3"
+            ]
+        ]
+    },
+    {
+        "id": "62022d2a42b45f7e",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 2280,
+        "wires": [
+            [
+                "0a53b8de0f83fa8f"
+            ]
+        ]
+    },
+    {
+        "id": "acac9fca332bd0c3",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "2be81a6b63c738e2"
+        ],
+        "x": 555,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "f9ed6d847ebfd793",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 2300,
+        "wires": [
+            [
+                "061da3d4ca50e0d8"
+            ]
+        ]
+    },
+    {
+        "id": "0baa4bf04c4ac709",
+        "type": "component",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "targetComponent": {
+            "id": "c8790ea6f277914c",
+            "name": "#11",
+            "api": []
+        },
+        "paramSources": {},
+        "statuz": "",
+        "statuzType": "str",
+        "outputs": 1,
+        "outLabels": [
+            "default"
+        ],
+        "x": 210,
+        "y": 2340,
+        "wires": [
+            [
+                "89e696fc4c2be43d"
+            ]
+        ]
+    },
+    {
+        "id": "89e696fc4c2be43d",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 2340,
+        "wires": [
+            [
+                "86cd6930d9e7ad6b"
+            ]
+        ]
+    },
+    {
+        "id": "812eb77c21e75980",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 2340,
+        "wires": [
+            [
+                "0baa4bf04c4ac709"
+            ]
+        ]
+    },
+    {
+        "id": "86cd6930d9e7ad6b",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "2be81a6b63c738e2"
+        ],
+        "x": 555,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "ba42f0ce75d9764e",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 350,
+        "y": 2360,
+        "wires": [
+            [
+                "89e696fc4c2be43d"
+            ]
+        ]
+    },
+    {
+        "id": "b798a5d9bd0d53a3",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1190,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "a641b8ea56fefbc8",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "2d9ca6a010afe218",
+            "86a72dd5e512b5c0",
+            "ec54e4230ac72d02"
+        ],
+        "uncaught": false,
+        "x": 850,
+        "y": 1440,
+        "wires": [
+            [
+                "b798a5d9bd0d53a3"
+            ]
+        ]
+    },
+    {
+        "id": "2d9ca6a010afe218",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 1400,
+        "wires": [
+            [
+                "86a72dd5e512b5c0"
+            ]
+        ]
+    },
+    {
+        "id": "86a72dd5e512b5c0",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1110,
+        "y": 1400,
+        "wires": [
+            [
+                "b798a5d9bd0d53a3"
+            ]
+        ]
+    },
+    {
+        "id": "ec54e4230ac72d02",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = undefined // no form at all\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1400,
+        "wires": [
+            [
+                "2d9ca6a010afe218"
+            ]
+        ]
+    },
+    {
+        "id": "fc08c62bf752e698",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1190,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "d53ddcc3a28d4427",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "35196f8663594f37",
+            "ead02d5758fddcbd",
+            "b4fd0dcf59dbb80b"
+        ],
+        "uncaught": false,
+        "x": 850,
+        "y": 1580,
+        "wires": [
+            [
+                "fc08c62bf752e698"
+            ]
+        ]
+    },
+    {
+        "id": "35196f8663594f37",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 1540,
+        "wires": [
+            [
+                "ead02d5758fddcbd"
+            ]
+        ]
+    },
+    {
+        "id": "ead02d5758fddcbd",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1110,
+        "y": 1540,
+        "wires": [
+            [
+                "fc08c62bf752e698"
+            ]
+        ]
+    },
+    {
+        "id": "b4fd0dcf59dbb80b",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red'\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1540,
+        "wires": [
+            [
+                "35196f8663594f37"
+            ]
+        ]
+    },
+    {
+        "id": "37d4f27ee64267a4",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1190,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "763592209f0c18b9",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "6fab3e03b1c969a5",
+            "ad1a408fd85d0970",
+            "51d1c92343b41787"
+        ],
+        "uncaught": false,
+        "x": 850,
+        "y": 1720,
+        "wires": [
+            [
+                "37d4f27ee64267a4"
+            ]
+        ]
+    },
+    {
+        "id": "6fab3e03b1c969a5",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 1680,
+        "wires": [
+            [
+                "ad1a408fd85d0970"
+            ]
+        ]
+    },
+    {
+        "id": "ad1a408fd85d0970",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1110,
+        "y": 1680,
+        "wires": [
+            [
+                "37d4f27ee64267a4"
+            ]
+        ]
+    },
+    {
+        "id": "51d1c92343b41787",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'invalid-user',\n  Password:'t0pS3cr3t!'\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1680,
+        "wires": [
+            [
+                "6fab3e03b1c969a5"
+            ]
+        ]
+    },
+    {
+        "id": "78b7c22180e23284",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1190,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "471772fd90e4cb32",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "d56c1ae038dc45c9",
+            "5af3b31d698db1a9",
+            "631b0a99cb9e3fac"
+        ],
+        "uncaught": false,
+        "x": 850,
+        "y": 1860,
+        "wires": [
+            [
+                "78b7c22180e23284"
+            ]
+        ]
+    },
+    {
+        "id": "d56c1ae038dc45c9",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 1820,
+        "wires": [
+            [
+                "5af3b31d698db1a9"
+            ]
+        ]
+    },
+    {
+        "id": "5af3b31d698db1a9",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1110,
+        "y": 1820,
+        "wires": [
+            [
+                "78b7c22180e23284"
+            ]
+        ]
+    },
+    {
+        "id": "631b0a99cb9e3fac",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red',\n  Password:'invalid-password'\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1820,
+        "wires": [
+            [
+                "d56c1ae038dc45c9"
+            ]
+        ]
+    },
+    {
+        "id": "54affdaabcb9bc72",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1190,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "17efeff93732c1c6",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "9544871667abfa7e",
+            "5ae696dccc5ca0c0",
+            "416c119924d4cf42"
+        ],
+        "uncaught": false,
+        "x": 850,
+        "y": 2000,
+        "wires": [
+            [
+                "54affdaabcb9bc72"
+            ]
+        ]
+    },
+    {
+        "id": "9544871667abfa7e",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 1960,
+        "wires": [
+            [
+                "5ae696dccc5ca0c0"
+            ]
+        ]
+    },
+    {
+        "id": "5ae696dccc5ca0c0",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet Header = msg.headers['authorization']\nexpect(Header).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\nexpect(UserId).to.equal('node-red')\nexpect(parseInt(Expiration,10)).to.be.at.least(msg.now)\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1110,
+        "y": 1960,
+        "wires": [
+            [
+                "54affdaabcb9bc72"
+            ]
+        ]
+    },
+    {
+        "id": "416c119924d4cf42",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1960,
+        "wires": [
+            [
+                "9544871667abfa7e"
+            ]
+        ]
+    },
+    {
+        "id": "815dfe09e0c658ec",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "http",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 270,
+        "y": 1880,
+        "wires": [
+            [
+                "0138ca45718b9325"
+            ]
+        ]
+    },
+    {
+        "id": "0138ca45718b9325",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet Header = msg.headers['authorization']\nexpect(Header).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\nexpect(UserId).to.equal('node-red')\nexpect(parseInt(Expiration,10)).to.be.at.least(msg.now)\n\nflow.set('HeaderAuthHeader',Header)\n\nif (msg.TestMode !== 'single-test') {\n  return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 390,
+        "y": 1880,
+        "wires": [
+            [
+                "79ef54a2de035fb8"
+            ]
+        ]
+    },
+    {
+        "id": "bb0ee59a2cd58a75",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "815dfe09e0c658ec",
+            "0138ca45718b9325",
+            "591db95236304ad5"
+        ],
+        "uncaught": false,
+        "x": 350,
+        "y": 1920,
+        "wires": [
+            [
+                "d9307b8ac410425a"
+            ]
+        ]
+    },
+    {
+        "id": "d9307b8ac410425a",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "report",
+        "func": "  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({})\n  } else {\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1920,
+        "wires": [
+            [
+                "1058abcffd64a90e"
+            ]
+        ]
+    },
+    {
+        "id": "1058abcffd64a90e",
+        "type": "link out",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "links": [
+            "25d9428a99d0e592",
+            "a2d05779d9af1600"
+        ],
+        "x": 555,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "e502454850417919",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1850,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "eb961c82cced9418",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "7d65427b52e210ae",
+            "42220ade043cc452",
+            "c84777f6f8f840d5"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 1440,
+        "wires": [
+            [
+                "e502454850417919"
+            ]
+        ]
+    },
+    {
+        "id": "7d65427b52e210ae",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 1400,
+        "wires": [
+            [
+                "42220ade043cc452"
+            ]
+        ]
+    },
+    {
+        "id": "42220ade043cc452",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 1400,
+        "wires": [
+            [
+                "e502454850417919"
+            ]
+        ]
+    },
+    {
+        "id": "c84777f6f8f840d5",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url = flow.get('HeaderAuthURL')\n\nmsg.headers = msg.headers || {}\ndelete msg.headers['authorization']\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 1400,
+        "wires": [
+            [
+                "7d65427b52e210ae"
+            ]
+        ]
+    },
+    {
+        "id": "c392631f132bc9ec",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1850,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "99609260ee1fec60",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "b27bd755a23bccc2",
+            "4d0d65268edb9187",
+            "7820daee17f39762"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 1580,
+        "wires": [
+            [
+                "c392631f132bc9ec"
+            ]
+        ]
+    },
+    {
+        "id": "b27bd755a23bccc2",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 1540,
+        "wires": [
+            [
+                "4d0d65268edb9187"
+            ]
+        ]
+    },
+    {
+        "id": "4d0d65268edb9187",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 1540,
+        "wires": [
+            [
+                "c392631f132bc9ec"
+            ]
+        ]
+    },
+    {
+        "id": "7820daee17f39762",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url = flow.get('HeaderAuthURL')\nmsg.headers = { authorization:'Bearer : : : : : : : broken-header' }\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 1540,
+        "wires": [
+            [
+                "b27bd755a23bccc2"
+            ]
+        ]
+    },
+    {
+        "id": "2e92c8615cca4b18",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1850,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "b73ede9b42748bbd",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "5be12133e3274c01",
+            "f675e86f6eac3b4a",
+            "eb85b0942e5a5bc7"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 1720,
+        "wires": [
+            [
+                "2e92c8615cca4b18"
+            ]
+        ]
+    },
+    {
+        "id": "5be12133e3274c01",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 1680,
+        "wires": [
+            [
+                "f675e86f6eac3b4a"
+            ]
+        ]
+    },
+    {
+        "id": "f675e86f6eac3b4a",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 1680,
+        "wires": [
+            [
+                "2e92c8615cca4b18"
+            ]
+        ]
+    },
+    {
+        "id": "eb85b0942e5a5bc7",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\n\nUserId = 'node-green'\n\nmsg.headers = { authorization:'Bearer ' + UserId + ':' + Expiration + ':' + Digest }\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 1680,
+        "wires": [
+            [
+                "5be12133e3274c01"
+            ]
+        ]
+    },
+    {
+        "id": "ab3b49fb0c76df63",
+        "type": "inject",
+        "z": "b8b754302f25342a",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 1840,
+        "wires": [
+            [
+                "591db95236304ad5"
+            ]
+        ]
+    },
+    {
+        "id": "27d988e2594b3b71",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1850,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "507fe83943e1cdb6",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "d8e2b4626b5a675a",
+            "622fa69286fdc5e9",
+            "8a783c6058848429"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 1860,
+        "wires": [
+            [
+                "27d988e2594b3b71"
+            ]
+        ]
+    },
+    {
+        "id": "d8e2b4626b5a675a",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 1820,
+        "wires": [
+            [
+                "622fa69286fdc5e9"
+            ]
+        ]
+    },
+    {
+        "id": "622fa69286fdc5e9",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 1820,
+        "wires": [
+            [
+                "27d988e2594b3b71"
+            ]
+        ]
+    },
+    {
+        "id": "8a783c6058848429",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\n\nExpiration = parseInt(Expiration,10) + 365*24*60*60*1000\n\nmsg.headers = { authorization:'Bearer ' + UserId + ':' + Expiration + ':' + Digest }\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 1820,
+        "wires": [
+            [
+                "d8e2b4626b5a675a"
+            ]
+        ]
+    },
+    {
+        "id": "b7b49c3b5c230908",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1850,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "b6e06d3d244803e7",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "be4c21e3ed7c655b",
+            "bc95cf3267e8b68d",
+            "e2d7a60da0961826"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 2000,
+        "wires": [
+            [
+                "b7b49c3b5c230908"
+            ]
+        ]
+    },
+    {
+        "id": "be4c21e3ed7c655b",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 1960,
+        "wires": [
+            [
+                "bc95cf3267e8b68d"
+            ]
+        ]
+    },
+    {
+        "id": "bc95cf3267e8b68d",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 1960,
+        "wires": [
+            [
+                "b7b49c3b5c230908"
+            ]
+        ]
+    },
+    {
+        "id": "e2d7a60da0961826",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\n\nDigest = 'c3da5c194d3104f6ff5986cd79cc3dada0bc14447330c7da0eb8299091188d7b'\n\nmsg.headers = { authorization:'Bearer ' + UserId + ':' + Expiration + ':' + Digest }\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 1960,
+        "wires": [
+            [
+                "be4c21e3ed7c655b"
+            ]
+        ]
+    },
+    {
+        "id": "60d1e1f4e03a731c",
+        "type": "component_out",
+        "z": "b8b754302f25342a",
+        "name": "return",
+        "mode": "default",
+        "component_definitions_are_NOT_allowed_inside_subflows": true,
+        "x": 1850,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "e380a3f72c9077a4",
+        "type": "catch",
+        "z": "b8b754302f25342a",
+        "name": "",
+        "scope": [
+            "103e8c1b01c11a42",
+            "2e061429532c5884",
+            "89a77382ed379724"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 2140,
+        "wires": [
+            [
+                "60d1e1f4e03a731c"
+            ]
+        ]
+    },
+    {
+        "id": "103e8c1b01c11a42",
+        "type": "http request",
+        "z": "b8b754302f25342a",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "ec064d975c3f74fe",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 2100,
+        "wires": [
+            [
+                "2e061429532c5884"
+            ]
+        ]
+    },
+    {
+        "id": "2e061429532c5884",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet newHeader = msg.headers['authorization']\nexpect(newHeader).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [newUserId,newExpiration,newDigest] = newHeader.replace(/^Bearer\\s+/,'').split(':')\n\nlet oldHeader = flow.get('HeaderAuthHeader')\nlet [oldUserId,oldExpiration,oldDigest] = oldHeader.replace(/^Bearer\\s+/,'').split(':')\n\nexpect(newUserId).to.equal(oldUserId)\nexpect(parseInt(newExpiration,10)).to.be.at.least(parseInt(oldExpiration,10))\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 2100,
+        "wires": [
+            [
+                "60d1e1f4e03a731c"
+            ]
+        ]
+    },
+    {
+        "id": "89a77382ed379724",
+        "type": "function",
+        "z": "b8b754302f25342a",
+        "name": "arrange",
+        "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\n\nmsg.headers = { authorization:Header }\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 2100,
+        "wires": [
+            [
+                "103e8c1b01c11a42"
+            ]
+        ]
+    },
+    {
+        "id": "ec064d975c3f74fe",
+        "type": "tls-config",
+        "name": "local-server",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]
