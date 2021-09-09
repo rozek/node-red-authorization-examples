@@ -74,6 +74,8 @@ The key used to generate message digests is randomly chosen at server startup - 
 
 Token lifetime may be configured - by default, it is set to 10 minutes.
 
+In order to "login", POST a form containing the variables `UserId` and `Password` to the proper endpoint (`/cookie-auth` in this example).
+
 > Nota bene: current law often requires users to be informed about cookie usage. The cookie used here counts as a "technically required cookie" which cannot be forbidden if the visited site is expected to work as foreseen.
 
 ![](cookie-auth.png)
