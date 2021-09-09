@@ -132,6 +132,8 @@ The key used to generate message digests is randomly chosen at server startup - 
 
 Token lifetime may be configured, by default, it is set to 10 minutes.
 
+In order to "login", POST a form containing the variables `UserId` and `Password` to the proper endpoint (`/header-auth` in this example).
+
 ![](header-auth.png)
 
 If desired, "Component use" nodes for "Header Login" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored. The upper output is used for successful authentications, the lower one for failures. Similarly, the upper output of "Component use" nodes for "Header Auth" fires upon successful token validation, the lower one in case of a validation failure.
