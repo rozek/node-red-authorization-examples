@@ -164,6 +164,20 @@ Successful login, token validation and token refresh always adds the required he
 
 Any login or token validation failure automatically deletes the authorization header, comparable to a logout.
 
+### Automated Tests ###
+
+There are a few automated (client-side) tests (built with the author's [node-red-test-support](https://github.com/rozek/node-red-test-support)) for this implementation. These tests require
+
+* the [Chai Assertion Library](https://www.chaijs.com/) - `npm install chai`
+
+to be installed.
+
+To run them, just import [the test flows](test-header-auth.json) into your workspace and enter the server to be tested in the node called "configure".
+
+![](test-header-auth-I.png)
+![](test-header-auth-II.png)
+![](test-header-auth-III.png)
+
 ## License ##
 
 [MIT License](LICENSE.md)
