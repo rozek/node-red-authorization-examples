@@ -1,398 +1,74 @@
 [
     {
-        "id": "c77fc63b7b5d8602",
+        "id": "b226928597254811",
         "type": "comment",
         "z": "c63466f5ec185814",
-        "name": "if used without \"node-red-within-express\"",
+        "name": "basic HTTP authentication (w/o expiration)",
         "info": "",
         "x": 180,
-        "y": 360,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "8141b7dfdc18bc8a",
-        "type": "inject",
+        "id": "044b8567a46bcbc1",
+        "type": "function",
         "z": "c63466f5ec185814",
-        "name": "at Startup",
-        "props": [
+        "name": "validate authorization",
+        "func": "  let Credentials = msg.req.headers['authorization'] || ''\n  if (! Credentials.startsWith('Basic')) {\n    return withAuthorizationRequest()\n  }\n\n  Credentials = Credentials.replace(/^Basic\\s+/,'')      // still Base64-encoded\n  try {\n    Credentials = (new Buffer(Credentials,'base64')).toString('utf8')\n  } catch (Signal) { return withAuthorizationRequest() }\n\n  let UserId   = Credentials.replace(/:.*$/,'').trim().toLowerCase()\n  let Password = Credentials.replace(/^[^:]+:/,'').trim()\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withAuthorizationRequest()\n        }\n      }\n    )\n  } else {\n    return withAuthorizationRequest()\n  }\n\n  function withAuthorizationOf (UserId, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.authenticatedUser = UserId\n      msg.authorizedRoles   = UserRoles\n      \n      node.send([msg,null])\n      node.done()\n    } else {\n      return withAuthorizationRequest()\n    }\n  }\n\n  function withAuthorizationRequest () {\n    msg.headers = msg.headers || {}\n    msg.headers['WWW-Authenticate'] = 'Basic'\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n\n    node.send([null,msg])\n    node.done()\n  }\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
             {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
+                "var": "crypto",
+                "module": "crypto"
             }
         ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 420,
+        "x": 280,
+        "y": 160,
         "wires": [
             [
-                "52405baae1574ece"
+                "e0e0d17d3102670c"
+            ],
+            [
+                "368ab4163a1781fe"
             ]
         ]
     },
     {
-        "id": "3854f9bb20843d13",
-        "type": "file in",
-        "z": "c63466f5ec185814",
-        "name": "",
-        "filename": "./registeredUsers.json",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 160,
-        "y": 540,
-        "wires": [
-            [
-                "0198d0d32e82591e"
-            ]
-        ]
-    },
-    {
-        "id": "690568c6a20becea",
-        "type": "catch",
-        "z": "c63466f5ec185814",
-        "name": "",
-        "scope": [
-            "3854f9bb20843d13",
-            "0198d0d32e82591e"
-        ],
-        "uncaught": false,
-        "x": 110,
-        "y": 600,
-        "wires": [
-            [
-                "85e93b749a23c07d"
-            ]
-        ]
-    },
-    {
-        "id": "7db18657b376e6aa",
-        "type": "debug",
-        "z": "c63466f5ec185814",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": true,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "'could not load user registry'",
-        "statusType": "jsonata",
-        "x": 510,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "c56fc609fda78995",
-        "type": "debug",
-        "z": "c63466f5ec185814",
-        "name": "Status",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "'user registry available'",
-        "statusType": "jsonata",
-        "x": 530,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "85e93b749a23c07d",
-        "type": "function",
-        "z": "c63466f5ec185814",
-        "name": "create in global context",
-        "func": "  let UserRegistry = Object.create(null)\n    UserRegistry['node-red'] =  {\n      Roles: ['node-red'],\n      Salt: '4486e8d35b8275020b1301226cc77963',\n      Hash: 'ab2b740ea9148aa4f320af3f3ba60ee2e33bb8039c57eea2b29579ff3f3b16bec2401f19e3c6ed8ad36de432b80b6f973a12c41af5d50738e4bb902d0117df53'\n    }\n  global.set('UserRegistry',UserRegistry)\n\n  return msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 600,
-        "wires": [
-            [
-                "7db18657b376e6aa",
-                "c2c4156520461e96"
-            ]
-        ]
-    },
-    {
-        "id": "762b9eeb2b5aa715",
-        "type": "file",
-        "z": "c63466f5ec185814",
-        "name": "",
-        "filename": "./registeredUsers.json",
-        "appendNewline": false,
-        "createDir": false,
-        "overwriteFile": "true",
-        "encoding": "utf8",
-        "x": 420,
-        "y": 720,
-        "wires": [
-            [
-                "b07ec65be23263d3"
-            ]
-        ]
-    },
-    {
-        "id": "15a24ea49049d876",
-        "type": "catch",
-        "z": "c63466f5ec185814",
-        "name": "",
-        "scope": [
-            "762b9eeb2b5aa715"
-        ],
-        "uncaught": false,
-        "x": 110,
-        "y": 840,
-        "wires": [
-            [
-                "03755ee9c3a590a8",
-                "2d8d4fd4deb6b657"
-            ]
-        ]
-    },
-    {
-        "id": "03755ee9c3a590a8",
-        "type": "debug",
-        "z": "c63466f5ec185814",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": true,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "'could not write user registry'",
-        "statusType": "jsonata",
-        "x": 250,
-        "y": 880,
-        "wires": []
-    },
-    {
-        "id": "b07ec65be23263d3",
-        "type": "change",
-        "z": "c63466f5ec185814",
-        "name": "restore payload",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "_payload",
-                "tot": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "_payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 180,
-        "y": 780,
-        "wires": [
-            [
-                "51df13d5ca62a956"
-            ]
-        ]
-    },
-    {
-        "id": "2d8d4fd4deb6b657",
-        "type": "change",
-        "z": "c63466f5ec185814",
-        "name": "report in payload",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Internal Server Error'",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "statusCode",
-                "pt": "msg",
-                "to": "500",
-                "tot": "str"
-            },
-            {
-                "t": "delete",
-                "p": "_payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 290,
-        "y": 840,
-        "wires": [
-            [
-                "51df13d5ca62a956"
-            ]
-        ]
-    },
-    {
-        "id": "0198d0d32e82591e",
-        "type": "function",
-        "z": "c63466f5ec185814",
-        "name": "write to global context",
-        "func": "  let UserSet = JSON.parse(msg.payload)                             // may fail!\n\n  let UserRegistry = Object.create(null)\n  for (let UserId in UserSet) {\n    if (UserSet.hasOwnProperty(UserId)) {\n      if ((UserId.indexOf('/') >= 0) || (UserId.indexOf(':') >= 0)) {\n        throw 'Invalid character in UserId found'\n      }\n      \n      UserRegistry[UserId.toLowerCase()] = UserSet[UserId]\n    }\n  }\n  global.set('UserRegistry',UserRegistry)\n\n  msg.payload = ''\n  return msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 400,
-        "y": 540,
-        "wires": [
-            [
-                "c2c4156520461e96"
-            ]
-        ]
-    },
-    {
-        "id": "66b67483a83c20ce",
-        "type": "function",
-        "z": "c63466f5ec185814",
-        "name": "→ catch",
-        "func": "// do not pass any msg from here!",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 480,
-        "wires": [
-            [
-                "85e93b749a23c07d"
-            ]
-        ]
-    },
-    {
-        "id": "05699a47cb63a34e",
-        "type": "function",
-        "z": "c63466f5ec185814",
-        "name": "→ catch",
-        "func": "// do not pass any msg from here!",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 660,
-        "wires": [
-            [
-                "2d8d4fd4deb6b657"
-            ]
-        ]
-    },
-    {
-        "id": "6373109762be3238",
-        "type": "function",
-        "z": "c63466f5ec185814",
-        "name": "read from global context",
-        "func": "  let UserRegistry = global.get('UserRegistry')\n\n  let UserSet = {}\n  for (let UserId in UserRegistry) {\n    let UserEntry = Object.assign({},UserRegistry[UserId])\n      delete UserEntry.Password          // never write passwords in plain text!\n    UserSet[UserId] = UserEntry\n  }\n\n  msg.payload = JSON.stringify(UserSet)\n  return msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 170,
-        "y": 720,
-        "wires": [
-            [
-                "762b9eeb2b5aa715"
-            ]
-        ]
-    },
-    {
-        "id": "c2c4156520461e96",
-        "type": "reusable-out",
-        "z": "c63466f5ec185814",
-        "name": "return",
-        "position": 1,
-        "x": 530,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "51df13d5ca62a956",
-        "type": "reusable-out",
-        "z": "c63466f5ec185814",
-        "name": "return",
-        "position": 1,
-        "x": 530,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "6263a001104605df",
+        "id": "e64025c431b73536",
         "type": "reusable-in",
         "z": "c63466f5ec185814",
-        "name": "load or create UserRegistry",
+        "name": "basic Auth",
         "info": "describe your reusable flow here",
         "scope": "global",
-        "x": 140,
-        "y": 480,
+        "x": 80,
+        "y": 160,
         "wires": [
             [
-                "66b67483a83c20ce",
-                "3854f9bb20843d13"
+                "044b8567a46bcbc1"
             ]
         ]
     },
     {
-        "id": "a7177d20183831f3",
-        "type": "reusable-in",
+        "id": "e0e0d17d3102670c",
+        "type": "reusable-out",
         "z": "c63466f5ec185814",
-        "name": "write UserRegistry",
-        "info": "describe your reusable flow here",
-        "scope": "global",
-        "x": 110,
-        "y": 660,
-        "wires": [
-            [
-                "05699a47cb63a34e",
-                "6373109762be3238"
-            ]
-        ]
+        "name": "authorized",
+        "position": 1,
+        "x": 490,
+        "y": 140,
+        "wires": []
     },
     {
-        "id": "52405baae1574ece",
-        "type": "reusable",
+        "id": "368ab4163a1781fe",
+        "type": "reusable-out",
         "z": "c63466f5ec185814",
-        "name": "",
-        "target": "load or create userregistry",
-        "outputs": 1,
-        "x": 320,
-        "y": 420,
-        "wires": [
-            [
-                "c56fc609fda78995"
-            ]
-        ]
+        "name": "unauthorized",
+        "position": "2",
+        "x": 490,
+        "y": 180,
+        "wires": []
     }
 ]
