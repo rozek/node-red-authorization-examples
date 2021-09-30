@@ -2,78 +2,35 @@
     {
         "id": "42afd0252abcde7b",
         "type": "http in",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "",
         "url": "basic-auth",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
-        "y": 340,
+        "x": 760,
+        "y": 160,
         "wires": [
             [
-                "edcb2401c89ab60d"
-            ]
-        ]
-    },
-    {
-        "id": "edcb2401c89ab60d",
-        "type": "component",
-        "z": "56af3abb553264d3",
-        "name": "",
-        "targetComponent": {
-            "id": "3ecce50b4322b35f",
-            "name": "basic Auth",
-            "api": [
-                {
-                    "name": "requiredRole",
-                    "type": "string",
-                    "required": false
-                }
-            ]
-        },
-        "paramSources": {
-            "requiredRole": {
-                "name": "requiredRole",
-                "type": "string",
-                "required": false,
-                "source": "",
-                "sourceType": "str"
-            }
-        },
-        "statuz": "",
-        "statuzType": "str",
-        "outputs": 2,
-        "outLabels": [
-            "authorized",
-            "unauthorized"
-        ],
-        "x": 300,
-        "y": 340,
-        "wires": [
-            [
-                "15935af93c0fb448"
-            ],
-            [
-                "a453e55d889e4f45"
+                "a592efb9da32b941"
             ]
         ]
     },
     {
         "id": "a453e55d889e4f45",
         "type": "http response",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 530,
-        "y": 400,
+        "x": 1190,
+        "y": 220,
         "wires": []
     },
     {
         "id": "15935af93c0fb448",
         "type": "change",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "inform about success",
         "rules": [
             {
@@ -89,8 +46,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 400,
+        "x": 1000,
+        "y": 220,
         "wires": [
             [
                 "a453e55d889e4f45"
@@ -100,11 +57,29 @@
     {
         "id": "82171f093abb349a",
         "type": "comment",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "try yourself",
         "info": "",
-        "x": 80,
-        "y": 280,
+        "x": 740,
+        "y": 100,
         "wires": []
+    },
+    {
+        "id": "a592efb9da32b941",
+        "type": "reusable",
+        "z": "c63466f5ec185814",
+        "name": "",
+        "target": "basic auth",
+        "outputs": 2,
+        "x": 950,
+        "y": 160,
+        "wires": [
+            [
+                "15935af93c0fb448"
+            ],
+            [
+                "a453e55d889e4f45"
+            ]
+        ]
     }
 ]
