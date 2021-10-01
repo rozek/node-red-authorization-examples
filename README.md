@@ -142,7 +142,7 @@ Again, access tokens consist of a user id and an expiration time. While they are
 
 The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active sessions.
 
-Token lifetime may be configured, by default, it is set to 10 minutes.
+Token lifetime may be configured, by default, it is set to 2 minutes.
 
 In order to "login", POST a form containing the variables `UserId` and `Password` to the proper endpoint (`/header-auth` in this example).
 
