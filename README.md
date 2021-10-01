@@ -42,7 +42,9 @@ The simplest approach to user authentication is to utilize the "basic HTTP authe
 
 ![](basic-auth.png)
 
-~~If desired, "Component use" nodes for "basic Auth" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored.~~ The upper output is used for successful authentications, the lower one for failures.
+If you want the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking the `basic auth` flow - otherwise, user roles will not be checked.
+
+The upper output is used for successful authentications, the lower one for failures.
 
 Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
