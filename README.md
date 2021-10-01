@@ -131,6 +131,8 @@ To run them, just import [the test flows](test-cookie-auth.json) into your works
 ![](test-cookie-auth-I.png)
 ![](test-cookie-auth-II.png)
 ![](test-cookie-auth-III.png)
+![](test-cookie-auth-IV.png)
+![](test-cookie-auth-V.png)
 
 ## Header-based Authorization ##
 
