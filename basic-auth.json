@@ -6,7 +6,7 @@
         "name": "basic HTTP authentication (w/o expiration)",
         "info": "",
         "x": 180,
-        "y": 100,
+        "y": 40,
         "wires": []
     },
     {
@@ -14,7 +14,7 @@
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "validate authorization",
-        "func": "  let Credentials = msg.req.headers['authorization'] || ''\n  if (! Credentials.startsWith('Basic')) {\n    return withAuthorizationRequest()\n  }\n\n  Credentials = Credentials.replace(/^Basic\\s+/,'')      // still Base64-encoded\n  try {\n    Credentials = (new Buffer(Credentials,'base64')).toString('utf8')\n  } catch (Signal) { return withAuthorizationRequest() }\n\n  let UserId   = Credentials.replace(/:.*$/,'').trim().toLowerCase()\n  let Password = Credentials.replace(/^[^:]+:/,'').trim()\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withAuthorizationRequest()\n        }\n      }\n    )\n  } else {\n    return withAuthorizationRequest()\n  }\n\n  function withAuthorizationOf (UserId, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.authenticatedUser = UserId\n      msg.authorizedRoles   = UserRoles\n      \n      node.send([msg,null])\n      node.done()\n    } else {\n      return withAuthorizationRequest()\n    }\n  }\n\n  function withAuthorizationRequest () {\n    msg.headers = msg.headers || {}\n    msg.headers['WWW-Authenticate'] = 'Basic'\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n\n    node.send([null,msg])\n    node.done()\n  }\n",
+        "func": "  let Credentials = msg.req.headers['authorization'] || ''\n  if (! Credentials.startsWith('Basic')) {\n    return withAuthorizationRequest()\n  }\n\n  Credentials = Credentials.replace(/^Basic\\s+/,'')      // still Base64-encoded\n  try {\n    Credentials = (new Buffer(Credentials,'base64')).toString('utf8')\n  } catch (Signal) { return withAuthorizationRequest() }\n\n  let UserId   = Credentials.replace(/:.*$/,'').trim().toLowerCase()\n  let Password = Credentials.replace(/^[^:]+:/,'').trim()\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations') || 100000\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withAuthorizationRequest()\n        }\n      }\n    )\n  } else {\n    return withAuthorizationRequest()\n  }\n\n  function withAuthorizationOf (UserId, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.authenticatedUser = UserId\n      msg.authorizedRoles   = UserRoles\n      \n      node.send([msg,null])\n      node.done()\n    } else {\n      return withAuthorizationRequest()\n    }\n  }\n\n  function withAuthorizationRequest () {\n    msg.headers = msg.headers || {}\n    msg.headers['WWW-Authenticate'] = 'Basic'\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n\n    node.send([null,msg])\n    node.done()\n  }\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -26,7 +26,7 @@
             }
         ],
         "x": 280,
-        "y": 160,
+        "y": 100,
         "wires": [
             [
                 "e0e0d17d3102670c"
@@ -40,11 +40,11 @@
         "id": "e64025c431b73536",
         "type": "reusable-in",
         "z": "c63466f5ec185814",
-        "name": "basic Auth",
+        "name": "basic auth",
         "info": "describe your reusable flow here",
         "scope": "global",
         "x": 80,
-        "y": 160,
+        "y": 100,
         "wires": [
             [
                 "044b8567a46bcbc1"
@@ -58,7 +58,7 @@
         "name": "authorized",
         "position": 1,
         "x": 490,
-        "y": 140,
+        "y": 80,
         "wires": []
     },
     {
@@ -68,7 +68,7 @@
         "name": "unauthorized",
         "position": "2",
         "x": 490,
-        "y": 180,
+        "y": 120,
         "wires": []
     }
 ]
