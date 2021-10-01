@@ -78,7 +78,7 @@ The token in this example consists of a user id and an expiration time. While it
 
 The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active tokens.
 
-Token lifetime may be configured - by default, it is set to 10 minutes.
+Token lifetime may be configured - by default, it is set to 2 minutes.
 
 In order to "login", POST a form containing the variables `UserId` and `Password` to the proper endpoint (`/cookie-auth` in this example).
 
