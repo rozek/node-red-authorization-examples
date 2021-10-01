@@ -42,7 +42,9 @@ The simplest approach to user authentication is to utilize the "basic HTTP authe
 
 ![](basic-auth.png)
 
-~~If desired, "Component use" nodes for "basic Auth" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored.~~ The upper output is used for successful authentications, the lower one for failures.
+The upper output is used for successful authentications, the lower one for failures.
+
+If you require the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking the `basic auth` flow - otherwise, user roles will not be checked.
 
 Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
@@ -76,7 +78,7 @@ The token in this example consists of a user id and an expiration time. While it
 
 The key used to generate message digests is randomly chosen at server startup - a server restart will therefore automatically invalidate any active tokens.
 
-Token lifetime may be configured - by default, it is set to 10 minutes.
+Token lifetime may be configured - by default, it is set to 2 minutes.
 
 In order to "login", POST a form containing the variables `UserId` and `Password` to the proper endpoint (`/cookie-auth` in this example).
 
@@ -84,7 +86,9 @@ In order to "login", POST a form containing the variables `UserId` and `Password
 
 ![](cookie-auth.png)
 
-~~If desired, "Component use" nodes for "Cookie Login" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored.~~ The upper output is used for successful authentications, the lower one for failures. Similarly, the upper output of "Component use" nodes for "Cookie Auth" fires upon successful token validation, the lower one in case of a validation failure.
+The upper outputs are used for successful authentications and logins, the lower ones for failures.
+
+If you require the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking `cookie auth` or `cookie login` - otherwise, user roles will not be checked.
 
 Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
@@ -140,7 +144,9 @@ In order to "login", POST a form containing the variables `UserId` and `Password
 
 ![](header-auth.png)
 
-~~If desired, "Component use" nodes for "Header Login" may be configured to require the authenticating user to have a specific role - otherwise, user roles are ignored.~~ The upper output is used for successful authentications, the lower one for failures. Similarly, the upper output of "Component use" nodes for "Header Auth" fires upon successful token validation, the lower one in case of a validation failure.
+The upper outputs are used for successful authentications and logins, the lower ones for failures.
+
+If you require the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking `header auth` or `header login` - otherwise, user roles will not be checked.
 
 Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
