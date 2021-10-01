@@ -88,7 +88,7 @@ In order to "login", POST a form containing the variables `UserId` and `Password
 
 The upper outputs are used for successful authentications and logins, the lower ones for failures.
 
-If you require the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking the `cookie auth` or `cookie login` - otherwise, user roles will not be checked.
+If you require the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking `cookie auth` or `cookie login` - otherwise, user roles will not be checked.
 
 Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
@@ -146,7 +146,7 @@ In order to "login", POST a form containing the variables `UserId` and `Password
 
 The upper outputs are used for successful authentications and logins, the lower ones for failures.
 
-If you require the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking the `header auth` or `header login` - otherwise, user roles will not be checked.
+If you require the authenticating user to have a specific role, you may set `msg.requiredRole` to that role before invoking `header auth` or `header login` - otherwise, user roles will not be checked.
 
 Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
