@@ -191,6 +191,8 @@ To run them, just import [the test flows](test-header-auth.json) into your works
 ![](test-header-auth-I.png)
 ![](test-header-auth-II.png)
 ![](test-header-auth-III.png)
+![](test-header-auth-IV.png)
+![](test-header-auth-V.png)
 
 ## License ##
 
