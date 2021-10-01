@@ -2,50 +2,132 @@
     {
         "id": "26648eb5bf6204e9",
         "type": "comment",
-        "z": "56af3abb553264d3",
+        "z": "4e29538c45ba477d",
         "name": "try yourself",
         "info": "",
-        "x": 1400,
-        "y": 560,
+        "x": 80,
+        "y": 500,
         "wires": []
     },
     {
         "id": "b658a6de0857907b",
         "type": "http in",
-        "z": "56af3abb553264d3",
+        "z": "4e29538c45ba477d",
         "name": "",
         "url": "header-auth",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 1430,
-        "y": 620,
+        "x": 110,
+        "y": 560,
         "wires": [
             [
-                "2da343d3e2c25288"
+                "dc105a4977025043"
             ]
         ]
     },
     {
-        "id": "2da343d3e2c25288",
-        "type": "component",
-        "z": "56af3abb553264d3",
+        "id": "ecd50a9259a2cfde",
+        "type": "http response",
+        "z": "4e29538c45ba477d",
         "name": "",
-        "targetComponent": {
-            "id": "8f9ec350798a22ab",
-            "name": "Header Auth",
-            "api": []
-        },
-        "paramSources": {},
-        "statuz": "",
-        "statuzType": "str",
-        "outputs": 2,
-        "outLabels": [
-            "authorized",
-            "unauthorized"
-        ],
-        "x": 1640,
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
         "y": 620,
+        "wires": []
+    },
+    {
+        "id": "af1aef5eff24af57",
+        "type": "change",
+        "z": "4e29538c45ba477d",
+        "name": "inform about success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "successfully authorized",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 620,
+        "wires": [
+            [
+                "ecd50a9259a2cfde"
+            ]
+        ]
+    },
+    {
+        "id": "d44680247d011e9b",
+        "type": "http in",
+        "z": "4e29538c45ba477d",
+        "name": "",
+        "url": "header-auth",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "2f655d899fbe9841"
+            ]
+        ]
+    },
+    {
+        "id": "8c7ae8b543f3576a",
+        "type": "change",
+        "z": "4e29538c45ba477d",
+        "name": "inform about success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "successfully authorized",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 740,
+        "wires": [
+            [
+                "d405c4344cb50dcb"
+            ]
+        ]
+    },
+    {
+        "id": "d405c4344cb50dcb",
+        "type": "http response",
+        "z": "4e29538c45ba477d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "dc105a4977025043",
+        "type": "reusable",
+        "z": "4e29538c45ba477d",
+        "name": "",
+        "target": "header auth",
+        "outputs": 2,
+        "x": 310,
+        "y": 560,
         "wires": [
             [
                 "af1aef5eff24af57"
@@ -56,94 +138,14 @@
         ]
     },
     {
-        "id": "ecd50a9259a2cfde",
-        "type": "http response",
-        "z": "56af3abb553264d3",
+        "id": "2f655d899fbe9841",
+        "type": "reusable",
+        "z": "4e29538c45ba477d",
         "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1850,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "af1aef5eff24af57",
-        "type": "change",
-        "z": "56af3abb553264d3",
-        "name": "inform about success",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "successfully authorized",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1660,
-        "y": 680,
-        "wires": [
-            [
-                "ecd50a9259a2cfde"
-            ]
-        ]
-    },
-    {
-        "id": "d44680247d011e9b",
-        "type": "http in",
-        "z": "56af3abb553264d3",
-        "name": "",
-        "url": "header-auth",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 1430,
-        "y": 740,
-        "wires": [
-            [
-                "f433b10a65ab8ffa"
-            ]
-        ]
-    },
-    {
-        "id": "f433b10a65ab8ffa",
-        "type": "component",
-        "z": "56af3abb553264d3",
-        "name": "",
-        "targetComponent": {
-            "id": "d4ec5cf7db1ed2b4",
-            "name": "Header Login",
-            "api": [
-                {
-                    "name": "requiredRoles",
-                    "type": "string",
-                    "required": false
-                }
-            ]
-        },
-        "paramSources": {
-            "requiredRoles": {
-                "name": "requiredRoles",
-                "type": "string",
-                "required": false,
-                "source": "",
-                "sourceType": "str"
-            }
-        },
-        "statuz": "",
-        "statuzType": "str",
+        "target": "header login",
         "outputs": 2,
-        "outLabels": [
-            "success",
-            "failure"
-        ],
-        "x": 1640,
-        "y": 740,
+        "x": 310,
+        "y": 680,
         "wires": [
             [
                 "8c7ae8b543f3576a"
@@ -152,43 +154,5 @@
                 "d405c4344cb50dcb"
             ]
         ]
-    },
-    {
-        "id": "8c7ae8b543f3576a",
-        "type": "change",
-        "z": "56af3abb553264d3",
-        "name": "inform about success",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "successfully authorized",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1660,
-        "y": 800,
-        "wires": [
-            [
-                "d405c4344cb50dcb"
-            ]
-        ]
-    },
-    {
-        "id": "d405c4344cb50dcb",
-        "type": "http response",
-        "z": "56af3abb553264d3",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1850,
-        "y": 800,
-        "wires": []
     }
 ]
