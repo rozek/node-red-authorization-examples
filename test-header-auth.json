@@ -302,16 +302,6 @@
         ]
     },
     {
-        "id": "52f890c69b96a9fc",
-        "type": "comment",
-        "z": "4e29538c45ba477d",
-        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
-        "info": "",
-        "x": 300,
-        "y": 1380,
-        "wires": []
-    },
-    {
         "id": "f81e260d89d1444f",
         "type": "comment",
         "z": "4e29538c45ba477d",
@@ -319,16 +309,6 @@
         "info": "",
         "x": 860,
         "y": 40,
-        "wires": []
-    },
-    {
-        "id": "a41b48695be3c38b",
-        "type": "comment",
-        "z": "4e29538c45ba477d",
-        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
-        "info": "",
-        "x": 960,
-        "y": 1760,
         "wires": []
     },
     {
@@ -2752,16 +2732,6 @@
                 "36653947c07260ec"
             ]
         ]
-    },
-    {
-        "id": "be1d881773254d22",
-        "type": "comment",
-        "z": "4e29538c45ba477d",
-        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
-        "info": "",
-        "x": 1620,
-        "y": 1980,
-        "wires": []
     },
     {
         "id": "bdd854ebf1812030",
