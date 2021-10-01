@@ -1,32 +1,18 @@
 [
     {
-        "id": "dca7a383b191c54a",
+        "id": "856ad51340ecb1ae",
         "type": "comment",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "Cookie-based authorization (w/ expiration)",
         "info": "",
-        "x": 840,
-        "y": 100,
+        "x": 180,
+        "y": 40,
         "wires": []
     },
     {
-        "id": "64e44cfd3f8cdc25",
-        "type": "component_in",
-        "z": "56af3abb553264d3",
-        "name": "Cookie Auth",
-        "api": [],
-        "x": 750,
-        "y": 300,
-        "wires": [
-            [
-                "773dd978b43cdf2d"
-            ]
-        ]
-    },
-    {
-        "id": "773dd978b43cdf2d",
+        "id": "aac45dad5955d437",
         "type": "function",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "validate authorization",
         "func": "  let Cookie = ((msg.req.cookies || {}).authorization || '').trim()\n  if (Cookie !== '') {\n    let UserRegistry = global.get('UserRegistry')\n    \n    let [UserId,Expiration,Digest] = Cookie.split(':')\n    if (\n      (UserId !== '') && (UserId in UserRegistry) &&\n      /^\\d+$/.test(Expiration) && /^[0-9a-fA-F]+$/.test(Digest)\n    ) {\n      let TokenKey = global.get('TokenKey')\n        const HMAC = crypto.createHmac('sha256',TokenKey)\n        HMAC.update(UserId + ':' + Expiration)\n      let expectedDigest = HMAC.digest('hex')\n\n      if (\n        (Digest === expectedDigest) &&\n        (parseInt(Expiration,10) >= Date.now())\n      ) {\n        msg.authenticatedUser = UserId\n        msg.authorizedRoles   = UserRegistry[UserId].Roles || []\n\n        msg.cookies = msg.cookies || {}\n        msg.cookies.authorization = Cookie\n        return [msg,null]                                          // authorized\n      }\n    }\n  }\n\n  msg.cookies = msg.cookies || {}\n  msg.cookies.authorization = null\n\n  msg.payload    = 'Unauthorized'\n  msg.statusCode = 401\n  return [null,msg]                                            // not authorized\n",
         "outputs": 2,
@@ -39,65 +25,23 @@
                 "module": "crypto"
             }
         ],
-        "x": 820,
-        "y": 360,
+        "x": 160,
+        "y": 300,
         "wires": [
             [
-                "831ab758fc9713ba"
+                "0cd2a54d2d7600bf"
             ],
             [
-                "70071c140431ccd8"
+                "2b4a0d7e8ed28c87"
             ]
         ]
     },
     {
-        "id": "6af7a94e4fadf088",
-        "type": "component_out",
-        "z": "56af3abb553264d3",
-        "name": "authorized",
-        "mode": "separate",
-        "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1170,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "70071c140431ccd8",
-        "type": "component_out",
-        "z": "56af3abb553264d3",
-        "name": "unauthorized",
-        "mode": "separate",
-        "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1170,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "419bf3f9ef406282",
-        "type": "component_in",
-        "z": "56af3abb553264d3",
-        "name": "Cookie Login",
-        "api": [
-            {
-                "name": "requiredRoles",
-                "type": "string",
-                "required": false
-            }
-        ],
-        "x": 750,
-        "y": 420,
-        "wires": [
-            [
-                "070ba65b879a3b29"
-            ]
-        ]
-    },
-    {
-        "id": "070ba65b879a3b29",
+        "id": "6da7d0cab3077886",
         "type": "function",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "validate credentials",
-        "func": "  let UserId   = (msg.payload.UserId  || '').toLowerCase()\n  let Password = msg.payload.Password || ''\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations')\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withoutAuthorization()\n        }\n      }\n    )\n  } else {\n    return withoutAuthorization()\n  }\n\n  function withAuthorizationOf (UserName, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.authenticatedUser = UserId\n      msg.authorizedRoles   = UserRoles\n\n      node.send([msg,null])\n      node.done()\n    } else {\n      return withoutAuthorization()\n    }\n  }\n\n  function withoutAuthorization () {\n    msg.cookies = msg.cookies || {}\n    msg.cookies.authorization = { value:null }\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n\n    node.send([null,msg])\n    node.done()\n  }\n",
+        "func": "  let UserId   = (msg.payload.UserId  || '').toLowerCase()\n  let Password = msg.payload.Password || ''\n\n  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  if (UserId in UserRegistry) {\n    let UserSpecs = UserRegistry[UserId]\n    if (UserSpecs.Password === Password) {              // internal optimization\n      return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n    }\n\n    let PBKDF2Iterations = global.get('PBKDF2Iterations') || 100000\n    crypto.pbkdf2(\n      Password, Buffer.from(UserSpecs.Salt,'hex'), PBKDF2Iterations, 64, 'sha512',\n      function (Error, computedHash) {\n        if ((Error == null) && (computedHash.toString('hex') === UserSpecs.Hash)) {\n          UserSpecs.Password = Password       // speeds up future auth. requests\n          return withAuthorizationOf(UserId,UserSpecs.Roles || [])\n        } else {\n          return withoutAuthorization()\n        }\n      }\n    )\n  } else {\n    return withoutAuthorization()\n  }\n\n  function withAuthorizationOf (UserName, UserRoles) {\n    let requiredRole = msg.requiredRole || ''   // workaround for \"comp use\" bug\n    if ((requiredRole === '') || (UserRoles.indexOf(requiredRole) >= 0)) {\n      msg.authenticatedUser = UserId\n      msg.authorizedRoles   = UserRoles\n\n      node.send([msg,null])\n      node.done()\n    } else {\n      return withoutAuthorization()\n    }\n  }\n\n  function withoutAuthorization () {\n    msg.cookies = msg.cookies || {}\n    msg.cookies.authorization = { value:null }\n\n    msg.payload    = 'Unauthorized'\n    msg.statusCode = 401\n\n    node.send([null,msg])\n    node.done()\n  }\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -108,43 +52,21 @@
                 "module": "crypto"
             }
         ],
-        "x": 810,
-        "y": 480,
+        "x": 150,
+        "y": 420,
         "wires": [
             [
-                "c17982509dce61d0"
+                "0617719e376703c2"
             ],
             [
-                "752f73cb0059d6e7"
+                "3ac991c55e5cf9cd"
             ]
         ]
     },
     {
-        "id": "d776081c50cd8a2a",
-        "type": "component_out",
-        "z": "56af3abb553264d3",
-        "name": "success",
-        "mode": "separate",
-        "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1180,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "752f73cb0059d6e7",
-        "type": "component_out",
-        "z": "56af3abb553264d3",
-        "name": "failure",
-        "mode": "separate",
-        "component_definitions_are_NOT_allowed_inside_subflows": true,
-        "x": 1190,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "1c33d24237575599",
+        "id": "c6fe87ca0c7bd0ae",
         "type": "inject",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "at Startup",
         "props": [
             {
@@ -161,18 +83,18 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "date",
-        "x": 770,
-        "y": 220,
+        "x": 110,
+        "y": 160,
         "wires": [
             [
-                "2d74506d45fc0194"
+                "890b01c6d94b0ecd"
             ]
         ]
     },
     {
-        "id": "2d74506d45fc0194",
+        "id": "890b01c6d94b0ecd",
         "type": "function",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "generate Token Key",
         "func": "  let TokenKey = global.get('TokenKey')\n  if (TokenKey == null) {     // do not change TokenKey upon Node-RED deployment\n    global.set('TokenKey',crypto.randomBytes(16).toString('hex'))\n  }\n  return msg\n",
         "outputs": 1,
@@ -185,18 +107,18 @@
                 "module": "crypto"
             }
         ],
-        "x": 980,
-        "y": 220,
+        "x": 320,
+        "y": 160,
         "wires": [
             [
-                "22e06c36beb8dbf1"
+                "6e75bdb05f92579a"
             ]
         ]
     },
     {
-        "id": "22e06c36beb8dbf1",
+        "id": "6e75bdb05f92579a",
         "type": "debug",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "Status",
         "active": true,
         "tosidebar": false,
@@ -206,14 +128,14 @@
         "targetType": "full",
         "statusVal": "'token key generated'",
         "statusType": "jsonata",
-        "x": 1190,
-        "y": 220,
+        "x": 530,
+        "y": 160,
         "wires": []
     },
     {
-        "id": "c17982509dce61d0",
+        "id": "0617719e376703c2",
         "type": "function",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "create token",
         "func": "  let Expiration   = Date.now() + global.get('TokenLifetime')\n  let TokenContent = msg.authenticatedUser + ':' + Expiration\n\n  let TokenKey = global.get('TokenKey')\n    const HMAC = crypto.createHmac('sha256',TokenKey)\n    HMAC.update(TokenContent)\n  let Digest = HMAC.digest('hex')\n\n  msg.cookies = msg.cookies || {}\n  msg.cookies.authorization = { value:TokenContent + ':' + Digest }\n  return msg\n",
         "outputs": 1,
@@ -226,18 +148,18 @@
                 "module": "crypto"
             }
         ],
-        "x": 1010,
-        "y": 420,
+        "x": 350,
+        "y": 360,
         "wires": [
             [
-                "d776081c50cd8a2a"
+                "39ed0f17d457dba9"
             ]
         ]
     },
     {
-        "id": "831ab758fc9713ba",
+        "id": "0cd2a54d2d7600bf",
         "type": "function",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "refresh token",
         "func": "  let Expiration   = Date.now() + global.get('TokenLifetime')\n  let TokenContent = msg.authenticatedUser + ':' + Expiration\n\n  let TokenKey = global.get('TokenKey')\n    const HMAC = crypto.createHmac('sha256',TokenKey)\n    HMAC.update(TokenContent)\n  let Digest = HMAC.digest('hex')\n\n  msg.cookies = msg.cookies || {}\n  msg.cookies.authorization = { value:TokenContent + ':' + Digest }\n  return msg\n",
         "outputs": 1,
@@ -250,18 +172,18 @@
                 "module": "crypto"
             }
         ],
-        "x": 990,
-        "y": 300,
+        "x": 330,
+        "y": 240,
         "wires": [
             [
-                "6af7a94e4fadf088"
+                "c858123e71e0b1ed"
             ]
         ]
     },
     {
-        "id": "0f30846df8e8edf9",
+        "id": "48974b513a556304",
         "type": "inject",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "at Startup",
         "props": [
             {
@@ -278,18 +200,18 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "date",
-        "x": 770,
-        "y": 160,
+        "x": 110,
+        "y": 100,
         "wires": [
             [
-                "157475d53bdb440d"
+                "7f67f56f5c30af44"
             ]
         ]
     },
     {
-        "id": "157475d53bdb440d",
+        "id": "7f67f56f5c30af44",
         "type": "change",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "set token lifetime",
         "rules": [
             {
@@ -312,18 +234,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 970,
-        "y": 160,
+        "x": 310,
+        "y": 100,
         "wires": [
             [
-                "4894ab45a53168ed"
+                "1302190ff82f3747"
             ]
         ]
     },
     {
-        "id": "4894ab45a53168ed",
+        "id": "1302190ff82f3747",
         "type": "debug",
-        "z": "56af3abb553264d3",
+        "z": "5cd3730f771ed2a6",
         "name": "Status",
         "active": true,
         "tosidebar": false,
@@ -333,8 +255,78 @@
         "targetType": "full",
         "statusVal": "payload",
         "statusType": "msg",
-        "x": 1190,
-        "y": 160,
+        "x": 530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "717695f44d31b333",
+        "type": "reusable-in",
+        "z": "5cd3730f771ed2a6",
+        "name": "cookie auth",
+        "info": "describe your reusable flow here",
+        "scope": "global",
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "aac45dad5955d437"
+            ]
+        ]
+    },
+    {
+        "id": "2f9bd721c97fbdde",
+        "type": "reusable-in",
+        "z": "5cd3730f771ed2a6",
+        "name": "cookie login",
+        "info": "describe your reusable flow here",
+        "scope": "global",
+        "x": 90,
+        "y": 360,
+        "wires": [
+            [
+                "6da7d0cab3077886"
+            ]
+        ]
+    },
+    {
+        "id": "c858123e71e0b1ed",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "authorized",
+        "position": 1,
+        "x": 510,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2b4a0d7e8ed28c87",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "unauthorized",
+        "position": "2",
+        "x": 510,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "39ed0f17d457dba9",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "success",
+        "position": 1,
+        "x": 520,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3ac991c55e5cf9cd",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "failure",
+        "position": "2",
+        "x": 530,
+        "y": 400,
         "wires": []
     }
 ]
