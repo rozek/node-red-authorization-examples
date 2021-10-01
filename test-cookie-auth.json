@@ -1,25 +1,5 @@
 [
     {
-        "id": "ef19b6865dc17369",
-        "type": "comment",
-        "z": "5cd3730f771ed2a6",
-        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
-        "info": "",
-        "x": 300,
-        "y": 1760,
-        "wires": []
-    },
-    {
-        "id": "320be7bea1e52aba",
-        "type": "comment",
-        "z": "5cd3730f771ed2a6",
-        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
-        "info": "",
-        "x": 1620,
-        "y": 2000,
-        "wires": []
-    },
-    {
         "id": "f9da2c1654a8bc8a",
         "type": "comment",
         "z": "5cd3730f771ed2a6",
@@ -2760,16 +2740,6 @@
         ]
     },
     {
-        "id": "d5256de469eb6b55",
-        "type": "comment",
-        "z": "5cd3730f771ed2a6",
-        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
-        "info": "",
-        "x": 960,
-        "y": 1760,
-        "wires": []
-    },
-    {
         "id": "4f36a5d9d15ee050",
         "type": "link in",
         "z": "5cd3730f771ed2a6",
@@ -3110,7 +3080,7 @@
         "type": "function",
         "z": "5cd3730f771ed2a6",
         "name": "arrange",
-        "func": "msg.url     = flow.get('CookieAuthURL') + '-2'\nmsg.payload = {\n  UserId:'node-red',\n  Password:'invalid-password'\n}\nreturn msg",
+        "func": "msg.url     = flow.get('CookieAuthURL') + '-2'\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
