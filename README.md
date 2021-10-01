@@ -2,8 +2,6 @@
 
 This repository contains three examples of user authentication and authorization for Node-RED flows. While they were designed to be immediately usable with the server implemented in [node-red-within-express](https://github.com/rozek/node-red-within-express) and play well together with the user management described in [node-red-user-management-example](https://github.com/rozek/node-red-user-management-example), all examples may also be used in other environments.
 
-> Nota bene: this work is currently in progress. While it may already be usable, it is safer to wait until end of September 2021. Please, stay tuned
-
 > Just a small note: if you like this module and plan to use it, consider "starring" this repository (you will find the "Star" button on the top right of this page), so that I know which of my repositories to take most care of.
 
 ## Prerequisites ##
