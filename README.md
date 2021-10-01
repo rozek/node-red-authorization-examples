@@ -70,6 +70,7 @@ To run them, just import [the test flows](test-basic-auth.json) into your worksp
 
 ![](test-basic-auth-I.png)
 ![](test-basic-auth-II.png)
+![](test-basic-auth-III.png)
 
 ## Cookie-based Authorization ##
 
