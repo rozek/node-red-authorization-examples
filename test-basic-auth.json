@@ -1072,7 +1072,7 @@
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "assert",
-        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\n\nreturn msg",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).to.match(/^Basic/)\n\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1096,7 +1096,7 @@
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "arrange",
-        "func": "msg.url = flow.get('BasicAuthURL')\nmsg.headers = {\n  'Authorization':'Basic ' + new Buffer('node-red:t0pS3cr3t!').toString('base64')\n}\nmsg.requiredRole = 'God'\nreturn msg",
+        "func": "msg.url = flow.get('BasicAuthURL') + '-2'\nmsg.headers = {\n  'Authorization':'Basic ' + new Buffer('node-red:t0pS3cr3t!').toString('base64')\n}\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1139,7 +1139,7 @@
         "id": "8319561f7ee6fb8f",
         "type": "comment",
         "z": "c63466f5ec185814",
-        "name": "with proper required role",
+        "name": "with correct required role",
         "info": "",
         "x": 1450,
         "y": 740,
@@ -1214,7 +1214,7 @@
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "arrange",
-        "func": "msg.url = flow.get('BasicAuthURL')\nmsg.headers = {\n  'Authorization':'Basic ' + new Buffer('node-red:t0pS3cr3t!').toString('base64')\n}\nmsg.requiredRole = 'node-red'\nreturn msg",
+        "func": "msg.url = flow.get('BasicAuthURL') + '-3'\nmsg.headers = {\n  'Authorization':'Basic ' + new Buffer('node-red:t0pS3cr3t!').toString('base64')\n}\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1444,6 +1444,160 @@
         "wires": [
             [
                 "cdedf2857b1dea68"
+            ]
+        ]
+    },
+    {
+        "id": "8804f28a8f0d4921",
+        "type": "comment",
+        "z": "c63466f5ec185814",
+        "name": "additional endpoints for testing",
+        "info": "",
+        "x": 810,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "f880186f5d8da986",
+        "type": "http in",
+        "z": "c63466f5ec185814",
+        "name": "",
+        "url": "basic-auth-2",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 770,
+        "y": 720,
+        "wires": [
+            [
+                "83020a9591be9d81"
+            ]
+        ]
+    },
+    {
+        "id": "83020a9591be9d81",
+        "type": "change",
+        "z": "c63466f5ec185814",
+        "name": "require impossible role",
+        "rules": [
+            {
+                "t": "set",
+                "p": "requiredRole",
+                "pt": "msg",
+                "to": "god",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 720,
+        "wires": [
+            [
+                "31601272f1212057"
+            ]
+        ]
+    },
+    {
+        "id": "d93378ccd2970961",
+        "type": "http in",
+        "z": "c63466f5ec185814",
+        "name": "",
+        "url": "basic-auth-3",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 770,
+        "y": 780,
+        "wires": [
+            [
+                "e88f760f531a375a"
+            ]
+        ]
+    },
+    {
+        "id": "e88f760f531a375a",
+        "type": "change",
+        "z": "c63466f5ec185814",
+        "name": "require possible role",
+        "rules": [
+            {
+                "t": "set",
+                "p": "requiredRole",
+                "pt": "msg",
+                "to": "node-red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 780,
+        "wires": [
+            [
+                "31601272f1212057"
+            ]
+        ]
+    },
+    {
+        "id": "1bb156a11dc13062",
+        "type": "http response",
+        "z": "c63466f5ec185814",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1190,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "519666a1e5b83a07",
+        "type": "change",
+        "z": "c63466f5ec185814",
+        "name": "inform about success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "successfully authorized",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 840,
+        "wires": [
+            [
+                "1bb156a11dc13062"
+            ]
+        ]
+    },
+    {
+        "id": "31601272f1212057",
+        "type": "reusable",
+        "z": "c63466f5ec185814",
+        "name": "",
+        "target": "basic auth",
+        "outputs": 2,
+        "x": 790,
+        "y": 840,
+        "wires": [
+            [
+                "519666a1e5b83a07"
+            ],
+            [
+                "1bb156a11dc13062"
             ]
         ]
     }
