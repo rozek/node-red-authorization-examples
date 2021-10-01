@@ -1,11 +1,31 @@
 [
     {
+        "id": "ef19b6865dc17369",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
+        "info": "",
+        "x": 300,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "320be7bea1e52aba",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
+        "info": "",
+        "x": 1620,
+        "y": 2000,
+        "wires": []
+    },
+    {
         "id": "f9da2c1654a8bc8a",
         "type": "comment",
         "z": "5cd3730f771ed2a6",
-        "name": "Cookie-based authorization (w/ expiration)",
+        "name": "automated tests for Cookie-based authorization",
         "info": "",
-        "x": 840,
+        "x": 860,
         "y": 40,
         "wires": []
     },
@@ -15,8 +35,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "login with missing form",
         "info": "",
-        "x": 1440,
-        "y": 100,
+        "x": 780,
+        "y": 760,
         "wires": []
     },
     {
@@ -25,8 +45,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "login with incomplete form",
         "info": "",
-        "x": 1450,
-        "y": 240,
+        "x": 790,
+        "y": 900,
         "wires": []
     },
     {
@@ -35,8 +55,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "login with wrong password",
         "info": "",
-        "x": 1450,
-        "y": 520,
+        "x": 790,
+        "y": 1180,
         "wires": []
     },
     {
@@ -45,8 +65,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "login with wrong userid",
         "info": "",
-        "x": 1440,
-        "y": 380,
+        "x": 780,
+        "y": 1040,
         "wires": []
     },
     {
@@ -55,8 +75,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "login with correct credentials",
         "info": "",
-        "x": 1460,
-        "y": 660,
+        "x": 800,
+        "y": 1320,
         "wires": []
     },
     {
@@ -65,8 +85,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "get without cookie",
         "info": "",
-        "x": 2090,
-        "y": 100,
+        "x": 1430,
+        "y": 860,
         "wires": []
     },
     {
@@ -75,8 +95,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "get with broken cookie",
         "info": "",
-        "x": 2100,
-        "y": 240,
+        "x": 1440,
+        "y": 1000,
         "wires": []
     },
     {
@@ -85,8 +105,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "get with modified userid",
         "info": "",
-        "x": 2100,
-        "y": 380,
+        "x": 1440,
+        "y": 1140,
         "wires": []
     },
     {
@@ -95,8 +115,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "get with modified expiration",
         "info": "",
-        "x": 2120,
-        "y": 520,
+        "x": 1460,
+        "y": 1280,
         "wires": []
     },
     {
@@ -105,8 +125,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "get with modified digest",
         "info": "",
-        "x": 2100,
-        "y": 660,
+        "x": 1440,
+        "y": 1420,
         "wires": []
     },
     {
@@ -115,8 +135,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "get with correct cookie",
         "info": "",
-        "x": 2100,
-        "y": 800,
+        "x": 1440,
+        "y": 1560,
         "wires": []
     },
     {
@@ -188,16 +208,16 @@
         "z": "5cd3730f771ed2a6",
         "name": "dispatch",
         "func": "if (context.get('pendingList') == null) { // first invocation\n  msg.TestMode = 'multiple-tests'\n\n  let MsgList = [null], pendingList = []\n  for (let i = 1, l = node.outputCount; i < l; i++) {\n    MsgList.push(null)\n    pendingList.push(i)\n  }\n  context.set('MsgList',MsgList)\n  context.set('pendingList',pendingList)\n}\n\nlet pendingList = context.get('pendingList')\nif (pendingList.length === 0) { // all tests completed\n  context.set('pendingList',null)\n  return [msg]\n} else { // ongoing tests\n  let msg = {} // create new, empty \"msg\" object\n\n  let chosenIndex  = Math.floor(Math.random()*pendingList.length)\n  let chosenOutput = pendingList.splice(chosenIndex,1)[0]\n\n  context.set('pendingList',pendingList)\n\n  let MsgList = context.get('MsgList').slice()\n    MsgList[chosenOutput] = msg\n  return MsgList\n}\n",
-        "outputs": 6,
+        "outputs": 8,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 800,
-        "y": 180,
+        "y": 200,
         "wires": [
             [
-                "8213fd821b18a981"
+                "903ba1f12e9b11dc"
             ],
             [
                 "7bc7dcdb3fd515d6"
@@ -213,6 +233,12 @@
             ],
             [
                 "8284635be68555f5"
+            ],
+            [
+                "17d96a979d2af611"
+            ],
+            [
+                "bd80ea523dec45d5"
             ]
         ]
     },
@@ -227,10 +253,12 @@
             "6f98128b69b761cd",
             "863b31b350778e3d",
             "7166bd98f88802f9",
-            "2c7b99466ec2eb1b"
+            "2c7b99466ec2eb1b",
+            "179bbd366aeb501a",
+            "44d0f43f6883b0ef"
         ],
         "x": 695,
-        "y": 180,
+        "y": 200,
         "wires": [
             [
                 "11d7dc62a995c10f"
@@ -276,7 +304,7 @@
         "finalize": "",
         "libs": [],
         "x": 1130,
-        "y": 260,
+        "y": 300,
         "wires": [
             [
                 "6f98128b69b761cd"
@@ -302,7 +330,7 @@
         "topic": "",
         "payloadType": "str",
         "x": 750,
-        "y": 260,
+        "y": 300,
         "wires": [
             [
                 "7bc7dcdb3fd515d6"
@@ -319,7 +347,7 @@
             "a2d05779d9af1600"
         ],
         "x": 1215,
-        "y": 260,
+        "y": 300,
         "wires": []
     },
     {
@@ -340,7 +368,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 1010,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "445a8c690a91ee3d"
@@ -359,7 +387,7 @@
         "finalize": "",
         "libs": [],
         "x": 1130,
-        "y": 320,
+        "y": 360,
         "wires": [
             [
                 "f4e5ebd344abd98d"
@@ -385,7 +413,7 @@
         "topic": "",
         "payloadType": "str",
         "x": 750,
-        "y": 320,
+        "y": 360,
         "wires": [
             [
                 "bf53d27c4783fc14"
@@ -402,7 +430,7 @@
             "a2d05779d9af1600"
         ],
         "x": 1215,
-        "y": 320,
+        "y": 360,
         "wires": []
     },
     {
@@ -423,7 +451,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 1010,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "447b3974e291e16a"
@@ -442,7 +470,7 @@
         "finalize": "",
         "libs": [],
         "x": 1130,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "c03e8a9702a308b7"
@@ -468,7 +496,7 @@
         "topic": "",
         "payloadType": "str",
         "x": 750,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "2db7493b14af6230"
@@ -485,7 +513,7 @@
             "a2d05779d9af1600"
         ],
         "x": 1215,
-        "y": 380,
+        "y": 420,
         "wires": []
     },
     {
@@ -506,7 +534,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 1010,
-        "y": 400,
+        "y": 440,
         "wires": [
             [
                 "dbdc55d41106b31f"
@@ -525,7 +553,7 @@
         "finalize": "",
         "libs": [],
         "x": 1130,
-        "y": 440,
+        "y": 480,
         "wires": [
             [
                 "7166bd98f88802f9"
@@ -551,7 +579,7 @@
         "topic": "",
         "payloadType": "str",
         "x": 750,
-        "y": 440,
+        "y": 480,
         "wires": [
             [
                 "de96949220329a4d"
@@ -568,7 +596,7 @@
             "a2d05779d9af1600"
         ],
         "x": 1215,
-        "y": 440,
+        "y": 480,
         "wires": []
     },
     {
@@ -589,7 +617,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 1010,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "14912be381921b39"
@@ -608,7 +636,7 @@
         "finalize": "",
         "libs": [],
         "x": 1130,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "863b31b350778e3d"
@@ -634,7 +662,7 @@
         "topic": "",
         "payloadType": "str",
         "x": 750,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "8284635be68555f5"
@@ -651,7 +679,7 @@
             "a2d05779d9af1600"
         ],
         "x": 1215,
-        "y": 500,
+        "y": 540,
         "wires": []
     },
     {
@@ -672,7 +700,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 1010,
-        "y": 520,
+        "y": 560,
         "wires": [
             [
                 "a7dc985890e1a061"
@@ -685,16 +713,16 @@
         "z": "5cd3730f771ed2a6",
         "name": "dispatch",
         "func": "if (context.get('pendingList') == null) { // first invocation\n  msg.TestMode = 'multiple-tests'\n\n  let MsgList = [null], pendingList = []\n  for (let i = 1, l = node.outputCount; i < l; i++) {\n    MsgList.push(null)\n    pendingList.push(i)\n  }\n  context.set('MsgList',MsgList)\n  context.set('pendingList',pendingList)\n}\n\nlet pendingList = context.get('pendingList')\nif (pendingList.length === 0) { // all tests completed\n  context.set('pendingList',null)\n  return [msg]\n} else { // ongoing tests\n  let msg = {} // create new, empty \"msg\" object\n\n  let chosenIndex  = Math.floor(Math.random()*pendingList.length)\n  let chosenOutput = pendingList.splice(chosenIndex,1)[0]\n\n  context.set('pendingList',pendingList)\n\n  let MsgList = context.get('MsgList').slice()\n    MsgList[chosenOutput] = msg\n  return MsgList\n}\n",
-        "outputs": 7,
+        "outputs": 9,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
-        "y": 700,
+        "x": 1460,
+        "y": 240,
         "wires": [
             [
-                "9017b0386f76f5b4"
+                "e14cbe566e885031"
             ],
             [
                 "287eed56e3e474f2"
@@ -713,6 +741,12 @@
             ],
             [
                 "4b34cefd70b6561f"
+            ],
+            [
+                "5437bacc17e8e1bf"
+            ],
+            [
+                "804c83924018da62"
             ]
         ]
     },
@@ -727,8 +761,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
-        "y": 620,
+        "x": 1440,
+        "y": 140,
         "wires": [
             [
                 "c8c8f467b0773e68"
@@ -746,10 +780,12 @@
             "a0322dc60d504273",
             "948c2406318239a0",
             "4b52c525c46c52e7",
-            "a578b4c7536094a2"
+            "a578b4c7536094a2",
+            "2251cf61d9c44e01",
+            "9c876fb40fad35cc"
         ],
-        "x": 695,
-        "y": 700,
+        "x": 1355,
+        "y": 240,
         "wires": [
             [
                 "4ecf50405ebfcf66"
@@ -767,8 +803,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 780,
+        "x": 1790,
+        "y": 340,
         "wires": [
             [
                 "1ff71e8581ca6470"
@@ -793,8 +829,8 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "str",
-        "x": 750,
-        "y": 780,
+        "x": 1410,
+        "y": 340,
         "wires": [
             [
                 "287eed56e3e474f2"
@@ -809,8 +845,8 @@
         "links": [
             "f08991a4f7f415e5"
         ],
-        "x": 1215,
-        "y": 780,
+        "x": 1875,
+        "y": 340,
         "wires": []
     },
     {
@@ -830,8 +866,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1010,
-        "y": 800,
+        "x": 1670,
+        "y": 360,
         "wires": [
             [
                 "a9b88034ade79e03"
@@ -849,8 +885,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 840,
+        "x": 1790,
+        "y": 400,
         "wires": [
             [
                 "e6be4a89e2aa1a31"
@@ -875,8 +911,8 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "str",
-        "x": 750,
-        "y": 840,
+        "x": 1410,
+        "y": 400,
         "wires": [
             [
                 "d02a44a6b1e8e5f6"
@@ -891,8 +927,8 @@
         "links": [
             "f08991a4f7f415e5"
         ],
-        "x": 1215,
-        "y": 840,
+        "x": 1875,
+        "y": 400,
         "wires": []
     },
     {
@@ -912,8 +948,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1010,
-        "y": 860,
+        "x": 1670,
+        "y": 420,
         "wires": [
             [
                 "6277aec4cf9450d7"
@@ -931,8 +967,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 900,
+        "x": 1790,
+        "y": 460,
         "wires": [
             [
                 "a0322dc60d504273"
@@ -957,8 +993,8 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "str",
-        "x": 750,
-        "y": 900,
+        "x": 1410,
+        "y": 460,
         "wires": [
             [
                 "1b050efc6e0a51a7"
@@ -973,8 +1009,8 @@
         "links": [
             "f08991a4f7f415e5"
         ],
-        "x": 1215,
-        "y": 900,
+        "x": 1875,
+        "y": 460,
         "wires": []
     },
     {
@@ -994,8 +1030,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1010,
-        "y": 920,
+        "x": 1670,
+        "y": 480,
         "wires": [
             [
                 "86a97b97535aad80"
@@ -1013,8 +1049,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 960,
+        "x": 1790,
+        "y": 520,
         "wires": [
             [
                 "948c2406318239a0"
@@ -1039,8 +1075,8 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "str",
-        "x": 750,
-        "y": 960,
+        "x": 1410,
+        "y": 520,
         "wires": [
             [
                 "725ce37e36c1630e"
@@ -1055,8 +1091,8 @@
         "links": [
             "f08991a4f7f415e5"
         ],
-        "x": 1215,
-        "y": 960,
+        "x": 1875,
+        "y": 520,
         "wires": []
     },
     {
@@ -1076,8 +1112,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1010,
-        "y": 980,
+        "x": 1670,
+        "y": 540,
         "wires": [
             [
                 "568eba20f227f355"
@@ -1095,8 +1131,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 1020,
+        "x": 1790,
+        "y": 580,
         "wires": [
             [
                 "4b52c525c46c52e7"
@@ -1121,8 +1157,8 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "str",
-        "x": 750,
-        "y": 1020,
+        "x": 1410,
+        "y": 580,
         "wires": [
             [
                 "b8f8e77aa273285f"
@@ -1137,8 +1173,8 @@
         "links": [
             "f08991a4f7f415e5"
         ],
-        "x": 1215,
-        "y": 1020,
+        "x": 1875,
+        "y": 580,
         "wires": []
     },
     {
@@ -1158,8 +1194,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1010,
-        "y": 1040,
+        "x": 1670,
+        "y": 600,
         "wires": [
             [
                 "88b79d67e703c73d"
@@ -1177,8 +1213,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 1080,
+        "x": 1790,
+        "y": 640,
         "wires": [
             [
                 "a578b4c7536094a2"
@@ -1203,8 +1239,8 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "str",
-        "x": 750,
-        "y": 1080,
+        "x": 1410,
+        "y": 640,
         "wires": [
             [
                 "4b34cefd70b6561f"
@@ -1219,8 +1255,8 @@
         "links": [
             "f08991a4f7f415e5"
         ],
-        "x": 1215,
-        "y": 1080,
+        "x": 1875,
+        "y": 640,
         "wires": []
     },
     {
@@ -1240,8 +1276,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1010,
-        "y": 1100,
+        "x": 1670,
+        "y": 660,
         "wires": [
             [
                 "86e7379355a92e0d"
@@ -1259,8 +1295,8 @@
             "3c9d5aae3237a04c"
         ],
         "uncaught": false,
-        "x": 1510,
-        "y": 180,
+        "x": 850,
+        "y": 840,
         "wires": [
             [
                 "c5fd42490747fcf3"
@@ -1280,8 +1316,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1650,
-        "y": 140,
+        "x": 990,
+        "y": 800,
         "wires": [
             [
                 "c72110469b9e5e7c"
@@ -1304,8 +1340,8 @@
                 "module": "chai"
             }
         ],
-        "x": 1770,
-        "y": 140,
+        "x": 1110,
+        "y": 800,
         "wires": [
             [
                 "c5fd42490747fcf3"
@@ -1323,8 +1359,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1520,
-        "y": 140,
+        "x": 860,
+        "y": 800,
         "wires": [
             [
                 "9f96d5dd507f2bf2"
@@ -1342,8 +1378,8 @@
             "03e3389f3719ed96"
         ],
         "uncaught": false,
-        "x": 1510,
-        "y": 320,
+        "x": 850,
+        "y": 980,
         "wires": [
             [
                 "1a3aa6fcae1e23fe"
@@ -1363,8 +1399,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1650,
-        "y": 280,
+        "x": 990,
+        "y": 940,
         "wires": [
             [
                 "1ede45f6d5a7c369"
@@ -1387,8 +1423,8 @@
                 "module": "chai"
             }
         ],
-        "x": 1770,
-        "y": 280,
+        "x": 1110,
+        "y": 940,
         "wires": [
             [
                 "1a3aa6fcae1e23fe"
@@ -1406,8 +1442,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1520,
-        "y": 280,
+        "x": 860,
+        "y": 940,
         "wires": [
             [
                 "669d92c806f33b26"
@@ -1425,8 +1461,8 @@
             "5208ea3f17b7280a"
         ],
         "uncaught": false,
-        "x": 1510,
-        "y": 460,
+        "x": 850,
+        "y": 1120,
         "wires": [
             [
                 "3eb10755deadbdae"
@@ -1446,8 +1482,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1650,
-        "y": 420,
+        "x": 990,
+        "y": 1080,
         "wires": [
             [
                 "9086d60704df4386"
@@ -1470,8 +1506,8 @@
                 "module": "chai"
             }
         ],
-        "x": 1770,
-        "y": 420,
+        "x": 1110,
+        "y": 1080,
         "wires": [
             [
                 "3eb10755deadbdae"
@@ -1489,8 +1525,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1520,
-        "y": 420,
+        "x": 860,
+        "y": 1080,
         "wires": [
             [
                 "5366f4f4610472ae"
@@ -1508,8 +1544,8 @@
             "b7247ed34300b341"
         ],
         "uncaught": false,
-        "x": 1510,
-        "y": 600,
+        "x": 850,
+        "y": 1260,
         "wires": [
             [
                 "ee7434881267123e"
@@ -1529,8 +1565,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1650,
-        "y": 560,
+        "x": 990,
+        "y": 1220,
         "wires": [
             [
                 "6c20b20bfbad571b"
@@ -1553,8 +1589,8 @@
                 "module": "chai"
             }
         ],
-        "x": 1770,
-        "y": 560,
+        "x": 1110,
+        "y": 1220,
         "wires": [
             [
                 "ee7434881267123e"
@@ -1572,8 +1608,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1520,
-        "y": 560,
+        "x": 860,
+        "y": 1220,
         "wires": [
             [
                 "c8b4dc6522b27cb1"
@@ -1591,8 +1627,8 @@
             "58b17f41df58455a"
         ],
         "uncaught": false,
-        "x": 1510,
-        "y": 740,
+        "x": 850,
+        "y": 1400,
         "wires": [
             [
                 "f648a7fca7513c65"
@@ -1612,8 +1648,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 1650,
-        "y": 700,
+        "x": 990,
+        "y": 1360,
         "wires": [
             [
                 "ebe00b0e79abd227"
@@ -1636,8 +1672,8 @@
                 "module": "chai"
             }
         ],
-        "x": 1770,
-        "y": 700,
+        "x": 1110,
+        "y": 1360,
         "wires": [
             [
                 "f648a7fca7513c65"
@@ -1655,8 +1691,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1520,
-        "y": 700,
+        "x": 860,
+        "y": 1360,
         "wires": [
             [
                 "24b6753f56cd7875"
@@ -1676,8 +1712,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 930,
-        "y": 620,
+        "x": 1590,
+        "y": 140,
         "wires": [
             [
                 "8a463a3cf96c6220"
@@ -1700,8 +1736,8 @@
                 "module": "chai"
             }
         ],
-        "x": 1050,
-        "y": 620,
+        "x": 1710,
+        "y": 140,
         "wires": [
             [
                 "4ecf50405ebfcf66"
@@ -1719,8 +1755,8 @@
             "8213fd821b18a981"
         ],
         "uncaught": false,
-        "x": 1010,
-        "y": 660,
+        "x": 1670,
+        "y": 180,
         "wires": [
             [
                 "62bdbcf8a2d2ed02"
@@ -1738,8 +1774,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 660,
+        "x": 1790,
+        "y": 180,
         "wires": [
             [
                 "2c7b99466ec2eb1b"
@@ -1755,8 +1791,8 @@
             "eb15d5a32a41e78f",
             "a2d05779d9af1600"
         ],
-        "x": 1215,
-        "y": 660,
+        "x": 1875,
+        "y": 180,
         "wires": []
     },
     {
@@ -1770,8 +1806,8 @@
             "35c3fc05271e5023"
         ],
         "uncaught": false,
-        "x": 2170,
-        "y": 180,
+        "x": 1510,
+        "y": 940,
         "wires": [
             [
                 "95b94a93f5e58ecd"
@@ -1791,8 +1827,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2310,
-        "y": 140,
+        "x": 1650,
+        "y": 900,
         "wires": [
             [
                 "256c5fcd79132a99"
@@ -1815,8 +1851,8 @@
                 "module": "chai"
             }
         ],
-        "x": 2430,
-        "y": 140,
+        "x": 1770,
+        "y": 900,
         "wires": [
             [
                 "95b94a93f5e58ecd"
@@ -1834,8 +1870,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2180,
-        "y": 140,
+        "x": 1520,
+        "y": 900,
         "wires": [
             [
                 "274660d2cf5ae0e6"
@@ -1853,8 +1889,8 @@
             "48a571dd64dc4ba5"
         ],
         "uncaught": false,
-        "x": 2170,
-        "y": 320,
+        "x": 1510,
+        "y": 1080,
         "wires": [
             [
                 "6d8ff6eddb3713f7"
@@ -1874,8 +1910,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2310,
-        "y": 280,
+        "x": 1650,
+        "y": 1040,
         "wires": [
             [
                 "5a579467923e7485"
@@ -1898,8 +1934,8 @@
                 "module": "chai"
             }
         ],
-        "x": 2430,
-        "y": 280,
+        "x": 1770,
+        "y": 1040,
         "wires": [
             [
                 "6d8ff6eddb3713f7"
@@ -1917,8 +1953,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2180,
-        "y": 280,
+        "x": 1520,
+        "y": 1040,
         "wires": [
             [
                 "124651c25462ae16"
@@ -1936,8 +1972,8 @@
             "6c47b02b4a1cb2ce"
         ],
         "uncaught": false,
-        "x": 2170,
-        "y": 460,
+        "x": 1510,
+        "y": 1220,
         "wires": [
             [
                 "2ae99422fc7bb037"
@@ -1957,8 +1993,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2310,
-        "y": 420,
+        "x": 1650,
+        "y": 1180,
         "wires": [
             [
                 "3ccb21c0a4cb08a6"
@@ -1981,8 +2017,8 @@
                 "module": "chai"
             }
         ],
-        "x": 2430,
-        "y": 420,
+        "x": 1770,
+        "y": 1180,
         "wires": [
             [
                 "2ae99422fc7bb037"
@@ -2000,8 +2036,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2180,
-        "y": 420,
+        "x": 1520,
+        "y": 1180,
         "wires": [
             [
                 "0e62a4f59f995931"
@@ -2026,8 +2062,8 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "str",
-        "x": 750,
-        "y": 580,
+        "x": 1410,
+        "y": 100,
         "wires": [
             [
                 "8213fd821b18a981"
@@ -2045,8 +2081,8 @@
             "6f87ae45bd6a9969"
         ],
         "uncaught": false,
-        "x": 2170,
-        "y": 600,
+        "x": 1510,
+        "y": 1360,
         "wires": [
             [
                 "9cfba1fab24bd968"
@@ -2066,8 +2102,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2310,
-        "y": 560,
+        "x": 1650,
+        "y": 1320,
         "wires": [
             [
                 "bcc2341b109df1db"
@@ -2090,8 +2126,8 @@
                 "module": "chai"
             }
         ],
-        "x": 2430,
-        "y": 560,
+        "x": 1770,
+        "y": 1320,
         "wires": [
             [
                 "9cfba1fab24bd968"
@@ -2109,8 +2145,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2180,
-        "y": 560,
+        "x": 1520,
+        "y": 1320,
         "wires": [
             [
                 "bfac33a999e5ea8c"
@@ -2128,8 +2164,8 @@
             "c0cb9968bf9299c6"
         ],
         "uncaught": false,
-        "x": 2170,
-        "y": 740,
+        "x": 1510,
+        "y": 1500,
         "wires": [
             [
                 "47439bca893b2a98"
@@ -2149,8 +2185,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2310,
-        "y": 700,
+        "x": 1650,
+        "y": 1460,
         "wires": [
             [
                 "7c3fa3d2e0d2751f"
@@ -2173,8 +2209,8 @@
                 "module": "chai"
             }
         ],
-        "x": 2430,
-        "y": 700,
+        "x": 1770,
+        "y": 1460,
         "wires": [
             [
                 "47439bca893b2a98"
@@ -2192,8 +2228,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2180,
-        "y": 700,
+        "x": 1520,
+        "y": 1460,
         "wires": [
             [
                 "ab2792cd43ee2b5c"
@@ -2211,8 +2247,8 @@
             "514a7161745e457b"
         ],
         "uncaught": false,
-        "x": 2170,
-        "y": 880,
+        "x": 1510,
+        "y": 1640,
         "wires": [
             [
                 "506c7c8143bebf5e"
@@ -2232,8 +2268,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 2310,
-        "y": 840,
+        "x": 1650,
+        "y": 1600,
         "wires": [
             [
                 "49905471619a8c43"
@@ -2256,8 +2292,8 @@
                 "module": "chai"
             }
         ],
-        "x": 2430,
-        "y": 840,
+        "x": 1770,
+        "y": 1600,
         "wires": [
             [
                 "506c7c8143bebf5e"
@@ -2275,8 +2311,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2180,
-        "y": 840,
+        "x": 1520,
+        "y": 1600,
         "wires": [
             [
                 "e42c9a13406f2b8e"
@@ -2289,8 +2325,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 1850,
-        "y": 180,
+        "x": 1190,
+        "y": 840,
         "wires": []
     },
     {
@@ -2299,8 +2335,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 1850,
-        "y": 320,
+        "x": 1190,
+        "y": 980,
         "wires": []
     },
     {
@@ -2309,8 +2345,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 1850,
-        "y": 460,
+        "x": 1190,
+        "y": 1120,
         "wires": []
     },
     {
@@ -2319,8 +2355,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 1850,
-        "y": 600,
+        "x": 1190,
+        "y": 1260,
         "wires": []
     },
     {
@@ -2329,8 +2365,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 1850,
-        "y": 740,
+        "x": 1190,
+        "y": 1400,
         "wires": []
     },
     {
@@ -2339,8 +2375,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 2510,
-        "y": 880,
+        "x": 1850,
+        "y": 1640,
         "wires": []
     },
     {
@@ -2349,8 +2385,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 2510,
-        "y": 740,
+        "x": 1850,
+        "y": 1500,
         "wires": []
     },
     {
@@ -2359,8 +2395,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 2510,
-        "y": 600,
+        "x": 1850,
+        "y": 1360,
         "wires": []
     },
     {
@@ -2369,8 +2405,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 2510,
-        "y": 460,
+        "x": 1850,
+        "y": 1220,
         "wires": []
     },
     {
@@ -2379,8 +2415,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 2510,
-        "y": 320,
+        "x": 1850,
+        "y": 1080,
         "wires": []
     },
     {
@@ -2389,8 +2425,8 @@
         "z": "5cd3730f771ed2a6",
         "name": "return",
         "position": 1,
-        "x": 2510,
-        "y": 180,
+        "x": 1850,
+        "y": 940,
         "wires": []
     },
     {
@@ -2400,8 +2436,8 @@
         "name": "#1",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 1390,
-        "y": 140,
+        "x": 730,
+        "y": 800,
         "wires": [
             [
                 "3c9d5aae3237a04c"
@@ -2415,8 +2451,8 @@
         "name": "#2",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 1390,
-        "y": 280,
+        "x": 730,
+        "y": 940,
         "wires": [
             [
                 "03e3389f3719ed96"
@@ -2430,8 +2466,8 @@
         "name": "#3",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 1390,
-        "y": 420,
+        "x": 730,
+        "y": 1080,
         "wires": [
             [
                 "5208ea3f17b7280a"
@@ -2445,8 +2481,8 @@
         "name": "#4",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 1390,
-        "y": 560,
+        "x": 730,
+        "y": 1220,
         "wires": [
             [
                 "b7247ed34300b341"
@@ -2460,8 +2496,8 @@
         "name": "#5",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 1390,
-        "y": 700,
+        "x": 730,
+        "y": 1360,
         "wires": [
             [
                 "58b17f41df58455a"
@@ -2472,11 +2508,11 @@
         "id": "bc9dc2dca3220839",
         "type": "reusable-in",
         "z": "5cd3730f771ed2a6",
-        "name": "#11",
+        "name": "#13",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 2050,
-        "y": 840,
+        "x": 1390,
+        "y": 1600,
         "wires": [
             [
                 "514a7161745e457b"
@@ -2487,11 +2523,11 @@
         "id": "9fc451dccf2d2ab1",
         "type": "reusable-in",
         "z": "5cd3730f771ed2a6",
-        "name": "#10",
+        "name": "#12",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 2050,
-        "y": 700,
+        "x": 1390,
+        "y": 1460,
         "wires": [
             [
                 "c0cb9968bf9299c6"
@@ -2502,11 +2538,11 @@
         "id": "8a1245e611601f96",
         "type": "reusable-in",
         "z": "5cd3730f771ed2a6",
-        "name": "#9",
+        "name": "#11",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 2050,
-        "y": 560,
+        "x": 1390,
+        "y": 1320,
         "wires": [
             [
                 "6f87ae45bd6a9969"
@@ -2517,11 +2553,11 @@
         "id": "f3211d1b6716a8e6",
         "type": "reusable-in",
         "z": "5cd3730f771ed2a6",
-        "name": "#8",
+        "name": "#10",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 2050,
-        "y": 420,
+        "x": 1390,
+        "y": 1180,
         "wires": [
             [
                 "6c47b02b4a1cb2ce"
@@ -2532,11 +2568,11 @@
         "id": "d3f24bfe48152653",
         "type": "reusable-in",
         "z": "5cd3730f771ed2a6",
-        "name": "#7",
+        "name": "#9",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 2050,
-        "y": 280,
+        "x": 1390,
+        "y": 1040,
         "wires": [
             [
                 "48a571dd64dc4ba5"
@@ -2547,11 +2583,11 @@
         "id": "e191f0f975943d26",
         "type": "reusable-in",
         "z": "5cd3730f771ed2a6",
-        "name": "#6",
+        "name": "#8",
         "info": "describe your reusable flow here",
         "scope": "local",
-        "x": 2050,
-        "y": 140,
+        "x": 1390,
+        "y": 900,
         "wires": [
             [
                 "35c3fc05271e5023"
@@ -2566,7 +2602,7 @@
         "target": "#1",
         "outputs": 1,
         "x": 870,
-        "y": 260,
+        "y": 300,
         "wires": [
             [
                 "445a8c690a91ee3d"
@@ -2581,7 +2617,7 @@
         "target": "#2",
         "outputs": 1,
         "x": 870,
-        "y": 320,
+        "y": 360,
         "wires": [
             [
                 "447b3974e291e16a"
@@ -2596,7 +2632,7 @@
         "target": "#3",
         "outputs": 1,
         "x": 870,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "dbdc55d41106b31f"
@@ -2611,7 +2647,7 @@
         "target": "#4",
         "outputs": 1,
         "x": 870,
-        "y": 440,
+        "y": 480,
         "wires": [
             [
                 "14912be381921b39"
@@ -2626,7 +2662,7 @@
         "target": "#5",
         "outputs": 1,
         "x": 870,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "a7dc985890e1a061"
@@ -2638,10 +2674,10 @@
         "type": "reusable",
         "z": "5cd3730f771ed2a6",
         "name": "",
-        "target": "#6",
+        "target": "#8",
         "outputs": 1,
-        "x": 870,
-        "y": 780,
+        "x": 1530,
+        "y": 340,
         "wires": [
             [
                 "a9b88034ade79e03"
@@ -2653,10 +2689,10 @@
         "type": "reusable",
         "z": "5cd3730f771ed2a6",
         "name": "",
-        "target": "#7",
+        "target": "#9",
         "outputs": 1,
-        "x": 870,
-        "y": 840,
+        "x": 1530,
+        "y": 400,
         "wires": [
             [
                 "6277aec4cf9450d7"
@@ -2668,10 +2704,10 @@
         "type": "reusable",
         "z": "5cd3730f771ed2a6",
         "name": "",
-        "target": "#8",
+        "target": "#10",
         "outputs": 1,
-        "x": 870,
-        "y": 900,
+        "x": 1530,
+        "y": 460,
         "wires": [
             [
                 "86a97b97535aad80"
@@ -2683,10 +2719,10 @@
         "type": "reusable",
         "z": "5cd3730f771ed2a6",
         "name": "",
-        "target": "#9",
+        "target": "#11",
         "outputs": 1,
-        "x": 870,
-        "y": 960,
+        "x": 1530,
+        "y": 520,
         "wires": [
             [
                 "568eba20f227f355"
@@ -2698,10 +2734,10 @@
         "type": "reusable",
         "z": "5cd3730f771ed2a6",
         "name": "",
-        "target": "#10",
+        "target": "#12",
         "outputs": 1,
-        "x": 870,
-        "y": 1020,
+        "x": 1530,
+        "y": 580,
         "wires": [
             [
                 "88b79d67e703c73d"
@@ -2713,13 +2749,1239 @@
         "type": "reusable",
         "z": "5cd3730f771ed2a6",
         "name": "",
-        "target": "#11",
+        "target": "#13",
         "outputs": 1,
-        "x": 870,
-        "y": 1080,
+        "x": 1530,
+        "y": 640,
         "wires": [
             [
                 "86e7379355a92e0d"
+            ]
+        ]
+    },
+    {
+        "id": "d5256de469eb6b55",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "---- standard Column Width Marker ---- ---- standard Column Width Marker ---- ",
+        "info": "",
+        "x": 960,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "4f36a5d9d15ee050",
+        "type": "link in",
+        "z": "5cd3730f771ed2a6",
+        "name": "2nd batch of automated tests",
+        "links": [
+            "903ba1f12e9b11dc"
+        ],
+        "x": 1535,
+        "y": 100,
+        "wires": [
+            [
+                "8213fd821b18a981"
+            ]
+        ]
+    },
+    {
+        "id": "903ba1f12e9b11dc",
+        "type": "link out",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "links": [
+            "4f36a5d9d15ee050"
+        ],
+        "x": 935,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c023da75cd3cf0bd",
+        "type": "link in",
+        "z": "5cd3730f771ed2a6",
+        "name": "finish automated tests",
+        "links": [
+            "e14cbe566e885031"
+        ],
+        "x": 1055,
+        "y": 160,
+        "wires": [
+            [
+                "9017b0386f76f5b4"
+            ]
+        ]
+    },
+    {
+        "id": "e14cbe566e885031",
+        "type": "link out",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "links": [
+            "c023da75cd3cf0bd"
+        ],
+        "x": 1635,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "6f46bc08bc77a338",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 600,
+        "wires": [
+            [
+                "179bbd366aeb501a"
+            ]
+        ]
+    },
+    {
+        "id": "07ffc331350347cd",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 750,
+        "y": 600,
+        "wires": [
+            [
+                "17d96a979d2af611"
+            ]
+        ]
+    },
+    {
+        "id": "179bbd366aeb501a",
+        "type": "link out",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "links": [
+            "eb15d5a32a41e78f",
+            "a2d05779d9af1600"
+        ],
+        "x": 1215,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "306e1324aa90f62a",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1010,
+        "y": 620,
+        "wires": [
+            [
+                "6f46bc08bc77a338"
+            ]
+        ]
+    },
+    {
+        "id": "17d96a979d2af611",
+        "type": "reusable",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "target": "#6",
+        "outputs": 1,
+        "x": 870,
+        "y": 600,
+        "wires": [
+            [
+                "6f46bc08bc77a338"
+            ]
+        ]
+    },
+    {
+        "id": "75d3bc26cc1ad96e",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 660,
+        "wires": [
+            [
+                "44d0f43f6883b0ef"
+            ]
+        ]
+    },
+    {
+        "id": "b689b0cf495ea7bc",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 750,
+        "y": 660,
+        "wires": [
+            [
+                "bd80ea523dec45d5"
+            ]
+        ]
+    },
+    {
+        "id": "44d0f43f6883b0ef",
+        "type": "link out",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "links": [
+            "eb15d5a32a41e78f",
+            "a2d05779d9af1600"
+        ],
+        "x": 1215,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "ddb874ac99d80e62",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1010,
+        "y": 680,
+        "wires": [
+            [
+                "75d3bc26cc1ad96e"
+            ]
+        ]
+    },
+    {
+        "id": "bd80ea523dec45d5",
+        "type": "reusable",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "target": "#7",
+        "outputs": 1,
+        "x": 870,
+        "y": 660,
+        "wires": [
+            [
+                "75d3bc26cc1ad96e"
+            ]
+        ]
+    },
+    {
+        "id": "82e3ab8cbf8eb7bd",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "login with wrong required role",
+        "info": "",
+        "x": 800,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "350b0759db9419df",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "login with correct required role",
+        "info": "",
+        "x": 800,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "7ad0dbcd91441243",
+        "type": "catch",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "scope": [
+            "e480f3df712002a4",
+            "d37a89ccbc1b4c7e",
+            "f4415233670ed659"
+        ],
+        "uncaught": false,
+        "x": 850,
+        "y": 1540,
+        "wires": [
+            [
+                "0440dc5f62717c74"
+            ]
+        ]
+    },
+    {
+        "id": "e480f3df712002a4",
+        "type": "http request",
+        "z": "5cd3730f771ed2a6",
+        "name": "act",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 1500,
+        "wires": [
+            [
+                "d37a89ccbc1b4c7e"
+            ]
+        ]
+    },
+    {
+        "id": "d37a89ccbc1b4c7e",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.responseCookies).to.exist\nexpect(msg.responseCookies['authorization']).to.exist\nexpect(msg.responseCookies['authorization'].value).to.equal('')\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1110,
+        "y": 1500,
+        "wires": [
+            [
+                "0440dc5f62717c74"
+            ]
+        ]
+    },
+    {
+        "id": "f4415233670ed659",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "arrange",
+        "func": "msg.url     = flow.get('CookieAuthURL') + '-2'\nmsg.payload = {\n  UserId:'node-red',\n  Password:'invalid-password'\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1500,
+        "wires": [
+            [
+                "e480f3df712002a4"
+            ]
+        ]
+    },
+    {
+        "id": "8eb13f53e6a815ff",
+        "type": "catch",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "scope": [
+            "141760c6fa197152",
+            "0f2bca3b1d84b8d7",
+            "ea970a3d633d903a"
+        ],
+        "uncaught": false,
+        "x": 850,
+        "y": 1680,
+        "wires": [
+            [
+                "49423bd547a1ca25"
+            ]
+        ]
+    },
+    {
+        "id": "141760c6fa197152",
+        "type": "http request",
+        "z": "5cd3730f771ed2a6",
+        "name": "act",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 1640,
+        "wires": [
+            [
+                "0f2bca3b1d84b8d7"
+            ]
+        ]
+    },
+    {
+        "id": "0f2bca3b1d84b8d7",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.responseCookies).to.exist\nexpect(msg.responseCookies['authorization']).to.exist\n\nlet Cookie = msg.responseCookies['authorization'].value\nexpect(Cookie).to.match(/^node-red:\\d+:[0-9a-f]+$/)\n\nlet [UserId,Expiration,Digest] = Cookie.split(':')\nexpect(UserId).to.equal('node-red')\nexpect(parseInt(Expiration,10)).to.be.at.least(msg.now)\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1110,
+        "y": 1640,
+        "wires": [
+            [
+                "49423bd547a1ca25"
+            ]
+        ]
+    },
+    {
+        "id": "ea970a3d633d903a",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "arrange",
+        "func": "msg.url     = flow.get('CookieAuthURL') + '-3'\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1640,
+        "wires": [
+            [
+                "141760c6fa197152"
+            ]
+        ]
+    },
+    {
+        "id": "0440dc5f62717c74",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "return",
+        "position": 1,
+        "x": 1190,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "49423bd547a1ca25",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "return",
+        "position": 1,
+        "x": 1190,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "28fc1448af393b74",
+        "type": "reusable-in",
+        "z": "5cd3730f771ed2a6",
+        "name": "#6",
+        "info": "describe your reusable flow here",
+        "scope": "local",
+        "x": 730,
+        "y": 1500,
+        "wires": [
+            [
+                "f4415233670ed659"
+            ]
+        ]
+    },
+    {
+        "id": "5cd4b332102b75f2",
+        "type": "reusable-in",
+        "z": "5cd3730f771ed2a6",
+        "name": "#7",
+        "info": "describe your reusable flow here",
+        "scope": "local",
+        "x": 730,
+        "y": 1640,
+        "wires": [
+            [
+                "ea970a3d633d903a"
+            ]
+        ]
+    },
+    {
+        "id": "0cd1a0ceb2755d30",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1790,
+        "y": 700,
+        "wires": [
+            [
+                "2251cf61d9c44e01"
+            ]
+        ]
+    },
+    {
+        "id": "4a17ed63fe1b89e8",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 1410,
+        "y": 700,
+        "wires": [
+            [
+                "5437bacc17e8e1bf"
+            ]
+        ]
+    },
+    {
+        "id": "2251cf61d9c44e01",
+        "type": "link out",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "links": [
+            "f08991a4f7f415e5"
+        ],
+        "x": 1875,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "b2b0ed1c1903c921",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1670,
+        "y": 720,
+        "wires": [
+            [
+                "0cd1a0ceb2755d30"
+            ]
+        ]
+    },
+    {
+        "id": "5437bacc17e8e1bf",
+        "type": "reusable",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "target": "#14",
+        "outputs": 1,
+        "x": 1530,
+        "y": 700,
+        "wires": [
+            [
+                "0cd1a0ceb2755d30"
+            ]
+        ]
+    },
+    {
+        "id": "f081d30d9d7ac971",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "report",
+        "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1790,
+        "y": 760,
+        "wires": [
+            [
+                "9c876fb40fad35cc"
+            ]
+        ]
+    },
+    {
+        "id": "a1b72930a3009eee",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": " test",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "single-test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 1410,
+        "y": 760,
+        "wires": [
+            [
+                "804c83924018da62"
+            ]
+        ]
+    },
+    {
+        "id": "9c876fb40fad35cc",
+        "type": "link out",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "links": [
+            "f08991a4f7f415e5"
+        ],
+        "x": 1875,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a02e270ad8e044ab",
+        "type": "inject",
+        "z": "5cd3730f771ed2a6",
+        "name": "show",
+        "props": [
+            {
+                "p": "TestMode",
+                "v": "show-error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1670,
+        "y": 780,
+        "wires": [
+            [
+                "f081d30d9d7ac971"
+            ]
+        ]
+    },
+    {
+        "id": "804c83924018da62",
+        "type": "reusable",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "target": "#15",
+        "outputs": 1,
+        "x": 1530,
+        "y": 760,
+        "wires": [
+            [
+                "f081d30d9d7ac971"
+            ]
+        ]
+    },
+    {
+        "id": "bbdd8fa4be023b3a",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "additional endpoints for automated tests",
+        "info": "",
+        "x": 180,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "50d9f6c1c0817736",
+        "type": "http in",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "url": "cookie-auth-2",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 940,
+        "wires": [
+            [
+                "12dafbb6fec1a78a"
+            ]
+        ]
+    },
+    {
+        "id": "a2841705605044a2",
+        "type": "http in",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "url": "cookie-auth-3",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 1000,
+        "wires": [
+            [
+                "f4e049b5d35ee243"
+            ]
+        ]
+    },
+    {
+        "id": "12dafbb6fec1a78a",
+        "type": "change",
+        "z": "5cd3730f771ed2a6",
+        "name": "require impossible role",
+        "rules": [
+            {
+                "t": "set",
+                "p": "requiredRole",
+                "pt": "msg",
+                "to": "god",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 940,
+        "wires": [
+            [
+                "ff07838d8fb0ca15"
+            ]
+        ]
+    },
+    {
+        "id": "f4e049b5d35ee243",
+        "type": "change",
+        "z": "5cd3730f771ed2a6",
+        "name": "require possible role",
+        "rules": [
+            {
+                "t": "set",
+                "p": "requiredRole",
+                "pt": "msg",
+                "to": "node-red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 1000,
+        "wires": [
+            [
+                "ff07838d8fb0ca15"
+            ]
+        ]
+    },
+    {
+        "id": "ff07838d8fb0ca15",
+        "type": "reusable",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "target": "cookie auth",
+        "outputs": 2,
+        "x": 130,
+        "y": 1060,
+        "wires": [
+            [
+                "2bf2204d691f9923"
+            ],
+            [
+                "769ffd9e0ff2435a"
+            ]
+        ]
+    },
+    {
+        "id": "769ffd9e0ff2435a",
+        "type": "change",
+        "z": "5cd3730f771ed2a6",
+        "name": "inform about success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "successfully authorized",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 1060,
+        "wires": [
+            [
+                "2bf2204d691f9923"
+            ]
+        ]
+    },
+    {
+        "id": "2bf2204d691f9923",
+        "type": "http response",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "13721211c076fcf7",
+        "type": "http in",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "url": "cookie-auth-2",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1120,
+        "wires": [
+            [
+                "daedc25eef89a81f"
+            ]
+        ]
+    },
+    {
+        "id": "0434ddfc4ff6715a",
+        "type": "reusable",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "target": "cookie login",
+        "outputs": 2,
+        "x": 130,
+        "y": 1240,
+        "wires": [
+            [
+                "74ce5e8211b999c0"
+            ],
+            [
+                "8dd2aa72353d0661"
+            ]
+        ]
+    },
+    {
+        "id": "8dd2aa72353d0661",
+        "type": "http response",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "0f08c4fd12b1f5f2",
+        "type": "http in",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "url": "cookie-auth-3",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1180,
+        "wires": [
+            [
+                "2960c632afa95f5a"
+            ]
+        ]
+    },
+    {
+        "id": "daedc25eef89a81f",
+        "type": "change",
+        "z": "5cd3730f771ed2a6",
+        "name": "require impossible role",
+        "rules": [
+            {
+                "t": "set",
+                "p": "requiredRole",
+                "pt": "msg",
+                "to": "god",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1120,
+        "wires": [
+            [
+                "0434ddfc4ff6715a"
+            ]
+        ]
+    },
+    {
+        "id": "2960c632afa95f5a",
+        "type": "change",
+        "z": "5cd3730f771ed2a6",
+        "name": "require possible role",
+        "rules": [
+            {
+                "t": "set",
+                "p": "requiredRole",
+                "pt": "msg",
+                "to": "node-red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1180,
+        "wires": [
+            [
+                "0434ddfc4ff6715a"
+            ]
+        ]
+    },
+    {
+        "id": "74ce5e8211b999c0",
+        "type": "change",
+        "z": "5cd3730f771ed2a6",
+        "name": "inform about success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "successfully authorized",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 1240,
+        "wires": [
+            [
+                "8dd2aa72353d0661"
+            ]
+        ]
+    },
+    {
+        "id": "547f8367f89665e6",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "get with wrong required role",
+        "info": "",
+        "x": 1460,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "a5f4faa55a586407",
+        "type": "comment",
+        "z": "5cd3730f771ed2a6",
+        "name": "get with correct required role",
+        "info": "",
+        "x": 1460,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "9fc69acf61048834",
+        "type": "catch",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "scope": [
+            "076b202b944df375",
+            "05ce4a5dcc81e2a3",
+            "31c781c2aa8edfd4"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 1780,
+        "wires": [
+            [
+                "fdcb432fd969e464"
+            ]
+        ]
+    },
+    {
+        "id": "076b202b944df375",
+        "type": "http request",
+        "z": "5cd3730f771ed2a6",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 1740,
+        "wires": [
+            [
+                "05ce4a5dcc81e2a3"
+            ]
+        ]
+    },
+    {
+        "id": "05ce4a5dcc81e2a3",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.responseCookies).to.exist\nexpect(msg.responseCookies['authorization']).to.exist\nexpect(msg.responseCookies['authorization'].value).to.equal('')\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 1740,
+        "wires": [
+            [
+                "fdcb432fd969e464"
+            ]
+        ]
+    },
+    {
+        "id": "31c781c2aa8edfd4",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "arrange",
+        "func": "msg.url = flow.get('CookieAuthURL') + '-2'\n\nlet Cookie = flow.get('CookieAuthCookie')\n\nmsg.cookies = { authorization:Cookie }\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 1740,
+        "wires": [
+            [
+                "076b202b944df375"
+            ]
+        ]
+    },
+    {
+        "id": "9375ef42ab0e8da7",
+        "type": "catch",
+        "z": "5cd3730f771ed2a6",
+        "name": "",
+        "scope": [
+            "1ede7d4383ba45cb",
+            "5ae029a93c198682",
+            "2c3149509fc17bfc"
+        ],
+        "uncaught": false,
+        "x": 1510,
+        "y": 1920,
+        "wires": [
+            [
+                "c922468a91f62d72"
+            ]
+        ]
+    },
+    {
+        "id": "1ede7d4383ba45cb",
+        "type": "http request",
+        "z": "5cd3730f771ed2a6",
+        "name": "act",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1650,
+        "y": 1880,
+        "wires": [
+            [
+                "5ae029a93c198682"
+            ]
+        ]
+    },
+    {
+        "id": "5ae029a93c198682",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "assert",
+        "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.responseCookies).to.exist\nexpect(msg.responseCookies['authorization']).to.exist\n\nlet newCookie = msg.responseCookies['authorization'].value\nexpect(newCookie).to.match(/^node-red:\\d+:[0-9a-f]+$/)\n\nlet [newUserId,newExpiration,newDigest] = newCookie.split(':')\n\nlet oldCookie = flow.get('CookieAuthCookie')\nlet [oldUserId,oldExpiration,oldDigest] = oldCookie.split(':')\n\nexpect(newUserId).to.equal(oldUserId)\nexpect(parseInt(newExpiration,10)).to.be.at.least(parseInt(oldExpiration,10))\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "chai",
+                "module": "chai"
+            }
+        ],
+        "x": 1770,
+        "y": 1880,
+        "wires": [
+            [
+                "c922468a91f62d72"
+            ]
+        ]
+    },
+    {
+        "id": "2c3149509fc17bfc",
+        "type": "function",
+        "z": "5cd3730f771ed2a6",
+        "name": "arrange",
+        "func": "msg.url = flow.get('CookieAuthURL') + '-3'\n\nlet Cookie = flow.get('CookieAuthCookie')\n\nmsg.cookies = { authorization:Cookie }\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 1880,
+        "wires": [
+            [
+                "1ede7d4383ba45cb"
+            ]
+        ]
+    },
+    {
+        "id": "c922468a91f62d72",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "return",
+        "position": 1,
+        "x": 1850,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "fdcb432fd969e464",
+        "type": "reusable-out",
+        "z": "5cd3730f771ed2a6",
+        "name": "return",
+        "position": 1,
+        "x": 1850,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "41cc367b024b0359",
+        "type": "reusable-in",
+        "z": "5cd3730f771ed2a6",
+        "name": "#15",
+        "info": "describe your reusable flow here",
+        "scope": "local",
+        "x": 1390,
+        "y": 1880,
+        "wires": [
+            [
+                "2c3149509fc17bfc"
+            ]
+        ]
+    },
+    {
+        "id": "a1b09a778960c6ee",
+        "type": "reusable-in",
+        "z": "5cd3730f771ed2a6",
+        "name": "#14",
+        "info": "describe your reusable flow here",
+        "scope": "local",
+        "x": 1390,
+        "y": 1740,
+        "wires": [
+            [
+                "31c781c2aa8edfd4"
             ]
         ]
     },
