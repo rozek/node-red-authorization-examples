@@ -68,7 +68,8 @@ to be installed.
 
 To run them, just import [the test flows](test-basic-auth.json) into your workspace and enter the server to be tested in the node called "configure".
 
-![](test-basic-auth.png)
+![](test-basic-auth-I.png)
+![](test-basic-auth-II.png)
 
 ## Cookie-based Authorization ##
 
