@@ -1,16 +1,16 @@
 [
     {
-        "id": "c77fc63b7b5d8602",
+        "id": "a437ea9e9983f2b9",
         "type": "comment",
         "z": "c63466f5ec185814",
         "name": "if used without \"node-red-within-express\"",
         "info": "",
         "x": 180,
-        "y": 360,
+        "y": 500,
         "wires": []
     },
     {
-        "id": "8141b7dfdc18bc8a",
+        "id": "ed50b5b2e94746c8",
         "type": "inject",
         "z": "c63466f5ec185814",
         "name": "at Startup",
@@ -30,15 +30,15 @@
         "topic": "",
         "payloadType": "date",
         "x": 100,
-        "y": 420,
+        "y": 560,
         "wires": [
             [
-                "52405baae1574ece"
+                "4a4c700ae4ecd934"
             ]
         ]
     },
     {
-        "id": "3854f9bb20843d13",
+        "id": "2d98c64a67e881e7",
         "type": "file in",
         "z": "c63466f5ec185814",
         "name": "",
@@ -49,33 +49,33 @@
         "encoding": "utf8",
         "allProps": false,
         "x": 160,
-        "y": 540,
+        "y": 680,
         "wires": [
             [
-                "0198d0d32e82591e"
+                "70c82a6e25251a70"
             ]
         ]
     },
     {
-        "id": "690568c6a20becea",
+        "id": "470b387186d7852a",
         "type": "catch",
         "z": "c63466f5ec185814",
         "name": "",
         "scope": [
-            "3854f9bb20843d13",
-            "0198d0d32e82591e"
+            "2d98c64a67e881e7",
+            "70c82a6e25251a70"
         ],
         "uncaught": false,
         "x": 110,
-        "y": 600,
+        "y": 740,
         "wires": [
             [
-                "85e93b749a23c07d"
+                "46809118b7d27252"
             ]
         ]
     },
     {
-        "id": "7db18657b376e6aa",
+        "id": "a52bccab8bc183a8",
         "type": "debug",
         "z": "c63466f5ec185814",
         "name": "",
@@ -88,11 +88,11 @@
         "statusVal": "'could not load user registry'",
         "statusType": "jsonata",
         "x": 510,
-        "y": 600,
+        "y": 740,
         "wires": []
     },
     {
-        "id": "c56fc609fda78995",
+        "id": "3eb566d1907d9b3b",
         "type": "debug",
         "z": "c63466f5ec185814",
         "name": "Status",
@@ -105,11 +105,11 @@
         "statusVal": "'user registry available'",
         "statusType": "jsonata",
         "x": 530,
-        "y": 420,
+        "y": 560,
         "wires": []
     },
     {
-        "id": "85e93b749a23c07d",
+        "id": "46809118b7d27252",
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "create in global context",
@@ -120,16 +120,16 @@
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 600,
+        "y": 740,
         "wires": [
             [
-                "7db18657b376e6aa",
-                "c2c4156520461e96"
+                "a52bccab8bc183a8",
+                "e0b359a7b5f90189"
             ]
         ]
     },
     {
-        "id": "762b9eeb2b5aa715",
+        "id": "a463788d4c5c13ab",
         "type": "file",
         "z": "c63466f5ec185814",
         "name": "",
@@ -139,33 +139,33 @@
         "overwriteFile": "true",
         "encoding": "utf8",
         "x": 420,
-        "y": 720,
+        "y": 860,
         "wires": [
             [
-                "b07ec65be23263d3"
+                "53948a7e0233c789"
             ]
         ]
     },
     {
-        "id": "15a24ea49049d876",
+        "id": "0892a7393f0e2863",
         "type": "catch",
         "z": "c63466f5ec185814",
         "name": "",
         "scope": [
-            "762b9eeb2b5aa715"
+            "a463788d4c5c13ab"
         ],
         "uncaught": false,
         "x": 110,
-        "y": 840,
+        "y": 980,
         "wires": [
             [
-                "03755ee9c3a590a8",
-                "2d8d4fd4deb6b657"
+                "e50a7cafe871861b",
+                "d97e0ea28a9f3c81"
             ]
         ]
     },
     {
-        "id": "03755ee9c3a590a8",
+        "id": "e50a7cafe871861b",
         "type": "debug",
         "z": "c63466f5ec185814",
         "name": "",
@@ -178,11 +178,11 @@
         "statusVal": "'could not write user registry'",
         "statusType": "jsonata",
         "x": 250,
-        "y": 880,
+        "y": 1020,
         "wires": []
     },
     {
-        "id": "b07ec65be23263d3",
+        "id": "53948a7e0233c789",
         "type": "change",
         "z": "c63466f5ec185814",
         "name": "restore payload",
@@ -206,15 +206,15 @@
         "to": "",
         "reg": false,
         "x": 180,
-        "y": 780,
+        "y": 920,
         "wires": [
             [
-                "51df13d5ca62a956"
+                "1ce07b54225e17dd"
             ]
         ]
     },
     {
-        "id": "2d8d4fd4deb6b657",
+        "id": "d97e0ea28a9f3c81",
         "type": "change",
         "z": "c63466f5ec185814",
         "name": "report in payload",
@@ -245,15 +245,15 @@
         "to": "",
         "reg": false,
         "x": 290,
-        "y": 840,
+        "y": 980,
         "wires": [
             [
-                "51df13d5ca62a956"
+                "1ce07b54225e17dd"
             ]
         ]
     },
     {
-        "id": "0198d0d32e82591e",
+        "id": "70c82a6e25251a70",
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "write to global context",
@@ -264,15 +264,15 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 540,
+        "y": 680,
         "wires": [
             [
-                "c2c4156520461e96"
+                "e0b359a7b5f90189"
             ]
         ]
     },
     {
-        "id": "66b67483a83c20ce",
+        "id": "4f110197c9f2a334",
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "→ catch",
@@ -283,15 +283,15 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 480,
+        "y": 620,
         "wires": [
             [
-                "85e93b749a23c07d"
+                "46809118b7d27252"
             ]
         ]
     },
     {
-        "id": "05699a47cb63a34e",
+        "id": "687ebf9f0226b7dc",
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "→ catch",
@@ -302,96 +302,96 @@
         "finalize": "",
         "libs": [],
         "x": 300,
-        "y": 660,
+        "y": 800,
         "wires": [
             [
-                "2d8d4fd4deb6b657"
+                "d97e0ea28a9f3c81"
             ]
         ]
     },
     {
-        "id": "6373109762be3238",
+        "id": "848c6ddfb76643e4",
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "read from global context",
-        "func": "  let UserRegistry = global.get('UserRegistry')\n\n  let UserSet = {}\n  for (let UserId in UserRegistry) {\n    let UserEntry = Object.assign({},UserRegistry[UserId])\n      delete UserEntry.Password          // never write passwords in plain text!\n    UserSet[UserId] = UserEntry\n  }\n\n  msg.payload = JSON.stringify(UserSet)\n  return msg\n",
+        "func": "  let UserRegistry = global.get('UserRegistry')\n  let UserSet = {}\n  for (let UserId in UserRegistry) {\n    if (UserRegistry[UserId] == null) {\n      UserSet[UserId] = null\n    } else {\n      let UserEntry = Object.assign({},UserRegistry[UserId])\n        delete UserEntry.Password     // never write passwords in plain text!\n      UserSet[UserId] = UserEntry\n    }\n  }\n\n  msg.payload = JSON.stringify(UserSet)\n  return msg\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 720,
+        "y": 860,
         "wires": [
             [
-                "762b9eeb2b5aa715"
+                "a463788d4c5c13ab"
             ]
         ]
     },
     {
-        "id": "c2c4156520461e96",
+        "id": "e0b359a7b5f90189",
         "type": "reusable-out",
         "z": "c63466f5ec185814",
         "name": "return",
         "position": 1,
         "x": 530,
-        "y": 480,
+        "y": 620,
         "wires": []
     },
     {
-        "id": "51df13d5ca62a956",
+        "id": "1ce07b54225e17dd",
         "type": "reusable-out",
         "z": "c63466f5ec185814",
         "name": "return",
         "position": 1,
         "x": 530,
-        "y": 780,
+        "y": 920,
         "wires": []
     },
     {
-        "id": "6263a001104605df",
+        "id": "254d667c7cc38a4e",
         "type": "reusable-in",
         "z": "c63466f5ec185814",
         "name": "load or create UserRegistry",
         "info": "describe your reusable flow here",
         "scope": "global",
         "x": 140,
-        "y": 480,
+        "y": 620,
         "wires": [
             [
-                "66b67483a83c20ce",
-                "3854f9bb20843d13"
+                "4f110197c9f2a334",
+                "2d98c64a67e881e7"
             ]
         ]
     },
     {
-        "id": "a7177d20183831f3",
+        "id": "e50f6e5eb55f7d87",
         "type": "reusable-in",
         "z": "c63466f5ec185814",
         "name": "write UserRegistry",
         "info": "describe your reusable flow here",
         "scope": "global",
         "x": 110,
-        "y": 660,
+        "y": 800,
         "wires": [
             [
-                "05699a47cb63a34e",
-                "6373109762be3238"
+                "687ebf9f0226b7dc",
+                "848c6ddfb76643e4"
             ]
         ]
     },
     {
-        "id": "52405baae1574ece",
+        "id": "4a4c700ae4ecd934",
         "type": "reusable",
         "z": "c63466f5ec185814",
         "name": "",
         "target": "load or create userregistry",
         "outputs": 1,
         "x": 320,
-        "y": 420,
+        "y": 560,
         "wires": [
             [
-                "c56fc609fda78995"
+                "3eb566d1907d9b3b"
             ]
         ]
     }
