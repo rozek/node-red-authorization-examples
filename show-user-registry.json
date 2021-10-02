@@ -2,7 +2,7 @@
     {
         "id": "fe9d58b1f84fce63",
         "type": "inject",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "show UserRegistry",
         "props": [
             {
@@ -30,7 +30,7 @@
     {
         "id": "80fab4a14a0c61a7",
         "type": "comment",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "for testing purposes",
         "info": "",
         "x": 770,
@@ -40,9 +40,9 @@
     {
         "id": "663a2575d83ff39f",
         "type": "function",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "create output",
-        "func": "let UserRegistry = global.get('UserRegistry')\n  msg.payload = 'UserRegistry:\\n'\n  for (let UserName in UserRegistry) {\n    let Roles = UserRegistry[UserName].Roles\n    msg.payload += (\n      ' - \"' + UserName + '\": ' + (\n        Array.isArray(Roles)\n        ? '[' + Roles.join(',') + ']'\n        : '[]'\n      )\n    ) + '\\n'\n  }\nreturn msg\n",
+        "func": "let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  let UserList = []\n  for (let UserId in UserRegistry) {\n    UserList.push(\n      UserRegistry[UserId] == null ? '[' + UserId + ']' : UserId\n    )\n  }\nmsg.payload = (\n  UserList.length === 0\n  ? '(no user registered)'\n  : 'registered users: \"' + UserList.join('\",\"') + '\"'\n)\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -59,7 +59,7 @@
     {
         "id": "62b2658722dbd9e7",
         "type": "debug",
-        "z": "56af3abb553264d3",
+        "z": "c63466f5ec185814",
         "name": "show",
         "active": true,
         "tosidebar": true,
