@@ -30,7 +30,7 @@ For testing and debugging purposes, the [following flow](show-user-registry.json
 
 ### Postman Collection ###
 
-Some of the experiments described below can be executed more easily if you have [Postman](https://www.postman.com/) installed on your machine. You may then import the [Postman collection](PostmanCollection.json) that comes with this repository and use predefined requests for testing.
+Some of the examples described below can be executed more easily if you have [Postman](https://www.postman.com/) installed on your machine. You may then import the [Postman collection](PostmanCollection.json) that comes with this repository and use predefined requests for testing.
 
 ## Basic HTTP Authorization ##
 
