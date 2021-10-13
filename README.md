@@ -8,7 +8,7 @@ This repository contains three examples of user authentication and authorization
 
 Every example requires the following Node-RED extension
 
-* [node-red-contrib-reusable-flows](https://github.com/ollixx/node-red-contrib-reusable-flows)<br>"Reusable Flows" allow multiply needed flows to be defined once and then invoked from multiple places
+* [node-red-contrib-reusable-flows](https://github.com/rozek/node-red-contrib-reusable-flows)<br>"Reusable Flows" allow multiply needed flows to be defined once and then invoked from multiple places
 
 Additionally, all examples expect the global flow context to contain an object called `UserRegistry` which has the same format as described in "node-red-within-express":
 
