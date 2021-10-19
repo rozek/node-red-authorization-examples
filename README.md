@@ -12,7 +12,7 @@ Every example requires the following Node-RED extension
 
 Additionally, all examples expect the global flow context to contain an object called `UserRegistry` which has the same format as described in "node-red-within-express":
 
-* the object's property names are the ids of registered users<br>user ids have no specific format, they may be user names, email addresses or any other data you are free to choose - with **two important exceptions**: user ids must neither contain any slashes ("/") nor any colons (":") or the authentication mechanisms described below (and the user management described in [node-red-user-management-example](https://github.com/rozek/node-red-user-management-example)) will fail. Additionally, upper and lower case in user ids is not distinguished
+* the object's property names are the ids of registered users<br>user ids are strings with no specific format, they may be user names, email addresses or any other data you are free to choose - with **two important exceptions**: user ids must neither contain any slashes ("/") nor any colons (":") or the authentication mechanisms described below (and the user management described in [node-red-user-management-example](https://github.com/rozek/node-red-user-management-example)) will fail. Additionally, upper and lower case in user ids is not distinguished
 * the object's property values are JavaScript objects with the following properties, at least (additional properties may be added at will):
   * **Roles**<br>is either missing or contains a list of strings with the user's roles. There is no specific format for role names
   * **Salt**<br>contains a random "salt" value which is used during PBKDF2 password hash calculation
