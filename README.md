@@ -15,8 +15,8 @@ Additionally, all examples expect the global flow context to contain an object c
 * the object's property names are the ids of registered users<br>user ids are strings with no specific format, they may be user names, email addresses or any other data you are free to choose - with **two important exceptions**: user ids must neither contain any slashes ("/") nor any colons (":") or the authentication mechanisms described below (and the user management described in [node-red-user-management-example](https://github.com/rozek/node-red-user-management-example)) will fail. Additionally, upper and lower case in user ids is not distinguished
 * the object's property values are JavaScript objects with the following properties, at least (additional properties may be added at will):
   * **Roles**<br>is either missing or contains a list of strings with the user's roles. There is no specific format for role names
-  * **Salt**<br>contains a random "salt" value which is used during PBKDF2 password hash calculation
-  * **Hash**<br>contains the actual PBKDF2 hash of the user's password
+  * **Salt**<br>is a string containing a random "salt" value which is used during PBKDF2 password hash calculation
+  * **Hash**<br>is a string containing the actual PBKDF2 hash of the user's password
 
 When used outside "node-red-within-express", the following flows allow such a registry to be loaded from an external JSON file called `registeredUsers.json` (or to be created if no such file exists or an existing file can not be loaded) and written back after changes:
 
