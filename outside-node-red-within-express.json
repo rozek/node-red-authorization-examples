@@ -314,7 +314,7 @@
         "type": "function",
         "z": "c63466f5ec185814",
         "name": "read from global context",
-        "func": "  let UserRegistry = global.get('UserRegistry')\n  let UserSet = {}\n  for (let UserId in UserRegistry) {\n    if (UserRegistry[UserId] == null) {\n      UserSet[UserId] = null\n    } else {\n      let UserEntry = Object.assign({},UserRegistry[UserId])\n        delete UserEntry.Password     // never write passwords in plain text!\n      UserSet[UserId] = UserEntry\n    }\n  }\n\n  msg.payload = JSON.stringify(UserSet)\n  return msg\n",
+        "func": "  let UserRegistry = global.get('UserRegistry') || Object.create(null)\n  let UserSet = {}\n  for (let UserId in UserRegistry) {\n    if (UserRegistry[UserId] == null) {\n      UserSet[UserId] = null\n    } else {\n      let UserEntry = Object.assign({},UserRegistry[UserId])\n        delete UserEntry.Password     // never write passwords in plain text!\n      UserSet[UserId] = UserEntry\n    }\n  }\n\n  msg.payload = JSON.stringify(UserSet)\n  return msg\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
