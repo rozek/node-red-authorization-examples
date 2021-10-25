@@ -1,8 +1,8 @@
 [
     {
-        "id": "ed0cd56bc0affe28",
+        "id": "b91867b9ff3e5fbe",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "additional endpoints for automated tests",
         "info": "",
         "x": 180,
@@ -10,9 +10,9 @@
         "wires": []
     },
     {
-        "id": "c720182a7e92736d",
+        "id": "10637208c0234816",
         "type": "http in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "url": "header-auth-2",
         "method": "get",
@@ -22,14 +22,14 @@
         "y": 940,
         "wires": [
             [
-                "af8ff17b4d3a6c43"
+                "9508538f2d715959"
             ]
         ]
     },
     {
-        "id": "cdb19bbf2de85977",
+        "id": "6af81cae46a2fe72",
         "type": "http in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "url": "header-auth-3",
         "method": "get",
@@ -39,14 +39,14 @@
         "y": 1000,
         "wires": [
             [
-                "06783cba24279194"
+                "389dfe05ad6e01a9"
             ]
         ]
     },
     {
-        "id": "af8ff17b4d3a6c43",
+        "id": "9508538f2d715959",
         "type": "change",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "require impossible role",
         "rules": [
             {
@@ -66,14 +66,14 @@
         "y": 940,
         "wires": [
             [
-                "572ff735abe7de37"
+                "b227364637b38d28"
             ]
         ]
     },
     {
-        "id": "06783cba24279194",
+        "id": "389dfe05ad6e01a9",
         "type": "change",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "require possible role",
         "rules": [
             {
@@ -93,14 +93,14 @@
         "y": 1000,
         "wires": [
             [
-                "572ff735abe7de37"
+                "b227364637b38d28"
             ]
         ]
     },
     {
-        "id": "572ff735abe7de37",
+        "id": "b227364637b38d28",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "header auth",
         "outputs": 2,
@@ -108,17 +108,17 @@
         "y": 1060,
         "wires": [
             [
-                "05d2ca432072c2ba"
+                "edeae0ebe474d074"
             ],
             [
-                "828467f9ecca6845"
+                "f574bf78f95941b3"
             ]
         ]
     },
     {
-        "id": "828467f9ecca6845",
+        "id": "f574bf78f95941b3",
         "type": "change",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "inform about success",
         "rules": [
             {
@@ -138,14 +138,14 @@
         "y": 1060,
         "wires": [
             [
-                "05d2ca432072c2ba"
+                "edeae0ebe474d074"
             ]
         ]
     },
     {
-        "id": "05d2ca432072c2ba",
+        "id": "edeae0ebe474d074",
         "type": "http response",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -154,9 +154,9 @@
         "wires": []
     },
     {
-        "id": "a36fcfe56f19bf44",
+        "id": "19493143e842356d",
         "type": "http in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "url": "header-auth-2",
         "method": "post",
@@ -166,14 +166,14 @@
         "y": 1120,
         "wires": [
             [
-                "daa6d4defe290b98"
+                "077deff3165d8fb5"
             ]
         ]
     },
     {
-        "id": "b9ebe9f67a0d56e3",
+        "id": "189e3371f6588af3",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "header login",
         "outputs": 2,
@@ -181,10 +181,10 @@
         "y": 1240,
         "wires": [
             [
-                "5c726962caf910ca"
+                "92c52f43e4fea1e1"
             ],
             [
-                "607aa5f9afa8903e"
+                "59765b0315b25ebe"
             ]
         ],
         "outputLabels": [
@@ -193,9 +193,9 @@
         ]
     },
     {
-        "id": "607aa5f9afa8903e",
+        "id": "59765b0315b25ebe",
         "type": "http response",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -204,9 +204,9 @@
         "wires": []
     },
     {
-        "id": "23f0aaa91d903928",
+        "id": "f522f48cf355d3c8",
         "type": "http in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "url": "header-auth-3",
         "method": "post",
@@ -216,14 +216,14 @@
         "y": 1180,
         "wires": [
             [
-                "c3a25d5462d5051a"
+                "72d9991603824c2c"
             ]
         ]
     },
     {
-        "id": "daa6d4defe290b98",
+        "id": "077deff3165d8fb5",
         "type": "change",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "require impossible role",
         "rules": [
             {
@@ -243,14 +243,14 @@
         "y": 1120,
         "wires": [
             [
-                "b9ebe9f67a0d56e3"
+                "189e3371f6588af3"
             ]
         ]
     },
     {
-        "id": "c3a25d5462d5051a",
+        "id": "72d9991603824c2c",
         "type": "change",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "require possible role",
         "rules": [
             {
@@ -270,14 +270,14 @@
         "y": 1180,
         "wires": [
             [
-                "b9ebe9f67a0d56e3"
+                "189e3371f6588af3"
             ]
         ]
     },
     {
-        "id": "5c726962caf910ca",
+        "id": "92c52f43e4fea1e1",
         "type": "change",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "inform about success",
         "rules": [
             {
@@ -297,14 +297,14 @@
         "y": 1240,
         "wires": [
             [
-                "607aa5f9afa8903e"
+                "59765b0315b25ebe"
             ]
         ]
     },
     {
-        "id": "f81e260d89d1444f",
+        "id": "bfd53ae1c05d67c7",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "automated tests for Header-based authorization",
         "info": "",
         "x": 860,
@@ -312,9 +312,9 @@
         "wires": []
     },
     {
-        "id": "2378e7619abb1f06",
+        "id": "c7028ceee98b800b",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login with missing form",
         "info": "",
         "x": 780,
@@ -322,9 +322,9 @@
         "wires": []
     },
     {
-        "id": "e53bf387e71805a9",
+        "id": "a42cb976177c80f2",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login with incomplete form",
         "info": "",
         "x": 790,
@@ -332,9 +332,9 @@
         "wires": []
     },
     {
-        "id": "fcd0ac43aa7a5e2c",
+        "id": "3e0f576453bf2d60",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login with wrong password",
         "info": "",
         "x": 790,
@@ -342,9 +342,9 @@
         "wires": []
     },
     {
-        "id": "c360d23c3cb97bb3",
+        "id": "76b0036a1819aa22",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login with wrong userid",
         "info": "",
         "x": 780,
@@ -352,9 +352,9 @@
         "wires": []
     },
     {
-        "id": "fc892b9d7ff2fb98",
+        "id": "3d1aa5789aec9550",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login with correct credentials",
         "info": "",
         "x": 800,
@@ -362,28 +362,28 @@
         "wires": []
     },
     {
-        "id": "65cc65e552a4e4bb",
+        "id": "ca805f8b59672fbe",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "19c668c9f48a46ea",
-            "0a22f2dccd7a52cd",
-            "f709a0eb675e1cfd"
+            "ac2ff910fb52a73e",
+            "d54b173853f8873d",
+            "83502a42e790cb05"
         ],
         "uncaught": false,
         "x": 850,
         "y": 840,
         "wires": [
             [
-                "48fbfc651685d5d8"
+                "84ded9872d73e0a5"
             ]
         ]
     },
     {
-        "id": "19c668c9f48a46ea",
+        "id": "ac2ff910fb52a73e",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "POST",
         "ret": "txt",
@@ -397,14 +397,14 @@
         "y": 800,
         "wires": [
             [
-                "0a22f2dccd7a52cd"
+                "d54b173853f8873d"
             ]
         ]
     },
     {
-        "id": "0a22f2dccd7a52cd",
+        "id": "d54b173853f8873d",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -421,16 +421,16 @@
         "y": 800,
         "wires": [
             [
-                "48fbfc651685d5d8"
+                "84ded9872d73e0a5"
             ]
         ]
     },
     {
-        "id": "f709a0eb675e1cfd",
+        "id": "83502a42e790cb05",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
-        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = undefined // no form at all\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = undefined // no form at all\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -440,33 +440,33 @@
         "y": 800,
         "wires": [
             [
-                "19c668c9f48a46ea"
+                "ac2ff910fb52a73e"
             ]
         ]
     },
     {
-        "id": "6e56a2f94d5d33ef",
+        "id": "1bc72001c8b4c694",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "4e1f92aebf852abd",
-            "fb49f6af95e3f5dc",
-            "96676db9b1fae55f"
+            "72c727e91da7485f",
+            "223bc49d80b72b9c",
+            "17cead6ff118b667"
         ],
         "uncaught": false,
         "x": 850,
         "y": 980,
         "wires": [
             [
-                "91618d0860b1298e"
+                "842747f1ec96f43d"
             ]
         ]
     },
     {
-        "id": "4e1f92aebf852abd",
+        "id": "72c727e91da7485f",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "POST",
         "ret": "txt",
@@ -480,14 +480,14 @@
         "y": 940,
         "wires": [
             [
-                "fb49f6af95e3f5dc"
+                "223bc49d80b72b9c"
             ]
         ]
     },
     {
-        "id": "fb49f6af95e3f5dc",
+        "id": "223bc49d80b72b9c",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -504,16 +504,16 @@
         "y": 940,
         "wires": [
             [
-                "91618d0860b1298e"
+                "842747f1ec96f43d"
             ]
         ]
     },
     {
-        "id": "96676db9b1fae55f",
+        "id": "17cead6ff118b667",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
-        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red'\n}\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = {\n  UserId:'node-red'\n}\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -523,33 +523,33 @@
         "y": 940,
         "wires": [
             [
-                "4e1f92aebf852abd"
+                "72c727e91da7485f"
             ]
         ]
     },
     {
-        "id": "7991f5b4dc8adc44",
+        "id": "880791526f253a6e",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "926db400194b6255",
-            "a4afb2067fb9c632",
-            "4018e8cdf6c78e1e"
+            "ea26f15fb480a59e",
+            "593bcf87eb0f737e",
+            "470c07ee7dbcfe15"
         ],
         "uncaught": false,
         "x": 850,
         "y": 1120,
         "wires": [
             [
-                "694770b5d903febe"
+                "c68aedf0d340f361"
             ]
         ]
     },
     {
-        "id": "926db400194b6255",
+        "id": "ea26f15fb480a59e",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "POST",
         "ret": "txt",
@@ -563,14 +563,14 @@
         "y": 1080,
         "wires": [
             [
-                "a4afb2067fb9c632"
+                "593bcf87eb0f737e"
             ]
         ]
     },
     {
-        "id": "a4afb2067fb9c632",
+        "id": "593bcf87eb0f737e",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -587,16 +587,16 @@
         "y": 1080,
         "wires": [
             [
-                "694770b5d903febe"
+                "c68aedf0d340f361"
             ]
         ]
     },
     {
-        "id": "4018e8cdf6c78e1e",
+        "id": "470c07ee7dbcfe15",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
-        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'invalid-user',\n  Password:'t0pS3cr3t!'\n}\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = {\n  UserId:'invalid-user',\n  Password:'t0pS3cr3t!'\n}\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -606,33 +606,33 @@
         "y": 1080,
         "wires": [
             [
-                "926db400194b6255"
+                "ea26f15fb480a59e"
             ]
         ]
     },
     {
-        "id": "2061e54ce08ac175",
+        "id": "9c5dd5a81a34dd48",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "5667bc63ba5b557e",
-            "50d0cbee0abcacee",
-            "c4d6ffda37a545eb"
+            "2c770843d861b016",
+            "d60a315bbbe4a044",
+            "7f8f856dff84b258"
         ],
         "uncaught": false,
         "x": 850,
         "y": 1260,
         "wires": [
             [
-                "294780a62373bb0b"
+                "dee4a6d9c2cdc7a7"
             ]
         ]
     },
     {
-        "id": "5667bc63ba5b557e",
+        "id": "2c770843d861b016",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "POST",
         "ret": "txt",
@@ -646,14 +646,14 @@
         "y": 1220,
         "wires": [
             [
-                "50d0cbee0abcacee"
+                "d60a315bbbe4a044"
             ]
         ]
     },
     {
-        "id": "50d0cbee0abcacee",
+        "id": "d60a315bbbe4a044",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -670,16 +670,16 @@
         "y": 1220,
         "wires": [
             [
-                "294780a62373bb0b"
+                "dee4a6d9c2cdc7a7"
             ]
         ]
     },
     {
-        "id": "c4d6ffda37a545eb",
+        "id": "7f8f856dff84b258",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
-        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red',\n  Password:'invalid-password'\n}\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = {\n  UserId:'node-red',\n  Password:'invalid-password'\n}\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -689,33 +689,33 @@
         "y": 1220,
         "wires": [
             [
-                "5667bc63ba5b557e"
+                "2c770843d861b016"
             ]
         ]
     },
     {
-        "id": "966b6407a90806d5",
+        "id": "84e7c3f49d6e27b6",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "b8b753373905d093",
-            "69487fc27ecb2bea",
-            "3ebfaa2a930e5384"
+            "e2991a5b150c3bcb",
+            "d3497b4944027e76",
+            "d3166c03b3e5ebc8"
         ],
         "uncaught": false,
         "x": 850,
         "y": 1400,
         "wires": [
             [
-                "9043ba0035c8469f"
+                "7ab388f8022b5ecb"
             ]
         ]
     },
     {
-        "id": "b8b753373905d093",
+        "id": "e2991a5b150c3bcb",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "POST",
         "ret": "txt",
@@ -729,14 +729,14 @@
         "y": 1360,
         "wires": [
             [
-                "69487fc27ecb2bea"
+                "d3497b4944027e76"
             ]
         ]
     },
     {
-        "id": "69487fc27ecb2bea",
+        "id": "d3497b4944027e76",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet Header = msg.headers['authorization']\nexpect(Header).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\nexpect(UserId).to.equal('node-red')\nexpect(parseInt(Expiration,10)).to.be.at.least(msg.now)\n\nreturn msg",
         "outputs": 1,
@@ -753,16 +753,16 @@
         "y": 1360,
         "wires": [
             [
-                "9043ba0035c8469f"
+                "7ab388f8022b5ecb"
             ]
         ]
     },
     {
-        "id": "3ebfaa2a930e5384",
+        "id": "d3166c03b3e5ebc8",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
-        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -772,14 +772,14 @@
         "y": 1360,
         "wires": [
             [
-                "b8b753373905d093"
+                "e2991a5b150c3bcb"
             ]
         ]
     },
     {
-        "id": "9bed4560a7780115",
+        "id": "74a9f22f4160c83d",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#1",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -787,14 +787,14 @@
         "y": 800,
         "wires": [
             [
-                "f709a0eb675e1cfd"
+                "83502a42e790cb05"
             ]
         ]
     },
     {
-        "id": "5c2021b67a43b9a6",
+        "id": "7523b527d784e5ba",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#2",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -802,14 +802,14 @@
         "y": 940,
         "wires": [
             [
-                "96676db9b1fae55f"
+                "17cead6ff118b667"
             ]
         ]
     },
     {
-        "id": "d845a53897103990",
+        "id": "b6d10a9996c5863f",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#3",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -817,14 +817,14 @@
         "y": 1080,
         "wires": [
             [
-                "4018e8cdf6c78e1e"
+                "470c07ee7dbcfe15"
             ]
         ]
     },
     {
-        "id": "4ce6671cbf890495",
+        "id": "aeb42c73a06e0e1b",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#4",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -832,14 +832,14 @@
         "y": 1220,
         "wires": [
             [
-                "c4d6ffda37a545eb"
+                "7f8f856dff84b258"
             ]
         ]
     },
     {
-        "id": "e45549f8603d8da6",
+        "id": "f49bc769137ae19e",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#5",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -847,14 +847,14 @@
         "y": 1360,
         "wires": [
             [
-                "3ebfaa2a930e5384"
+                "d3166c03b3e5ebc8"
             ]
         ]
     },
     {
-        "id": "48fbfc651685d5d8",
+        "id": "84ded9872d73e0a5",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1190,
@@ -862,9 +862,9 @@
         "wires": []
     },
     {
-        "id": "91618d0860b1298e",
+        "id": "842747f1ec96f43d",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1190,
@@ -872,9 +872,9 @@
         "wires": []
     },
     {
-        "id": "694770b5d903febe",
+        "id": "c68aedf0d340f361",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1190,
@@ -882,9 +882,9 @@
         "wires": []
     },
     {
-        "id": "294780a62373bb0b",
+        "id": "dee4a6d9c2cdc7a7",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1190,
@@ -892,9 +892,9 @@
         "wires": []
     },
     {
-        "id": "9043ba0035c8469f",
+        "id": "7ab388f8022b5ecb",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1190,
@@ -902,65 +902,65 @@
         "wires": []
     },
     {
-        "id": "81078451c33ead50",
+        "id": "ecd31d87709ba650",
         "type": "link in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "2nd batch of automated tests",
         "links": [
-            "8722ce379dd5ec87"
+            "46582fde975466dd"
         ],
         "x": 1535,
         "y": 100,
         "wires": [
             [
-                "36653947c07260ec"
+                "b846ec8ea3cfb424"
             ]
         ]
     },
     {
-        "id": "139e0b01b1188918",
+        "id": "01953f8bf6c5e512",
         "type": "link in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "finish automated tests",
         "links": [
-            "962075042304e5b6"
+            "ef0a8e5c0fd3c244"
         ],
         "x": 1055,
         "y": 160,
         "wires": [
             [
-                "2e137e3d672c77b6"
+                "02db513476c2fb0e"
             ]
         ]
     },
     {
-        "id": "8722ce379dd5ec87",
+        "id": "46582fde975466dd",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "81078451c33ead50"
+            "ecd31d87709ba650"
         ],
         "x": 935,
         "y": 160,
         "wires": []
     },
     {
-        "id": "962075042304e5b6",
+        "id": "ef0a8e5c0fd3c244",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "139e0b01b1188918"
+            "01953f8bf6c5e512"
         ],
         "x": 1635,
         "y": 240,
         "wires": []
     },
     {
-        "id": "6e59dbb2566deea3",
+        "id": "a26cef0e2169790d",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "run Tests",
         "props": [
             {
@@ -981,14 +981,14 @@
         "y": 100,
         "wires": [
             [
-                "41f542db2a2f26e3"
+                "b31d6da60c799732"
             ]
         ]
     },
     {
-        "id": "100c746b02a9c77f",
+        "id": "66163482b30c5914",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "reset totals",
         "func": "flow.set('Totals',0)\n\nmsg.TestMode = '-'\nreturn msg",
         "outputs": 1,
@@ -1000,15 +1000,15 @@
         "y": 100,
         "wires": [
             [
-                "2e137e3d672c77b6",
-                "a52e25b5c89f3be8"
+                "02db513476c2fb0e",
+                "8d7d328683d95a56"
             ]
         ]
     },
     {
-        "id": "2e137e3d672c77b6",
+        "id": "02db513476c2fb0e",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "Status",
         "func": "switch (true) {\n  case (msg.TestMode === '-'):\n    node.status({})\n    break\n  case (flow.get('Totals') === 0):\n    node.status({fill:'green',shape:'dot',text:'ok'})\n    break\n  default:\n    node.status({fill:'red',shape:'dot',text:'failed'})\n}\n",
         "outputs": 0,
@@ -1021,9 +1021,9 @@
         "wires": []
     },
     {
-        "id": "a52e25b5c89f3be8",
+        "id": "8d7d328683d95a56",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "dispatch",
         "func": "if (context.get('pendingList') == null) { // first invocation\n  msg.TestMode = 'multiple-tests'\n\n  let MsgList = [null], pendingList = []\n  for (let i = 1, l = node.outputCount; i < l; i++) {\n    MsgList.push(null)\n    pendingList.push(i)\n  }\n  context.set('MsgList',MsgList)\n  context.set('pendingList',pendingList)\n}\n\nlet pendingList = context.get('pendingList')\nif (pendingList.length === 0) { // all tests completed\n  context.set('pendingList',null)\n  return [msg]\n} else { // ongoing tests\n  let msg = {} // create new, empty \"msg\" object\n\n  let chosenIndex  = Math.floor(Math.random()*pendingList.length)\n  let chosenOutput = pendingList.splice(chosenIndex,1)[0]\n\n  context.set('pendingList',pendingList)\n\n  let MsgList = context.get('MsgList').slice()\n    MsgList[chosenOutput] = msg\n  return MsgList\n}\n",
         "outputs": 8,
@@ -1035,59 +1035,59 @@
         "y": 200,
         "wires": [
             [
-                "8722ce379dd5ec87"
+                "46582fde975466dd"
             ],
             [
-                "78246d763c32200a"
+                "d8b846710423539a"
             ],
             [
-                "481de8f3201e2e07"
+                "f8682820958b6d73"
             ],
             [
-                "81dccf9baf39b1ab"
+                "4bc0dc2d7fdcd08a"
             ],
             [
-                "c4bbdf827efd561d"
+                "0b181b198b30956f"
             ],
             [
-                "6a1d243d7f2b51e8"
+                "fb4458338bf68eca"
             ],
             [
-                "164e070d06377c17"
+                "1e0f5b961aaa589c"
             ],
             [
-                "304131a94989e2a1"
+                "3e5d75661cb21de9"
             ]
         ]
     },
     {
-        "id": "93a3885db8911f91",
+        "id": "d16bdbc9880c750b",
         "type": "link in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "Header-based Authorization I",
         "links": [
             "88eec75a427c5751",
-            "a3edc810eb038804",
-            "a2b3389431ec2ea8",
-            "cd0a6140ed89b044",
-            "6ff4f8a510e53cf7",
-            "5fe0d6f40f187bd5",
-            "9c8fc2c5d5cc58fa",
-            "33bbbc60b57cd10a",
-            "b5b9fc0ef12d216d"
+            "a3c8afbe6fa19793",
+            "c7962629f558d15e",
+            "1c4b850506c70da7",
+            "6a4ec64367a31f72",
+            "9592742915370b62",
+            "ddf8d1243b96b42b",
+            "c7ab3ca52dd0fe82",
+            "e91e98be5d66f69d"
         ],
         "x": 695,
         "y": 200,
         "wires": [
             [
-                "a52e25b5c89f3be8"
+                "8d7d328683d95a56"
             ]
         ]
     },
     {
-        "id": "41f542db2a2f26e3",
+        "id": "b31d6da60c799732",
         "type": "change",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "configure",
         "rules": [
             {
@@ -1107,14 +1107,14 @@
         "y": 100,
         "wires": [
             [
-                "100c746b02a9c77f"
+                "66163482b30c5914"
             ]
         ]
     },
     {
-        "id": "028e6893ceaaf8d2",
+        "id": "8941838ec13c47e8",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -1126,14 +1126,14 @@
         "y": 300,
         "wires": [
             [
-                "5fe0d6f40f187bd5"
+                "9592742915370b62"
             ]
         ]
     },
     {
-        "id": "cfd1a9deed7b04e3",
+        "id": "f5c1ddfb38c74193",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -1152,17 +1152,17 @@
         "y": 300,
         "wires": [
             [
-                "78246d763c32200a"
+                "d8b846710423539a"
             ]
         ]
     },
     {
-        "id": "5fe0d6f40f187bd5",
+        "id": "9592742915370b62",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "93a3885db8911f91",
+            "d16bdbc9880c750b",
             "a2d05779d9af1600"
         ],
         "x": 1215,
@@ -1170,9 +1170,9 @@
         "wires": []
     },
     {
-        "id": "38a71b42637c0396",
+        "id": "7426e259223b75fc",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -1190,14 +1190,14 @@
         "y": 320,
         "wires": [
             [
-                "028e6893ceaaf8d2"
+                "8941838ec13c47e8"
             ]
         ]
     },
     {
-        "id": "1fd3190f08974edd",
+        "id": "ad8ae53e66024de6",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -1209,14 +1209,14 @@
         "y": 360,
         "wires": [
             [
-                "cd0a6140ed89b044"
+                "1c4b850506c70da7"
             ]
         ]
     },
     {
-        "id": "3e8ae0591cc7a621",
+        "id": "f3840664eb460aee",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -1235,17 +1235,17 @@
         "y": 360,
         "wires": [
             [
-                "481de8f3201e2e07"
+                "f8682820958b6d73"
             ]
         ]
     },
     {
-        "id": "cd0a6140ed89b044",
+        "id": "1c4b850506c70da7",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "93a3885db8911f91",
+            "d16bdbc9880c750b",
             "a2d05779d9af1600"
         ],
         "x": 1215,
@@ -1253,9 +1253,9 @@
         "wires": []
     },
     {
-        "id": "67e42370830b5da9",
+        "id": "e1cb318a0eb428ea",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -1273,14 +1273,14 @@
         "y": 380,
         "wires": [
             [
-                "1fd3190f08974edd"
+                "ad8ae53e66024de6"
             ]
         ]
     },
     {
-        "id": "37e64baacaf67a0c",
+        "id": "a279e7be37dc758a",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -1292,14 +1292,14 @@
         "y": 420,
         "wires": [
             [
-                "a3edc810eb038804"
+                "a3c8afbe6fa19793"
             ]
         ]
     },
     {
-        "id": "4cc80654a1f6125e",
+        "id": "7dfb640faab8369b",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -1318,17 +1318,17 @@
         "y": 420,
         "wires": [
             [
-                "81dccf9baf39b1ab"
+                "4bc0dc2d7fdcd08a"
             ]
         ]
     },
     {
-        "id": "a3edc810eb038804",
+        "id": "a3c8afbe6fa19793",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "93a3885db8911f91",
+            "d16bdbc9880c750b",
             "a2d05779d9af1600"
         ],
         "x": 1215,
@@ -1336,9 +1336,9 @@
         "wires": []
     },
     {
-        "id": "2e46efc05bed97b4",
+        "id": "24b22093c8b3da92",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -1356,14 +1356,14 @@
         "y": 440,
         "wires": [
             [
-                "37e64baacaf67a0c"
+                "a279e7be37dc758a"
             ]
         ]
     },
     {
-        "id": "ba4f944ca47faa1f",
+        "id": "d7d36d921cfd77cf",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -1375,14 +1375,14 @@
         "y": 480,
         "wires": [
             [
-                "6ff4f8a510e53cf7"
+                "6a4ec64367a31f72"
             ]
         ]
     },
     {
-        "id": "6f22eb95b843e5fb",
+        "id": "383d5a94a0894e5b",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -1401,17 +1401,17 @@
         "y": 480,
         "wires": [
             [
-                "c4bbdf827efd561d"
+                "0b181b198b30956f"
             ]
         ]
     },
     {
-        "id": "6ff4f8a510e53cf7",
+        "id": "6a4ec64367a31f72",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "93a3885db8911f91",
+            "d16bdbc9880c750b",
             "a2d05779d9af1600"
         ],
         "x": 1215,
@@ -1419,9 +1419,9 @@
         "wires": []
     },
     {
-        "id": "e3724f6a1be5b79d",
+        "id": "b75302708c6ea9d8",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -1439,14 +1439,14 @@
         "y": 500,
         "wires": [
             [
-                "ba4f944ca47faa1f"
+                "d7d36d921cfd77cf"
             ]
         ]
     },
     {
-        "id": "97924a879e02842c",
+        "id": "531991edc6900b31",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -1458,14 +1458,14 @@
         "y": 540,
         "wires": [
             [
-                "a2b3389431ec2ea8"
+                "c7962629f558d15e"
             ]
         ]
     },
     {
-        "id": "0140143a5b88108c",
+        "id": "a9fde265b0251bbc",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -1484,17 +1484,17 @@
         "y": 540,
         "wires": [
             [
-                "6a1d243d7f2b51e8"
+                "fb4458338bf68eca"
             ]
         ]
     },
     {
-        "id": "a2b3389431ec2ea8",
+        "id": "c7962629f558d15e",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "93a3885db8911f91",
+            "d16bdbc9880c750b",
             "a2d05779d9af1600"
         ],
         "x": 1215,
@@ -1502,9 +1502,9 @@
         "wires": []
     },
     {
-        "id": "bbb693c243ac304d",
+        "id": "630e77a5a1ab3657",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -1522,14 +1522,14 @@
         "y": 560,
         "wires": [
             [
-                "97924a879e02842c"
+                "531991edc6900b31"
             ]
         ]
     },
     {
-        "id": "78246d763c32200a",
+        "id": "d8b846710423539a",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#1",
         "outputs": 1,
@@ -1537,14 +1537,14 @@
         "y": 300,
         "wires": [
             [
-                "028e6893ceaaf8d2"
+                "8941838ec13c47e8"
             ]
         ]
     },
     {
-        "id": "481de8f3201e2e07",
+        "id": "f8682820958b6d73",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#2",
         "outputs": 1,
@@ -1552,14 +1552,14 @@
         "y": 360,
         "wires": [
             [
-                "1fd3190f08974edd"
+                "ad8ae53e66024de6"
             ]
         ]
     },
     {
-        "id": "81dccf9baf39b1ab",
+        "id": "4bc0dc2d7fdcd08a",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#3",
         "outputs": 1,
@@ -1567,14 +1567,14 @@
         "y": 420,
         "wires": [
             [
-                "37e64baacaf67a0c"
+                "a279e7be37dc758a"
             ]
         ]
     },
     {
-        "id": "c4bbdf827efd561d",
+        "id": "0b181b198b30956f",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#4",
         "outputs": 1,
@@ -1582,14 +1582,14 @@
         "y": 480,
         "wires": [
             [
-                "ba4f944ca47faa1f"
+                "d7d36d921cfd77cf"
             ]
         ]
     },
     {
-        "id": "6a1d243d7f2b51e8",
+        "id": "fb4458338bf68eca",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#5",
         "outputs": 1,
@@ -1597,14 +1597,14 @@
         "y": 540,
         "wires": [
             [
-                "97924a879e02842c"
+                "531991edc6900b31"
             ]
         ]
     },
     {
-        "id": "169aca66be1974b2",
+        "id": "2537611c9a0568f4",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -1616,14 +1616,14 @@
         "y": 600,
         "wires": [
             [
-                "9c8fc2c5d5cc58fa"
+                "ddf8d1243b96b42b"
             ]
         ]
     },
     {
-        "id": "dae12f1d49d50a2a",
+        "id": "b2d09c58a4d08128",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -1642,17 +1642,17 @@
         "y": 600,
         "wires": [
             [
-                "164e070d06377c17"
+                "1e0f5b961aaa589c"
             ]
         ]
     },
     {
-        "id": "9c8fc2c5d5cc58fa",
+        "id": "ddf8d1243b96b42b",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "93a3885db8911f91",
+            "d16bdbc9880c750b",
             "a2d05779d9af1600"
         ],
         "x": 1215,
@@ -1660,9 +1660,9 @@
         "wires": []
     },
     {
-        "id": "03a86520b5b962bd",
+        "id": "5ac2de08648773fa",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -1680,14 +1680,14 @@
         "y": 620,
         "wires": [
             [
-                "169aca66be1974b2"
+                "2537611c9a0568f4"
             ]
         ]
     },
     {
-        "id": "008730fa1ae9cc94",
+        "id": "676545ca5c66a4e9",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -1699,14 +1699,14 @@
         "y": 660,
         "wires": [
             [
-                "33bbbc60b57cd10a"
+                "c7ab3ca52dd0fe82"
             ]
         ]
     },
     {
-        "id": "a2cbef6ddf8742d5",
+        "id": "eda52622a0a32dff",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -1725,17 +1725,17 @@
         "y": 660,
         "wires": [
             [
-                "304131a94989e2a1"
+                "3e5d75661cb21de9"
             ]
         ]
     },
     {
-        "id": "33bbbc60b57cd10a",
+        "id": "c7ab3ca52dd0fe82",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "93a3885db8911f91",
+            "d16bdbc9880c750b",
             "a2d05779d9af1600"
         ],
         "x": 1215,
@@ -1743,9 +1743,9 @@
         "wires": []
     },
     {
-        "id": "f91a80a663f4deae",
+        "id": "186bf0d309183125",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -1763,14 +1763,14 @@
         "y": 680,
         "wires": [
             [
-                "008730fa1ae9cc94"
+                "676545ca5c66a4e9"
             ]
         ]
     },
     {
-        "id": "164e070d06377c17",
+        "id": "1e0f5b961aaa589c",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#6",
         "outputs": 1,
@@ -1778,14 +1778,14 @@
         "y": 600,
         "wires": [
             [
-                "169aca66be1974b2"
+                "2537611c9a0568f4"
             ]
         ]
     },
     {
-        "id": "304131a94989e2a1",
+        "id": "3e5d75661cb21de9",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#7",
         "outputs": 1,
@@ -1793,14 +1793,14 @@
         "y": 660,
         "wires": [
             [
-                "008730fa1ae9cc94"
+                "676545ca5c66a4e9"
             ]
         ]
     },
     {
-        "id": "3821a16fd6ab5001",
+        "id": "74e5d506f92a7eda",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login with wrong required role",
         "info": "",
         "x": 800,
@@ -1808,9 +1808,9 @@
         "wires": []
     },
     {
-        "id": "0b71247a78f7d143",
+        "id": "57b0e80a9363d4dd",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login with correct required role",
         "info": "",
         "x": 800,
@@ -1818,28 +1818,28 @@
         "wires": []
     },
     {
-        "id": "5b273ca966f0185f",
+        "id": "136fbb6c2791a53c",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "91045012dd9c3e3d",
-            "7ef86a6126cd8dec",
-            "c759052b5b980ee5"
+            "d44835ea86099e1d",
+            "815174cab30924fb",
+            "ce1f16f5d47d8da0"
         ],
         "uncaught": false,
         "x": 850,
         "y": 1540,
         "wires": [
             [
-                "1b5971026d19ec18"
+                "ac4637aa453b3bd1"
             ]
         ]
     },
     {
-        "id": "91045012dd9c3e3d",
+        "id": "d44835ea86099e1d",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "POST",
         "ret": "txt",
@@ -1853,14 +1853,14 @@
         "y": 1500,
         "wires": [
             [
-                "7ef86a6126cd8dec"
+                "815174cab30924fb"
             ]
         ]
     },
     {
-        "id": "7ef86a6126cd8dec",
+        "id": "815174cab30924fb",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -1877,16 +1877,16 @@
         "y": 1500,
         "wires": [
             [
-                "1b5971026d19ec18"
+                "ac4637aa453b3bd1"
             ]
         ]
     },
     {
-        "id": "c759052b5b980ee5",
+        "id": "ce1f16f5d47d8da0",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
-        "func": "msg.url     = flow.get('HeaderAuthURL') + '-2'\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL') + '-2'\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1896,33 +1896,33 @@
         "y": 1500,
         "wires": [
             [
-                "91045012dd9c3e3d"
+                "d44835ea86099e1d"
             ]
         ]
     },
     {
-        "id": "fd09669a36f60c78",
+        "id": "5577c747713afd0b",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "70bd1b6d3cdbdeea",
-            "81c532e7a00c15ea",
-            "546d468031a94533"
+            "48de2d71aa4348c3",
+            "0f519f691b61b2c3",
+            "be7f2c1ade5f47be"
         ],
         "uncaught": false,
         "x": 850,
         "y": 1680,
         "wires": [
             [
-                "28551973ebce074c"
+                "d356a4882829f103"
             ]
         ]
     },
     {
-        "id": "70bd1b6d3cdbdeea",
+        "id": "48de2d71aa4348c3",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "POST",
         "ret": "txt",
@@ -1936,14 +1936,14 @@
         "y": 1640,
         "wires": [
             [
-                "81c532e7a00c15ea"
+                "0f519f691b61b2c3"
             ]
         ]
     },
     {
-        "id": "81c532e7a00c15ea",
+        "id": "0f519f691b61b2c3",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet Header = msg.headers['authorization']\nexpect(Header).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\nexpect(UserId).to.equal('node-red')\nexpect(parseInt(Expiration,10)).to.be.at.least(msg.now)\n\nreturn msg",
         "outputs": 1,
@@ -1960,16 +1960,16 @@
         "y": 1640,
         "wires": [
             [
-                "28551973ebce074c"
+                "d356a4882829f103"
             ]
         ]
     },
     {
-        "id": "546d468031a94533",
+        "id": "be7f2c1ade5f47be",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
-        "func": "msg.url     = flow.get('HeaderAuthURL') + '-3'\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL') + '-3'\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1979,14 +1979,14 @@
         "y": 1640,
         "wires": [
             [
-                "70bd1b6d3cdbdeea"
+                "48de2d71aa4348c3"
             ]
         ]
     },
     {
-        "id": "c13acb7c6b484677",
+        "id": "b7ae1a25daf1eab6",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#6",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -1994,14 +1994,14 @@
         "y": 1500,
         "wires": [
             [
-                "c759052b5b980ee5"
+                "ce1f16f5d47d8da0"
             ]
         ]
     },
     {
-        "id": "552242571b496058",
+        "id": "8457be19a88c3ca3",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#7",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -2009,14 +2009,14 @@
         "y": 1640,
         "wires": [
             [
-                "546d468031a94533"
+                "be7f2c1ade5f47be"
             ]
         ]
     },
     {
-        "id": "1b5971026d19ec18",
+        "id": "ac4637aa453b3bd1",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1190,
@@ -2024,9 +2024,9 @@
         "wires": []
     },
     {
-        "id": "28551973ebce074c",
+        "id": "d356a4882829f103",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1190,
@@ -2034,9 +2034,9 @@
         "wires": []
     },
     {
-        "id": "35a8e3d0bdae2570",
+        "id": "f0067cd7a06bca2a",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "dispatch",
         "func": "if (context.get('pendingList') == null) { // first invocation\n  msg.TestMode = 'multiple-tests'\n\n  let MsgList = [null], pendingList = []\n  for (let i = 1, l = node.outputCount; i < l; i++) {\n    MsgList.push(null)\n    pendingList.push(i)\n  }\n  context.set('MsgList',MsgList)\n  context.set('pendingList',pendingList)\n}\n\nlet pendingList = context.get('pendingList')\nif (pendingList.length === 0) { // all tests completed\n  context.set('pendingList',null)\n  return [msg]\n} else { // ongoing tests\n  let msg = {} // create new, empty \"msg\" object\n\n  let chosenIndex  = Math.floor(Math.random()*pendingList.length)\n  let chosenOutput = pendingList.splice(chosenIndex,1)[0]\n\n  context.set('pendingList',pendingList)\n\n  let MsgList = context.get('MsgList').slice()\n    MsgList[chosenOutput] = msg\n  return MsgList\n}\n",
         "outputs": 9,
@@ -2048,40 +2048,40 @@
         "y": 240,
         "wires": [
             [
-                "962075042304e5b6"
+                "ef0a8e5c0fd3c244"
             ],
             [
-                "bdd854ebf1812030"
+                "d7433323f3b36ed7"
             ],
             [
-                "1b2a984f4e8759b6"
+                "99030bd566663ca6"
             ],
             [
-                "457123c9716d4ff7"
+                "7d2b5d13e5c23d7a"
             ],
             [
-                "ecfbbbda7ed495bb"
+                "6fe38edddf676a96"
             ],
             [
-                "1d7d4da6c88bc7a1"
+                "5094c8c6d39e5f97"
             ],
             [
-                "fd2be6d10cfff6b1"
+                "a5dd15926c47c2ae"
             ],
             [
-                "fe9e8a486380ae39"
+                "3c6a58e2a83d04fb"
             ],
             [
-                "323d9fd44dab80f1"
+                "76842119a517ae6d"
             ]
         ]
     },
     {
-        "id": "36653947c07260ec",
+        "id": "b846ec8ea3cfb424",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "login properly",
-        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\n\nreturn msg",
+        "func": "msg.url     = flow.get('HeaderAuthURL')\nmsg.headers = { 'Content-Type':'application/x-www-form-urlencoded' }\nmsg.payload = {\n  UserId:'node-red',\n  Password:'t0pS3cr3t!'\n}\n\nmsg.now = Date.now()\n\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2091,37 +2091,37 @@
         "y": 140,
         "wires": [
             [
-                "c889cccaab5a0a67"
+                "8759a7f41f7dc0bc"
             ]
         ]
     },
     {
-        "id": "abedd48969e0f7c6",
+        "id": "a91a83828238a5d8",
         "type": "link in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "Header-based Authorization II",
         "links": [
-            "c178728cbc03a8c9",
-            "e425d2bbd0dd01b4",
-            "5276f213bd476d9d",
-            "0fe8cf6859a13122",
-            "44bc61dd74edf9ad",
-            "1f5f744aa9c50408",
-            "948c85c17c58f972",
-            "97ed8736a8eb7fdb"
+            "5c70c49ca293db7c",
+            "9dcfdd67d1bd2c9d",
+            "aa0929e5576ed0c3",
+            "a080e96c8ab54a37",
+            "a19d2c7bdb8c6549",
+            "6b72df89a707e1c9",
+            "420574c4832951e1",
+            "1170b0b183f448a4"
         ],
         "x": 1355,
         "y": 240,
         "wires": [
             [
-                "35a8e3d0bdae2570"
+                "f0067cd7a06bca2a"
             ]
         ]
     },
     {
-        "id": "b18cd8f4e8340dde",
+        "id": "8b76fad98a345a71",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2133,14 +2133,14 @@
         "y": 340,
         "wires": [
             [
-                "c178728cbc03a8c9"
+                "5c70c49ca293db7c"
             ]
         ]
     },
     {
-        "id": "564a21e1d8153e43",
+        "id": "d3b717f740c57a39",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2159,26 +2159,26 @@
         "y": 340,
         "wires": [
             [
-                "bdd854ebf1812030"
+                "d7433323f3b36ed7"
             ]
         ]
     },
     {
-        "id": "c178728cbc03a8c9",
+        "id": "5c70c49ca293db7c",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 340,
         "wires": []
     },
     {
-        "id": "5dab7bb6e2ec24de",
+        "id": "f40c77dfb87457f1",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2196,14 +2196,14 @@
         "y": 360,
         "wires": [
             [
-                "b18cd8f4e8340dde"
+                "8b76fad98a345a71"
             ]
         ]
     },
     {
-        "id": "79c76e9684f338ed",
+        "id": "98b84012531a9cc4",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2215,14 +2215,14 @@
         "y": 400,
         "wires": [
             [
-                "0fe8cf6859a13122"
+                "a080e96c8ab54a37"
             ]
         ]
     },
     {
-        "id": "192db1b61c951e75",
+        "id": "5520e2886ab5f42b",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2241,26 +2241,26 @@
         "y": 400,
         "wires": [
             [
-                "1b2a984f4e8759b6"
+                "99030bd566663ca6"
             ]
         ]
     },
     {
-        "id": "0fe8cf6859a13122",
+        "id": "a080e96c8ab54a37",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 400,
         "wires": []
     },
     {
-        "id": "7a4f58c6b649ecb5",
+        "id": "b9c3d8bcecb0000e",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2278,14 +2278,14 @@
         "y": 420,
         "wires": [
             [
-                "79c76e9684f338ed"
+                "98b84012531a9cc4"
             ]
         ]
     },
     {
-        "id": "f9ae35e16fd23e14",
+        "id": "7d5bc15c60a06b68",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2297,14 +2297,14 @@
         "y": 460,
         "wires": [
             [
-                "e425d2bbd0dd01b4"
+                "9dcfdd67d1bd2c9d"
             ]
         ]
     },
     {
-        "id": "a9a0abbce408aecc",
+        "id": "a470f5ae6e7bb49c",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2323,26 +2323,26 @@
         "y": 460,
         "wires": [
             [
-                "457123c9716d4ff7"
+                "7d2b5d13e5c23d7a"
             ]
         ]
     },
     {
-        "id": "e425d2bbd0dd01b4",
+        "id": "9dcfdd67d1bd2c9d",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 460,
         "wires": []
     },
     {
-        "id": "c62e3930c7a62ea1",
+        "id": "2192785d6b60c28a",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2360,14 +2360,14 @@
         "y": 480,
         "wires": [
             [
-                "f9ae35e16fd23e14"
+                "7d5bc15c60a06b68"
             ]
         ]
     },
     {
-        "id": "f35d71c0dc54aa1c",
+        "id": "782f594dbbc3c5fb",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2379,14 +2379,14 @@
         "y": 520,
         "wires": [
             [
-                "44bc61dd74edf9ad"
+                "a19d2c7bdb8c6549"
             ]
         ]
     },
     {
-        "id": "17c7cea72c29409e",
+        "id": "bf06f8c8ee1057a0",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2405,26 +2405,26 @@
         "y": 520,
         "wires": [
             [
-                "ecfbbbda7ed495bb"
+                "6fe38edddf676a96"
             ]
         ]
     },
     {
-        "id": "44bc61dd74edf9ad",
+        "id": "a19d2c7bdb8c6549",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 520,
         "wires": []
     },
     {
-        "id": "53151004f20bba73",
+        "id": "a4679794e393498a",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2442,14 +2442,14 @@
         "y": 540,
         "wires": [
             [
-                "f35d71c0dc54aa1c"
+                "782f594dbbc3c5fb"
             ]
         ]
     },
     {
-        "id": "6747400249662cda",
+        "id": "3aa59bd7b58225c5",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2461,14 +2461,14 @@
         "y": 580,
         "wires": [
             [
-                "1f5f744aa9c50408"
+                "6b72df89a707e1c9"
             ]
         ]
     },
     {
-        "id": "7c4ec5711a86252c",
+        "id": "af772bb6d9de4be7",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2487,26 +2487,26 @@
         "y": 580,
         "wires": [
             [
-                "1d7d4da6c88bc7a1"
+                "5094c8c6d39e5f97"
             ]
         ]
     },
     {
-        "id": "1f5f744aa9c50408",
+        "id": "6b72df89a707e1c9",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 580,
         "wires": []
     },
     {
-        "id": "bea523a37d19e2bd",
+        "id": "aaa78ec2b68e9384",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2524,14 +2524,14 @@
         "y": 600,
         "wires": [
             [
-                "6747400249662cda"
+                "3aa59bd7b58225c5"
             ]
         ]
     },
     {
-        "id": "d9799554a147f0cf",
+        "id": "7b33d2e92583f333",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2543,14 +2543,14 @@
         "y": 640,
         "wires": [
             [
-                "5276f213bd476d9d"
+                "aa0929e5576ed0c3"
             ]
         ]
     },
     {
-        "id": "dffc501bf1340a67",
+        "id": "b5bb01470c3e6596",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2569,26 +2569,26 @@
         "y": 640,
         "wires": [
             [
-                "fd2be6d10cfff6b1"
+                "a5dd15926c47c2ae"
             ]
         ]
     },
     {
-        "id": "5276f213bd476d9d",
+        "id": "aa0929e5576ed0c3",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 640,
         "wires": []
     },
     {
-        "id": "af692e4528afc37d",
+        "id": "934e20d2f221b853",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2606,14 +2606,14 @@
         "y": 660,
         "wires": [
             [
-                "d9799554a147f0cf"
+                "7b33d2e92583f333"
             ]
         ]
     },
     {
-        "id": "c889cccaab5a0a67",
+        "id": "8759a7f41f7dc0bc",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "http",
         "method": "POST",
         "ret": "txt",
@@ -2627,14 +2627,14 @@
         "y": 140,
         "wires": [
             [
-                "a1e697ee8edfd931"
+                "8be6200880036b63"
             ]
         ]
     },
     {
-        "id": "a1e697ee8edfd931",
+        "id": "8be6200880036b63",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet Header = msg.headers['authorization']\nexpect(Header).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\nexpect(UserId).to.equal('node-red')\nexpect(parseInt(Expiration,10)).to.be.at.least(msg.now)\n\nflow.set('HeaderAuthHeader',Header)\n\nif (msg.TestMode !== 'single-test') {\n  return msg\n}\n",
         "outputs": 1,
@@ -2651,33 +2651,33 @@
         "y": 140,
         "wires": [
             [
-                "35a8e3d0bdae2570"
+                "f0067cd7a06bca2a"
             ]
         ]
     },
     {
-        "id": "0e517530c6d13af6",
+        "id": "f4ea275b5235dd70",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "c889cccaab5a0a67",
-            "a1e697ee8edfd931",
-            "36653947c07260ec"
+            "8759a7f41f7dc0bc",
+            "8be6200880036b63",
+            "b846ec8ea3cfb424"
         ],
         "uncaught": false,
         "x": 1670,
         "y": 180,
         "wires": [
             [
-                "e91d3ac82dea5966"
+                "7a6ebde16ee28c8a"
             ]
         ]
     },
     {
-        "id": "e91d3ac82dea5966",
+        "id": "7a6ebde16ee28c8a",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({})\n  } else {\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n",
         "outputs": 1,
@@ -2689,28 +2689,28 @@
         "y": 180,
         "wires": [
             [
-                "b5b9fc0ef12d216d"
+                "e91e98be5d66f69d"
             ]
         ]
     },
     {
-        "id": "b5b9fc0ef12d216d",
+        "id": "e91e98be5d66f69d",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
             "2127d920bb2faa12",
             "a2d05779d9af1600",
-            "93a3885db8911f91"
+            "d16bdbc9880c750b"
         ],
         "x": 1875,
         "y": 180,
         "wires": []
     },
     {
-        "id": "edcf826fb8d4d9a9",
+        "id": "76c007f412bc0542",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2729,14 +2729,14 @@
         "y": 100,
         "wires": [
             [
-                "36653947c07260ec"
+                "b846ec8ea3cfb424"
             ]
         ]
     },
     {
-        "id": "bdd854ebf1812030",
+        "id": "d7433323f3b36ed7",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#8",
         "outputs": 1,
@@ -2744,14 +2744,14 @@
         "y": 340,
         "wires": [
             [
-                "b18cd8f4e8340dde"
+                "8b76fad98a345a71"
             ]
         ]
     },
     {
-        "id": "1b2a984f4e8759b6",
+        "id": "99030bd566663ca6",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#9",
         "outputs": 1,
@@ -2759,14 +2759,14 @@
         "y": 400,
         "wires": [
             [
-                "79c76e9684f338ed"
+                "98b84012531a9cc4"
             ]
         ]
     },
     {
-        "id": "457123c9716d4ff7",
+        "id": "7d2b5d13e5c23d7a",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#10",
         "outputs": 1,
@@ -2774,14 +2774,14 @@
         "y": 460,
         "wires": [
             [
-                "f9ae35e16fd23e14"
+                "7d5bc15c60a06b68"
             ]
         ]
     },
     {
-        "id": "ecfbbbda7ed495bb",
+        "id": "6fe38edddf676a96",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#11",
         "outputs": 1,
@@ -2789,14 +2789,14 @@
         "y": 520,
         "wires": [
             [
-                "f35d71c0dc54aa1c"
+                "782f594dbbc3c5fb"
             ]
         ]
     },
     {
-        "id": "1d7d4da6c88bc7a1",
+        "id": "5094c8c6d39e5f97",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#12",
         "outputs": 1,
@@ -2804,14 +2804,14 @@
         "y": 580,
         "wires": [
             [
-                "6747400249662cda"
+                "3aa59bd7b58225c5"
             ]
         ]
     },
     {
-        "id": "fd2be6d10cfff6b1",
+        "id": "a5dd15926c47c2ae",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#13",
         "outputs": 1,
@@ -2819,14 +2819,14 @@
         "y": 640,
         "wires": [
             [
-                "d9799554a147f0cf"
+                "7b33d2e92583f333"
             ]
         ]
     },
     {
-        "id": "c7a5f2345fb3a417",
+        "id": "cdabe0539399ad79",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2838,14 +2838,14 @@
         "y": 700,
         "wires": [
             [
-                "948c85c17c58f972"
+                "420574c4832951e1"
             ]
         ]
     },
     {
-        "id": "0c80a14ca091f6fa",
+        "id": "2337c8a9e8a07f6c",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2864,26 +2864,26 @@
         "y": 700,
         "wires": [
             [
-                "fe9e8a486380ae39"
+                "3c6a58e2a83d04fb"
             ]
         ]
     },
     {
-        "id": "948c85c17c58f972",
+        "id": "420574c4832951e1",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 700,
         "wires": []
     },
     {
-        "id": "dae5f972626dd126",
+        "id": "687681b8e2244c5a",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2901,14 +2901,14 @@
         "y": 720,
         "wires": [
             [
-                "c7a5f2345fb3a417"
+                "cdabe0539399ad79"
             ]
         ]
     },
     {
-        "id": "1f8f66b163564f98",
+        "id": "1387fe86d1d7cdd0",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "report",
         "func": "if (msg.TestMode === 'show-error') {\n  node.error(context.get('failed-msg') || '(no failure)')\n//return msg // do NOT pass injected message\n} else {\n  if (msg.error == null) {\n    context.set('failed-msg',null)\n    node.status({fill:'green',shape:'dot',text:'ok'})\n  } else {\n    let failedMsg = Object.assign({},RED.util.cloneMessage(msg))\n    context.set('failed-msg',failedMsg)\n    node.status({fill:'red',shape:'dot',text:'failed'})\n    \n    let Totals = flow.get('Totals')\n    flow.set('Totals', typeof Totals === 'number' ? Totals + 1 : 1)\n  }\n  \n  if (msg.TestMode === 'single-test') {\n    return null\n  } else {\n    return msg\n  }\n}\n",
         "outputs": 1,
@@ -2920,14 +2920,14 @@
         "y": 760,
         "wires": [
             [
-                "97ed8736a8eb7fdb"
+                "1170b0b183f448a4"
             ]
         ]
     },
     {
-        "id": "ef6addb6d482db4f",
+        "id": "49afd98fd5b40697",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": " test",
         "props": [
             {
@@ -2946,26 +2946,26 @@
         "y": 760,
         "wires": [
             [
-                "323d9fd44dab80f1"
+                "76842119a517ae6d"
             ]
         ]
     },
     {
-        "id": "97ed8736a8eb7fdb",
+        "id": "1170b0b183f448a4",
         "type": "link out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "links": [
-            "abedd48969e0f7c6"
+            "a91a83828238a5d8"
         ],
         "x": 1875,
         "y": 760,
         "wires": []
     },
     {
-        "id": "af4dbe1616c3d5f7",
+        "id": "9c0577cd5eb5e761",
         "type": "inject",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "show",
         "props": [
             {
@@ -2983,14 +2983,14 @@
         "y": 780,
         "wires": [
             [
-                "1f8f66b163564f98"
+                "1387fe86d1d7cdd0"
             ]
         ]
     },
     {
-        "id": "fe9e8a486380ae39",
+        "id": "3c6a58e2a83d04fb",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#14",
         "outputs": 1,
@@ -2998,14 +2998,14 @@
         "y": 700,
         "wires": [
             [
-                "c7a5f2345fb3a417"
+                "cdabe0539399ad79"
             ]
         ]
     },
     {
-        "id": "323d9fd44dab80f1",
+        "id": "76842119a517ae6d",
         "type": "reusable",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "target": "#15",
         "outputs": 1,
@@ -3013,14 +3013,14 @@
         "y": 760,
         "wires": [
             [
-                "1f8f66b163564f98"
+                "1387fe86d1d7cdd0"
             ]
         ]
     },
     {
-        "id": "7685d37f51f19cc4",
+        "id": "e3e06d98e5c47c0b",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get without authorization header",
         "info": "",
         "x": 1470,
@@ -3028,9 +3028,9 @@
         "wires": []
     },
     {
-        "id": "a9e274e1bc6c8411",
+        "id": "d312835b9dd71344",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get with broken authorization header",
         "info": "",
         "x": 1480,
@@ -3038,9 +3038,9 @@
         "wires": []
     },
     {
-        "id": "6a44ab193b3fb5bf",
+        "id": "3a48142b7d7f7ad5",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get with modified userid",
         "info": "",
         "x": 1440,
@@ -3048,9 +3048,9 @@
         "wires": []
     },
     {
-        "id": "ef757cd92ff23ba2",
+        "id": "9169238fda50565a",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get with modified expiration",
         "info": "",
         "x": 1460,
@@ -3058,9 +3058,9 @@
         "wires": []
     },
     {
-        "id": "de6197ba6051a5fe",
+        "id": "150e8af163c1eee2",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get with modified digest",
         "info": "",
         "x": 1440,
@@ -3068,9 +3068,9 @@
         "wires": []
     },
     {
-        "id": "b012e5900987630b",
+        "id": "50e45f3a69c65825",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get with correct authorization header",
         "info": "",
         "x": 1480,
@@ -3078,28 +3078,28 @@
         "wires": []
     },
     {
-        "id": "b0fb3d8d614eb78b",
+        "id": "c9032e9dc35a9416",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "17554944c4a56a61",
-            "7bbac5263263b69f",
-            "f8c5c6ce30d66c7f"
+            "063cbfeb57f05362",
+            "ec32ec849c897d79",
+            "8e238b1bcce20e5d"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 940,
         "wires": [
             [
-                "4c0c7761ca66c8ea"
+                "25afa6d796216c19"
             ]
         ]
     },
     {
-        "id": "17554944c4a56a61",
+        "id": "063cbfeb57f05362",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3113,14 +3113,14 @@
         "y": 900,
         "wires": [
             [
-                "7bbac5263263b69f"
+                "ec32ec849c897d79"
             ]
         ]
     },
     {
-        "id": "7bbac5263263b69f",
+        "id": "ec32ec849c897d79",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -3137,14 +3137,14 @@
         "y": 900,
         "wires": [
             [
-                "4c0c7761ca66c8ea"
+                "25afa6d796216c19"
             ]
         ]
     },
     {
-        "id": "f8c5c6ce30d66c7f",
+        "id": "8e238b1bcce20e5d",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL')\n\nmsg.headers = msg.headers || {}\ndelete msg.headers['authorization']\n\nreturn msg",
         "outputs": 1,
@@ -3156,33 +3156,33 @@
         "y": 900,
         "wires": [
             [
-                "17554944c4a56a61"
+                "063cbfeb57f05362"
             ]
         ]
     },
     {
-        "id": "58983609660c295c",
+        "id": "28a1ef33b8e64b94",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "a73daa76ce0bb526",
-            "8935d69a9c43d669",
-            "4aaa24ddf2a18e51"
+            "ab927585c26643e9",
+            "b5ed77e69698c44c",
+            "b0a0538ecf9826ef"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 1080,
         "wires": [
             [
-                "371f1948c7f61e39"
+                "78098f5b6efad01b"
             ]
         ]
     },
     {
-        "id": "a73daa76ce0bb526",
+        "id": "ab927585c26643e9",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3196,14 +3196,14 @@
         "y": 1040,
         "wires": [
             [
-                "8935d69a9c43d669"
+                "b5ed77e69698c44c"
             ]
         ]
     },
     {
-        "id": "8935d69a9c43d669",
+        "id": "b5ed77e69698c44c",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -3220,14 +3220,14 @@
         "y": 1040,
         "wires": [
             [
-                "371f1948c7f61e39"
+                "78098f5b6efad01b"
             ]
         ]
     },
     {
-        "id": "4aaa24ddf2a18e51",
+        "id": "b0a0538ecf9826ef",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL')\nmsg.headers = { authorization:'Bearer : : : : : : : broken-header' }\nreturn msg",
         "outputs": 1,
@@ -3239,33 +3239,33 @@
         "y": 1040,
         "wires": [
             [
-                "a73daa76ce0bb526"
+                "ab927585c26643e9"
             ]
         ]
     },
     {
-        "id": "d503be57f8f61cf0",
+        "id": "1fba72c270ceade4",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "9c4c8a4bba096531",
-            "b163bb1857aee92b",
-            "144d5eb05aaa166a"
+            "d8f92f3953e06752",
+            "0dd049d9c4626ff8",
+            "5fa2eb1565d53ef3"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 1220,
         "wires": [
             [
-                "22168ae4f305ddf2"
+                "a80a755e0dd316c8"
             ]
         ]
     },
     {
-        "id": "9c4c8a4bba096531",
+        "id": "d8f92f3953e06752",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3279,14 +3279,14 @@
         "y": 1180,
         "wires": [
             [
-                "b163bb1857aee92b"
+                "0dd049d9c4626ff8"
             ]
         ]
     },
     {
-        "id": "b163bb1857aee92b",
+        "id": "0dd049d9c4626ff8",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -3303,14 +3303,14 @@
         "y": 1180,
         "wires": [
             [
-                "22168ae4f305ddf2"
+                "a80a755e0dd316c8"
             ]
         ]
     },
     {
-        "id": "144d5eb05aaa166a",
+        "id": "5fa2eb1565d53ef3",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\n\nUserId = 'node-green'\n\nmsg.headers = { authorization:'Bearer ' + UserId + ':' + Expiration + ':' + Digest }\nreturn msg",
         "outputs": 1,
@@ -3322,33 +3322,33 @@
         "y": 1180,
         "wires": [
             [
-                "9c4c8a4bba096531"
+                "d8f92f3953e06752"
             ]
         ]
     },
     {
-        "id": "b2265713155d1d90",
+        "id": "2454c26f900f848d",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "c066f0ccee9a34f1",
-            "29daab80fc33f84a",
-            "4909e25f17488a79"
+            "983e2b3f721d17fc",
+            "f0369017aab9b49f",
+            "c0aa33ced2c6d7ca"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 1360,
         "wires": [
             [
-                "dcf0fe3105903a8a"
+                "c4801de3b5557a10"
             ]
         ]
     },
     {
-        "id": "c066f0ccee9a34f1",
+        "id": "983e2b3f721d17fc",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3362,14 +3362,14 @@
         "y": 1320,
         "wires": [
             [
-                "29daab80fc33f84a"
+                "f0369017aab9b49f"
             ]
         ]
     },
     {
-        "id": "29daab80fc33f84a",
+        "id": "f0369017aab9b49f",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -3386,14 +3386,14 @@
         "y": 1320,
         "wires": [
             [
-                "dcf0fe3105903a8a"
+                "c4801de3b5557a10"
             ]
         ]
     },
     {
-        "id": "4909e25f17488a79",
+        "id": "c0aa33ced2c6d7ca",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\n\nExpiration = parseInt(Expiration,10) + 365*24*60*60*1000\n\nmsg.headers = { authorization:'Bearer ' + UserId + ':' + Expiration + ':' + Digest }\nreturn msg",
         "outputs": 1,
@@ -3405,33 +3405,33 @@
         "y": 1320,
         "wires": [
             [
-                "c066f0ccee9a34f1"
+                "983e2b3f721d17fc"
             ]
         ]
     },
     {
-        "id": "27ae8a65d3bf686a",
+        "id": "39d3413be69ac667",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "316ac49bfc337c27",
-            "92740df5d81df668",
-            "04bd1d6e1656598c"
+            "fcf37b7533bb6dc1",
+            "e80e6f988d7e533a",
+            "f126a5eef5181437"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 1500,
         "wires": [
             [
-                "a85bec90aef1edc0"
+                "7a3d4a9c9f9e8f56"
             ]
         ]
     },
     {
-        "id": "316ac49bfc337c27",
+        "id": "fcf37b7533bb6dc1",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3445,14 +3445,14 @@
         "y": 1460,
         "wires": [
             [
-                "92740df5d81df668"
+                "e80e6f988d7e533a"
             ]
         ]
     },
     {
-        "id": "92740df5d81df668",
+        "id": "e80e6f988d7e533a",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -3469,14 +3469,14 @@
         "y": 1460,
         "wires": [
             [
-                "a85bec90aef1edc0"
+                "7a3d4a9c9f9e8f56"
             ]
         ]
     },
     {
-        "id": "04bd1d6e1656598c",
+        "id": "f126a5eef5181437",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\nlet [UserId,Expiration,Digest] = Header.replace(/^Bearer\\s+/,'').split(':')\n\nDigest = 'c3da5c194d3104f6ff5986cd79cc3dada0bc14447330c7da0eb8299091188d7b'\n\nmsg.headers = { authorization:'Bearer ' + UserId + ':' + Expiration + ':' + Digest }\nreturn msg",
         "outputs": 1,
@@ -3488,33 +3488,33 @@
         "y": 1460,
         "wires": [
             [
-                "316ac49bfc337c27"
+                "fcf37b7533bb6dc1"
             ]
         ]
     },
     {
-        "id": "7bb45842e2248489",
+        "id": "af8b76fb25fd8971",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "508cd8da30d8e436",
-            "372dfc4bcbf99f75",
-            "78b53203f7c04f80"
+            "985c88eee7ea6c19",
+            "203ffe90c5ca313f",
+            "b6e0bc06b35b9cb6"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 1640,
         "wires": [
             [
-                "230678b8afded32d"
+                "897f87ce2a075e92"
             ]
         ]
     },
     {
-        "id": "508cd8da30d8e436",
+        "id": "985c88eee7ea6c19",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3528,14 +3528,14 @@
         "y": 1600,
         "wires": [
             [
-                "372dfc4bcbf99f75"
+                "203ffe90c5ca313f"
             ]
         ]
     },
     {
-        "id": "372dfc4bcbf99f75",
+        "id": "203ffe90c5ca313f",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet newHeader = msg.headers['authorization']\nexpect(newHeader).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [newUserId,newExpiration,newDigest] = newHeader.replace(/^Bearer\\s+/,'').split(':')\n\nlet oldHeader = flow.get('HeaderAuthHeader')\nlet [oldUserId,oldExpiration,oldDigest] = oldHeader.replace(/^Bearer\\s+/,'').split(':')\n\nexpect(newUserId).to.equal(oldUserId)\nexpect(parseInt(newExpiration,10)).to.be.at.least(parseInt(oldExpiration,10))\n\nreturn msg",
         "outputs": 1,
@@ -3552,14 +3552,14 @@
         "y": 1600,
         "wires": [
             [
-                "230678b8afded32d"
+                "897f87ce2a075e92"
             ]
         ]
     },
     {
-        "id": "78b53203f7c04f80",
+        "id": "b6e0bc06b35b9cb6",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL')\n\nlet Header = flow.get('HeaderAuthHeader')\n\nmsg.headers = { authorization:Header }\nreturn msg",
         "outputs": 1,
@@ -3571,14 +3571,14 @@
         "y": 1600,
         "wires": [
             [
-                "508cd8da30d8e436"
+                "985c88eee7ea6c19"
             ]
         ]
     },
     {
-        "id": "6a622391f492bbcd",
+        "id": "c9c7f7b52d5d1ed9",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#8",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3586,14 +3586,14 @@
         "y": 900,
         "wires": [
             [
-                "f8c5c6ce30d66c7f"
+                "8e238b1bcce20e5d"
             ]
         ]
     },
     {
-        "id": "d4cc0fc2d46bf6e7",
+        "id": "5a0f96640c28278b",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#9",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3601,14 +3601,14 @@
         "y": 1040,
         "wires": [
             [
-                "4aaa24ddf2a18e51"
+                "b0a0538ecf9826ef"
             ]
         ]
     },
     {
-        "id": "7f74c3b456df2cfe",
+        "id": "fd0ac5289a638e00",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#10",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3616,14 +3616,14 @@
         "y": 1180,
         "wires": [
             [
-                "144d5eb05aaa166a"
+                "5fa2eb1565d53ef3"
             ]
         ]
     },
     {
-        "id": "cb5be0ab1bfabf38",
+        "id": "b84a1c6e156fdcc4",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#11",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3631,14 +3631,14 @@
         "y": 1320,
         "wires": [
             [
-                "4909e25f17488a79"
+                "c0aa33ced2c6d7ca"
             ]
         ]
     },
     {
-        "id": "04cd1af55fdd743b",
+        "id": "5ffe58d93bed1291",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#12",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3646,14 +3646,14 @@
         "y": 1460,
         "wires": [
             [
-                "04bd1d6e1656598c"
+                "f126a5eef5181437"
             ]
         ]
     },
     {
-        "id": "8f34ddb3f159834c",
+        "id": "4e948ba78e8fa150",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#13",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3661,14 +3661,14 @@
         "y": 1600,
         "wires": [
             [
-                "78b53203f7c04f80"
+                "b6e0bc06b35b9cb6"
             ]
         ]
     },
     {
-        "id": "230678b8afded32d",
+        "id": "897f87ce2a075e92",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
@@ -3676,9 +3676,9 @@
         "wires": []
     },
     {
-        "id": "a85bec90aef1edc0",
+        "id": "7a3d4a9c9f9e8f56",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
@@ -3686,9 +3686,9 @@
         "wires": []
     },
     {
-        "id": "dcf0fe3105903a8a",
+        "id": "c4801de3b5557a10",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
@@ -3696,9 +3696,9 @@
         "wires": []
     },
     {
-        "id": "22168ae4f305ddf2",
+        "id": "a80a755e0dd316c8",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
@@ -3706,9 +3706,9 @@
         "wires": []
     },
     {
-        "id": "371f1948c7f61e39",
+        "id": "78098f5b6efad01b",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
@@ -3716,9 +3716,9 @@
         "wires": []
     },
     {
-        "id": "4c0c7761ca66c8ea",
+        "id": "25afa6d796216c19",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
@@ -3726,9 +3726,9 @@
         "wires": []
     },
     {
-        "id": "d226580d305fcffe",
+        "id": "f16306f2a437179b",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get with wrong required role",
         "info": "",
         "x": 1460,
@@ -3736,9 +3736,9 @@
         "wires": []
     },
     {
-        "id": "f920c0dcf8bc1895",
+        "id": "311365ea259d9163",
         "type": "comment",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "get with correct required role",
         "info": "",
         "x": 1460,
@@ -3746,28 +3746,28 @@
         "wires": []
     },
     {
-        "id": "abe64b70eef3485a",
+        "id": "d86b30422762a942",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "da3b386844aa7f5e",
-            "888ced533669737d",
-            "5e30af554119c266"
+            "7a10bb1e181afdc1",
+            "d8309cd3fca98eb8",
+            "e94bdb800cfd0b3b"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 1780,
         "wires": [
             [
-                "9eae790686b2f548"
+                "9ca8b62502254ec5"
             ]
         ]
     },
     {
-        "id": "da3b386844aa7f5e",
+        "id": "7a10bb1e181afdc1",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3781,14 +3781,14 @@
         "y": 1740,
         "wires": [
             [
-                "888ced533669737d"
+                "d8309cd3fca98eb8"
             ]
         ]
     },
     {
-        "id": "888ced533669737d",
+        "id": "d8309cd3fca98eb8",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(401)\nexpect(msg.headers['www-authenticate']).not.to.exist\nexpect(msg.headers['authorization']).not.to.exist\n\nreturn msg",
         "outputs": 1,
@@ -3805,14 +3805,14 @@
         "y": 1740,
         "wires": [
             [
-                "9eae790686b2f548"
+                "9ca8b62502254ec5"
             ]
         ]
     },
     {
-        "id": "5e30af554119c266",
+        "id": "e94bdb800cfd0b3b",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL') + '-2'\n\nlet Header = flow.get('HeaderAuthHeader')\n\nmsg.headers = { authorization:Header }\nreturn msg",
         "outputs": 1,
@@ -3824,33 +3824,33 @@
         "y": 1740,
         "wires": [
             [
-                "da3b386844aa7f5e"
+                "7a10bb1e181afdc1"
             ]
         ]
     },
     {
-        "id": "0356b8e522f7605f",
+        "id": "f3069de4120ffb2a",
         "type": "catch",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "",
         "scope": [
-            "db8cd7f0714f8119",
-            "42397437a4b39062",
-            "60787ba146fcfcbe"
+            "21cc7cf4d71c095f",
+            "5b77ae3cd58e6cd6",
+            "cc523ae166b81159"
         ],
         "uncaught": false,
         "x": 1510,
         "y": 1920,
         "wires": [
             [
-                "64b109512ad6a0a5"
+                "ef8919967c07b987"
             ]
         ]
     },
     {
-        "id": "db8cd7f0714f8119",
+        "id": "21cc7cf4d71c095f",
         "type": "http request",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "act",
         "method": "GET",
         "ret": "txt",
@@ -3864,14 +3864,14 @@
         "y": 1880,
         "wires": [
             [
-                "42397437a4b39062"
+                "5b77ae3cd58e6cd6"
             ]
         ]
     },
     {
-        "id": "42397437a4b39062",
+        "id": "5b77ae3cd58e6cd6",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "assert",
         "func": "let expect = chai.expect\n\nexpect(msg.statusCode).to.equal(200)\nexpect(msg.headers['www-authenticate']).not.to.exist\n\nexpect(msg.headers['authorization']).to.exist\n\nlet newHeader = msg.headers['authorization']\nexpect(newHeader).to.match(/^Bearer\\s+node-red:\\d+:[0-9a-f]+$/)\n\nlet [newUserId,newExpiration,newDigest] = newHeader.replace(/^Bearer\\s+/,'').split(':')\n\nlet oldHeader = flow.get('HeaderAuthHeader')\nlet [oldUserId,oldExpiration,oldDigest] = oldHeader.replace(/^Bearer\\s+/,'').split(':')\n\nexpect(newUserId).to.equal(oldUserId)\nexpect(parseInt(newExpiration,10)).to.be.at.least(parseInt(oldExpiration,10))\n\nreturn msg",
         "outputs": 1,
@@ -3888,14 +3888,14 @@
         "y": 1880,
         "wires": [
             [
-                "64b109512ad6a0a5"
+                "ef8919967c07b987"
             ]
         ]
     },
     {
-        "id": "60787ba146fcfcbe",
+        "id": "cc523ae166b81159",
         "type": "function",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "arrange",
         "func": "msg.url = flow.get('HeaderAuthURL') + '-3'\n\nlet Header = flow.get('HeaderAuthHeader')\n\nmsg.headers = { authorization:Header }\nreturn msg",
         "outputs": 1,
@@ -3907,14 +3907,14 @@
         "y": 1880,
         "wires": [
             [
-                "db8cd7f0714f8119"
+                "21cc7cf4d71c095f"
             ]
         ]
     },
     {
-        "id": "1fecf6b016de916b",
+        "id": "46f0c37bb452f533",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#14",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3922,14 +3922,14 @@
         "y": 1740,
         "wires": [
             [
-                "5e30af554119c266"
+                "e94bdb800cfd0b3b"
             ]
         ]
     },
     {
-        "id": "ef88171a20f8171e",
+        "id": "de7509e8abf06055",
         "type": "reusable-in",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "#15",
         "info": "describe your reusable flow here",
         "scope": "local",
@@ -3937,14 +3937,14 @@
         "y": 1880,
         "wires": [
             [
-                "60787ba146fcfcbe"
+                "cc523ae166b81159"
             ]
         ]
     },
     {
-        "id": "64b109512ad6a0a5",
+        "id": "ef8919967c07b987",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
@@ -3952,9 +3952,9 @@
         "wires": []
     },
     {
-        "id": "9eae790686b2f548",
+        "id": "9ca8b62502254ec5",
         "type": "reusable-out",
-        "z": "4e29538c45ba477d",
+        "z": "015583ed4bc63617",
         "name": "return",
         "position": 1,
         "x": 1850,
