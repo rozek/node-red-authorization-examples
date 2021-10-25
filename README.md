@@ -154,6 +154,8 @@ If you require the authenticating user to have a specific role, you may set `msg
 
 Upon successful authentication, `msg.authenticatedUser` contains the id of the authenticated user and `msg.authorizedRoles` contains a (possibly empty) list with the roles of that user.
 
+> While the "cookie login" node always removes `UserId` and `Password` from `msg.payload`, other contents are left untouched. This may be important for downstream nodes, but unskillful if this node is directly wired to "HTTP out". For that reason: **if you plan to implement a dedicated "login" entry point, make sure that `msg.payload` is always deleted (or overwritten) before it is sent back to the client**.
+
 ### Try yourself ###
 
 The following example illustrates how to integrate Header-based authentication into Node-RED flows. Just [import it](try-header-auth.json) and:
